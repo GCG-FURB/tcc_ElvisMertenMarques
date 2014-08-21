@@ -125,11 +125,11 @@ public class Gerenciador extends Observable {
 				//downloadArquivos();	
 				inicializarPlanos();
 				
-				CarregarPlanos();
+				//CarregarPlanos();
 				
-				CarregarCheckPoints();
+				//CarregarCheckPoints();
 				
-				InicializarBanco();
+				//InicializarBanco();
 				
 			    CarregarPlanosBD(); 
 				
