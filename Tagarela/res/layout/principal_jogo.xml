@@ -1,0 +1,83 @@
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/fundo">
+    
+    <TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="Aprenda a Escrever Desenhando!"
+		android:layout_gravity="center"
+		android:layout_marginTop="20dp"
+		android:id="@+id/tvTextoSuperior"
+        ></TextView>
+    
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical"
+	    android:gravity="center">
+	
+	    <LinearLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			>
+	        
+	        <ImageView 
+			    android:layout_width="100dp"
+			    android:layout_height="match_parent"
+			    android:rotation="180"
+				android:src="@drawable/next"
+				android:id="@+id/btnPrevius"/>
+	        	        	        	        
+	        <EditText 
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+				android:text="Plano"
+				android:gravity="center"
+				android:id="@+id/edPlano"
+				android:editable="false"
+				android:textColor="@color/yellow2"/>
+	        
+	        <ImageView 
+			    android:layout_width="100dp"
+			    android:layout_height="match_parent"
+				android:src="@drawable/next"
+				android:id="@+id/btnNext"/>
+	        
+	    </LinearLayout>
+	    
+	    <LinearLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+	        android:orientation="vertical">
+	        
+			<Button 
+			    android:layout_marginTop="20dp"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="center"
+			    android:text="@string/jogar"	    
+			    android:textStyle="bold"
+			    android:id="@+id/btnJogar"
+			    android:background="@drawable/custombutton"/>
+			
+			<Button 
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="center"
+			    android:layout_marginTop="20dp"
+			    android:text="Criar Plano"	    
+			    android:textStyle="bold"
+			    android:id="@+id/btnNovaLista"
+			    android:background="@drawable/custombutton"/>
+	        	        
+	       
+	    </LinearLayout>
+	    				    				        
+	</LinearLayout>
+
+</LinearLayout>
