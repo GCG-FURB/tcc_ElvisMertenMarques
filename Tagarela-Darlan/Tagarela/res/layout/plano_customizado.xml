@@ -1,0 +1,124 @@
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/fundo"
+    android:id="@+id/layout_view"
+    >
+    
+    <TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="Incluir/Alterar Planos"
+		android:layout_gravity="center"
+		android:layout_marginTop="20dp"
+		android:id="@+id/tvTextoSuperior"
+        ></TextView>
+    
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical"
+	    android:gravity="center">	  	    	    
+	    	    
+	    <LinearLayout 
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+			android:orientation="vertical">
+			
+			<TextView
+                android:id="@+id/tvNomeLista"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="Nome do plano:" >
+            </TextView>
+            			
+			<EditText 
+			    android:layout_width="1000dp"
+			    android:layout_height="wrap_content"
+				android:hint="Toque para incluir o nome do plano"
+				android:gravity="center"
+				android:layout_gravity="center"
+				android:id="@+id/edNomePlano"
+				android:layout_marginTop="10dp"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:background="@android:drawable/edit_text"
+				/>
+	        	        
+	    </LinearLayout>
+	    
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical"
+	        
+	         >
+			
+			<TextView
+                android:id="@+id/tvPalavras"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="Texto customizado:" >
+            </TextView>
+            
+			<EditText  		
+			    android:layout_width="1000dp"
+			    android:layout_height="wrap_content"
+			    android:minLines="5"
+			    android:maxLines="5"			    
+				android:layout_gravity="center"
+				android:hint="Toque para incluir o texto"
+				android:id="@+id/edPalavras"
+				android:layout_marginTop="10dp"
+				android:background="@android:drawable/edit_text"/>
+	        	        
+	    </LinearLayout>
+	    	    
+	    
+	   <LinearLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        >
+	        
+			<Button 
+			    android:layout_marginTop="20dp"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="center"
+			    android:text="Gravar"	    
+			    android:textStyle="bold"
+			    android:id="@+id/btnGravar"
+			    android:background="@drawable/custombutton"/>
+			
+			<Button 
+			    android:layout_marginTop="20dp"
+			    android:layout_marginLeft="10dp"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="center"
+			    android:text="Remover"	    
+			    android:textStyle="bold"
+			    android:id="@+id/btnRemover"
+			    android:background="@drawable/custombutton"/>
+
+			<Button 
+			    android:layout_marginTop="20dp"
+			    android:layout_marginLeft="10dp"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="center"
+			    android:text="Cancelar"	    
+			    android:textStyle="bold"
+			    android:id="@+id/btnCancelar"
+			    android:background="@drawable/custombutton"/>
+																      
+	    </LinearLayout>	    				    				        
+	</LinearLayout>
+</LinearLayout>

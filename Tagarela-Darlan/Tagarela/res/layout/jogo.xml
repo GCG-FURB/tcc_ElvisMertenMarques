@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/jogoLayoutPrincipal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/jogoLayoutTop"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal" >
+        
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="horizontal" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:id="@+id/jogoLayoutText"
+                android:padding="10dp" >
+                
+            </LinearLayout>
+        </HorizontalScrollView>
+        
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"        
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <LinearLayout 
+	        android:layout_width="200dp"
+	        android:layout_height="match_parent"
+	        android:id="@+id/jogoLayoutLeft">
+            
+			<LinearLayout 
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:orientation="vertical">
+				
+				<LinearLayout 
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal">
+							
+					<TextView 
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="X: "/>
+					
+					<EditText 
+						android:layout_width="80dp"
+						android:layout_height="wrap_content"
+						android:id="@+id/edPointX"
+						android:editable="false"/>
+					
+					<TextView 
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="Y: "/>
+					
+					<EditText 
+						android:layout_width="80dp"
+						android:layout_height="wrap_content"
+						android:id="@+id/edPointY"
+						android:editable="false"/>
+					
+				</LinearLayout>
+						
+				<LinearLayout 
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:orientation="vertical">
+					
+					<Button 
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="Adicionar"
+						android:id="@+id/btnAdicionar"/>
+					
+					<Button 
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="Gravar"
+						android:id="@+id/btnGravar"/>
+																	
+					<EditText
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:id="@+id/edCoordenadas"
+						android:editable="false"/>
+								
+				</LinearLayout>
+				
+			</LinearLayout>
+			
+        </LinearLayout>
+                
+	    <LinearLayout
+	        android:id="@+id/jogoLayoutCentral"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_marginRight="200dp"        
+	        android:background="@drawable/background_simbolo"
+	        android:gravity="center"
+	        android:orientation="vertical"
+	        android:padding="20dp" >
+	    
+	        <br.com.furb.tagarela.game.view.SimboloView
+	            android:id="@+id/viewSimbolo"
+	            android:layout_width="match_parent"
+	            android:layout_height="match_parent" />
+	        
+	    </LinearLayout>
+	    	    	    	    
+	</LinearLayout>
+	
+    <LinearLayout
+        android:id="@+id/jogoLayoutBotton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:baselineAligned="false" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp">
+
+            <ImageView
+                android:id="@+id/btnVoltar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/next"
+                android:rotation="180"
+                android:layout_marginBottom="10dp"/>
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scrollbars="horizontal" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_vertical"
+                android:orientation="horizontal"
+                android:id="@+id/jogoLayoutHistorico"
+                android:layout_marginBottom="10dp" >
+
+                <ImageView
+                    android:id="@+id/imageV"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/letra_a"
+                    />
+                
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp" >
+
+            <ImageView
+                android:id="@+id/btnProximo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/next"
+                android:layout_marginBottom="10dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
