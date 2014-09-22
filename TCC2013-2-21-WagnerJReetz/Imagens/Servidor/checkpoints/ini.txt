@@ -1,0 +1,10 @@
+1=abelha
+2=coelho
+3=galinha
+4=gato
+5=sapo
+abelha=flor
+coelho=cenoura
+galinha=minhoca
+gato=peixe
+sapo=mosca
