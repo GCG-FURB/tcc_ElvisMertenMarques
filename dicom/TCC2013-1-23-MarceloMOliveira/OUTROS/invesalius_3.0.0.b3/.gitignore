@@ -1,0 +1,27 @@
+*.swp
+
+# /invesalius/
+/invesalius/*.pyc
+/invesalius/*.log
+/invesalius/*.hg
+/invesalius/*.swp
+/invesalius/*.swo
+/invesalius/*.swn
+/invesalius/*.project
+/invesalius/*.classpath
+
+# /invesalius/data/
+/invesalius/data/*.pyc
+/invesalius/data/*.log
+
+# /invesalius/gui/
+/invesalius/gui/*.pyc
+/invesalius/gui/*.log
+
+# /invesalius/gui/widgets/
+/invesalius/gui/widgets/*.pyc
+/invesalius/gui/widgets/*.log
+
+# /invesalius/reader/
+/invesalius/reader/*.pyc
+/invesalius/reader/*.log

@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/activity"
+    android:orientation="vertical"
+    tools:context=".VolumetricViewerActivity" 
+    android:weightSum="100">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dip"
+        android:layout_weight="50" android:orientation="horizontal" android:weightSum="100">
+        
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+        	android:layout_weight="50" android:orientation="vertical" android:id="@+viewer/sagital_container">
+        	
+    	</LinearLayout>
+    	
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+        	android:layout_weight="50" android:orientation="vertical" android:id="@+viewer/coronal_container">
+        
+    	</LinearLayout>
+        
+    </LinearLayout>
+    
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dip"
+        android:layout_weight="50" android:orientation="horizontal" android:weightSum="100">
+        
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+        	android:layout_weight="50" android:orientation="vertical" android:id="@+viewer/axial_container">
+        
+    	</LinearLayout>
+    	
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+        	android:layout_weight="50" android:orientation="vertical" android:id="@+viewer/volumetric_container">
+        
+    	</LinearLayout>
+        
+    </LinearLayout>
+
+</LinearLayout>

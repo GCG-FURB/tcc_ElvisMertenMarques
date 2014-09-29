@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="SWe-Yv-MEn">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="mc2-L3-q44">
+            <objects>
+                <viewController id="SWe-Yv-MEn" customClass="MainViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Sot-LW-6jF">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="MeN-wx-hvE" customClass="DraggableLocation">
+                                <rect key="frame" x="10" y="10" width="200" height="984"/>
+                                <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" id="ScM-3V-dRu" customClass="DraggableView">
+                                        <rect key="frame" x="20" y="20" width="121" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <color key="backgroundColor" red="1" green="0.022727272730000001" blue="0.022727272730000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="IsQ-p6-G6b" customClass="DraggableView">
+                                        <rect key="frame" x="20" y="140" width="160" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <color key="backgroundColor" red="0.4818516175" green="1" blue="0.33404965139999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="R1P-rq-hCr" customClass="DraggableView">
+                                        <rect key="frame" x="20" y="261" width="81" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <color key="backgroundColor" red="0.024409394960000001" green="0.90296677599999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="pXW-Vc-hWI" customClass="DraggableView">
+                                        <rect key="frame" x="20" y="382" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <color key="backgroundColor" red="1" green="0.82691124831114815" blue="0.00038747176139786177" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.13487917980522673" green="0.27915048278789234" blue="0.67436623086734693" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view tag="1" contentMode="scaleToFill" id="YKS-qx-RWM" customClass="DraggableLocation">
+                                <rect key="frame" x="284" y="10" width="200" height="984"/>
+                                <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.58069557439999997" green="0.2265210875" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view tag="2" contentMode="scaleToFill" id="2Il-fl-mFT" customClass="DraggableLocation">
+                                <rect key="frame" x="558" y="10" width="200" height="984"/>
+                                <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="40k-bB-FmQ">
+                                        <rect key="frame" x="10" y="808" width="180" height="166"/>
+                                        <string key="text">Esta UIView foi configurada para nao aceitar DraggableViews de outras DraggableLocations.
+Verificar em MainViewController.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.33974520975437966" green="0.70735012755102034" blue="0.23693416307409162" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="firstLocation" destination="MeN-wx-hvE" id="i0I-mf-Vm8"/>
+                        <outlet property="secondLocation" destination="YKS-qx-RWM" id="UhK-9x-QM2"/>
+                        <outlet property="thirdLocation" destination="2Il-fl-mFT" id="wnt-r3-n75"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Omy-56-c5i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-214" y="-262"/>
+        </scene>
+    </scenes>
+    <classes>
+        <class className="DraggableLocation" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DraggableLocation.h"/>
+        </class>
+        <class className="DraggableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DraggableView.h"/>
+        </class>
+        <class className="MainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="firstLocation" candidateClass="DraggableLocation"/>
+                <relationship kind="outlet" name="secondLocation" candidateClass="DraggableLocation"/>
+                <relationship kind="outlet" name="thirdLocation" candidateClass="DraggableLocation"/>
+            </relationships>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

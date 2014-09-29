@@ -1,0 +1,17 @@
+Instalando Android SDK e executando a aplicação
+
+- Baixe e instale o executável do Android SDK através do link:
+http://developer.android.com/sdk/index.html
+
+Instalando o aplicativo no Emulador Android
+
+- Primeiramente, crie um Virtual Device com target mínimo 8, com suporte a sdcard, como explicado no link:
+http://developer.android.com/tools/devices/index.html
+
+- copie o conteúdo da pasta OUTROS/exame_joelho para uma nova pasta do sdcard chamada joelho_dalton, como explicado no link:
+http://developer.android.com/tools/devices/emulator.html#sdcard-files
+
+- installe o arquivo RMA.apk que se encontra no diretório FONTES/rma-android/bin, como explicado no link:
+http://developer.android.com/tools/devices/emulator.html#apps
+
+

@@ -1,0 +1,74 @@
+<resources>
+
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        
+    </style>
+
+    <style name="AppTheme" parent="AppBaseTheme">
+        
+    </style>
+    
+    <style name="activity">
+        <item name="android:background">#000000</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+    
+    <style name="list_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+    
+    <style name="list_view_fill" parent="list_view">
+        <item name="android:layout_height">match_parent</item>
+    </style>
+    
+    <style name="text_view">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    
+    <style name="edit_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    
+    <style name="text_view_bold" parent="text_view">
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    
+    <style name="fill_button" parent="button">
+        <item name="android:layout_width">match_parent</item>
+    </style>
+    
+    <style name="image_button" parent="button">
+        
+    </style>
+    
+    <style name="item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">10dip</item>
+    </style>
+    
+    <style name="item_horizontal" parent="item">    
+        <item name="android:orientation">horizontal</item>
+    </style>
+    
+    <style name="item_vertical" parent="item">    
+        <item name="android:orientation">vertical</item>
+    </style>
+    
+    <style name="seekbar_container">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingRight">5dip</item>
+        <item name="android:paddingLeft">5dip</item>
+    </style>
+
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RMA</string>
+    <string name="activity_dicom_files_title">Selecione um arquivo</string>
+    <string name="action_settings">Settings</string>
+    <string name="dicom_details_title">Informações</string>
+    <string name="dicom.patient.name">Nome do paciente</string>
+    <string name="dicom.patient.gender">Gênero</string>
+    <string name="viewer_activity_title">Visualização em 2D</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_viewer">ViewerActivity</string>
+    <string name="sagital_title">Sagital</string>
+    <string name="coronal_title">Coronal</string>
+    <string name="axial_title">Axial</string>
+    <string name="volumetric_title">Volumétrica</string>
+    <string name="volumetric_viewer_activity_title">Visualização volumétrica</string>
+    <string name="volumetric_eye_x">Eye X</string>
+    <string name="volumetric_eye_y">Eye Y</string>
+    <string name="volumetric_eye_z">Eye Z</string>
+    <string name="volumetric_btn_abrir">Abrir visualização</string>
+
+</resources>
