@@ -1,25 +1,27 @@
 #import "TGBoardInteractorViewController.h"
 #import "TGGamePointTraceView.h"
 #import "TGWayPointView.h"
-#import "TGBackgroundChooserView.h"
 #import "TGPreviewView.h"
 #import "TGHistoricView.h"
 #import "TGGroupPlanController.h"
+#import "TGSymbolPickerViewController.h"
 
 @interface TGBoardInteractorViewController ()
 @property BOOL isGame;
-@property NSArray* pointTraces; // lista para mudar o desenho e audio do traco
 @property AVAudioPlayer* backgroundAudio;
 @property AVAudioPlayer* wrongPathAudio;
-@property TGGamePointTraceView* currentTrace;
-@property NSMutableArray* plans;
 @property (strong,nonatomic)NSMutableArray* wayPoints;
 @property CFDataRef pixelData;
 @property TGPreviewView* previewView;
 @property TGHistoricView* historicView;
 @property UIView* drawView;
 @property TGGroupPlanController* groupPlanController;
-@property UIView *backGroundChooserView;
+@property Symbol* backgroundSymbol;
+@property Symbol* traceSymbol;
+@property Symbol* predatorSymbol;
+@property Symbol* wayPointSymbol;
+@property TGGamePointTraceView *pointTrace;
+@property UIImageView *predatorView;
 @end
 
 @implementation TGBoardInteractorViewController
@@ -77,27 +79,26 @@
             
             self.isGame = YES;
             if(self.isGame){
-            [imageView1 setContentMode:UIViewContentModeScaleAspectFit];
             self.wayPoints = [[NSMutableArray alloc] init];
             
             NSError *error;
-            NSURL* url = [[NSBundle mainBundle] URLForResource:@"FreedomDance" withExtension:@"wav"] ;
-            [self setBackgroundAudio:[[AVAudioPlayer alloc]initWithContentsOfURL:url error:&error]];
+            [self setBackgroundAudio:[[AVAudioPlayer alloc] initWithData:_backgroundSymbol.sound error:&error]];
             [[self backgroundAudio]setNumberOfLoops:0];
             [[self backgroundAudio]prepareToPlay];
             [[self backgroundAudio]play];
             [[self backgroundAudio] setDelegate:self];
-            
-            url = [[NSBundle mainBundle] URLForResource:@"spray" withExtension:@"mp3"];
-            AVAudioPlayer* sound = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:&error];
-            UIImage* image = [UIImage imageNamed:@"icon.gif"];
-            TGGamePointTraceView* trace = [[TGGamePointTraceView alloc]initWithImage:image andSound:sound];
-            self.currentTrace = trace;
+                
+            _pointTrace = [[TGGamePointTraceView alloc]initWithImage:[UIImage imageWithData:_traceSymbol.picture] andSound:[[AVAudioPlayer alloc]initWithData:_traceSymbol.sound error:nil]];
+                
+            _predatorView = [[UIImageView alloc]initWithImage:[UIImage imageWithData:_predatorSymbol.picture]];
+            _predatorView.frame = CGRectMake(0, 0, 50, 50);
+            _predatorView.alpha = 0;
+            [imageView1 addSubview:_predatorView];
             
             //imagem de fundo
             
             self.backgroundImageView = [[UIImageView alloc]initWithFrame:CGRectMake( self.view.frame.size.width/2-200, 124, 700,500)];
-            [self.backgroundImageView setImage:[UIImage imageNamed:@"background3.jpg"]];
+            [self.backgroundImageView setImage:[UIImage imageWithData:[_backgroundSymbol picture]]];
             self.backgroundImageView.layer.zPosition = 0;
             [self.view addSubview:self.backgroundImageView];
 
@@ -110,8 +111,30 @@
             UIButton* backgroundButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 200, 100, 50)];
             [backgroundButton setTitle:@"Fundo" forState:UIControlStateNormal];
             [backgroundButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [backgroundButton addTarget:self action: @selector(changeBackground) forControlEvents:UIControlEventTouchUpInside];
+            [backgroundButton addTarget:self action: @selector(change:) forControlEvents:UIControlEventTouchUpInside];
+            [backgroundButton setTag:1];
             [self.view addSubview:backgroundButton];
+            
+            UIButton* predatorButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 300, 100, 50)];
+            [predatorButton setTitle:@"Predador" forState:UIControlStateNormal];
+            [predatorButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [predatorButton addTarget:self action: @selector(change:) forControlEvents:UIControlEventTouchUpInside];
+            [predatorButton setTag:2];
+            [self.view addSubview:predatorButton];
+                
+            UIButton* preyButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 400, 100, 50)];
+            [preyButton setTitle:@"presa" forState:UIControlStateNormal];
+            [preyButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [preyButton addTarget:self action: @selector(change:) forControlEvents:UIControlEventTouchUpInside];
+                [preyButton setTag:3];
+            [self.view addSubview:preyButton];
+                
+            UIButton* traceButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 500, 100, 50)];
+            [traceButton setTitle:@"traço" forState:UIControlStateNormal];
+            [traceButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [traceButton addTarget:self action: @selector(change:) forControlEvents:UIControlEventTouchUpInside];
+                [traceButton setTag:4];
+            [self.view addSubview:traceButton];
                 
             UIButton* nextButton = [[UIButton alloc]initWithFrame:CGRectMake( 900, 624 , 100, 50)];
                 NSLog(@"%f",self.view.frame.size.width);
@@ -131,9 +154,6 @@
             self.drawView.layer.zPosition = 2;
             
             [self.view addSubview:self.drawView];
-            
-            //seta o pixelData para analise na hora do toque na tela. ao trocar de Plano sempre setar o pixelData
-           // self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(imageView1.image.CGImage));
             
             [self makeWayPoints];
             
@@ -460,10 +480,6 @@
     }            
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
 
 - (void)customizeViewStyle
 {
@@ -500,17 +516,23 @@
 
 #pragma mark - game methods
 
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    _predatorView.alpha = 0;
+}
+
 //método presente na classe
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     if (self.isGame) {
     CGPoint location = [[touches anyObject] locationInView:self.view];
-    CGRect fingerRect = CGRectMake(location.x , location.y, 20, 20); //dedo com sua dimensao
+    CGRect fingerRect = CGRectMake(location.x-5 , location.y-5, 20, 20); //dedo com sua dimensao
     
     if(CGRectIntersectsRect(fingerRect, _drawView.frame) && [self isWallPixel:location.x-258 :location.y-120]){
-        UIImageView* Imageview = [[UIImageView alloc]initWithImage:_currentTrace.trace];
+        _predatorView.frame = CGRectMake(location.x-258 ,location.y-120, 50,50);
+        _predatorView.alpha = 1;
+        
+        UIImageView* Imageview = [[UIImageView alloc]initWithImage:_pointTrace.trace];
         Imageview.frame = CGRectMake(location.x-258 ,location.y-120, 20,20);
-        Imageview.layer.zPosition = 4;
-        [self.currentTrace playSound];
+        [_pointTrace playSound];
         [self.drawView addSubview:Imageview];
         
         
@@ -544,13 +566,13 @@
     const UInt8* data = CFDataGetBytePtr(_pixelData);
     int pixelInfo = ((imageView1.image.size.width  * y) + x ) * 4; // The image is png
     //retira os valores do pixel
-    UInt8 red = data[pixelInfo];
-    UInt8 green = data[(pixelInfo + 1)];
-    UInt8 blue = data[pixelInfo + 2];
+    //UInt8 red = data[pixelInfo];
+    //UInt8 green = data[(pixelInfo + 1)];
+    //UInt8 blue = data[pixelInfo + 2];
     UInt8 alpha = data[pixelInfo + 3];
     
     if(x==0||y==0){
-    UIColor* color = [UIColor colorWithRed:red/255.f green:green/255.f blue:blue/255.f alpha:alpha/255.f]; // The pixel color info
+   // UIColor* color = [UIColor colorWithRed:red/255.f green:green/255.f blue:blue/255.f alpha:alpha/255.f]; // The pixel color info
     }
     if (alpha==0){
         NSLog(@"a=%i, x=%i y=%i",alpha,x,y);
@@ -564,11 +586,23 @@
 //desenhar as presas no caminho
 -(void)makeWayPoints{
     
-    TGWayPointView *point = [[TGWayPointView alloc]initWithFrame:CGRectMake(400, 400, 70, 70)];
-    [_wayPoints addObject:point];
-    TGWayPointView *point2 = [[TGWayPointView alloc]initWithFrame:CGRectMake(400, 100, 50, 50)];
+    
+    UIImageView *point1 = [[UIImageView alloc]initWithImage:[UIImage imageWithData:_wayPointSymbol.picture]];
+    point1.frame =CGRectMake(400, 400, 50, 50);
+    [point1 setContentMode:UIViewContentModeScaleAspectFit];
+    point1.clipsToBounds = YES;
+    [_wayPoints addObject:point1];
+    
+    UIImageView *point2 = [[UIImageView alloc]initWithImage:[UIImage imageWithData:_wayPointSymbol.picture]];
+    point2.frame =CGRectMake(400, 100, 50, 50);
+    [point2 setContentMode:UIViewContentModeScaleAspectFit];
+    point2.clipsToBounds = YES;
     [_wayPoints addObject:point2];
-    TGWayPointView *point3 = [[TGWayPointView alloc]initWithFrame:CGRectMake(200, 200, 50, 50)];
+    
+    UIImageView *point3 = [[UIImageView alloc]initWithImage:[UIImage imageWithData:_wayPointSymbol.picture]];
+    point3.frame =CGRectMake(200, 200, 50, 50);
+    [point3 setContentMode:UIViewContentModeScaleAspectFit];
+    point3.clipsToBounds = YES;
     [_wayPoints addObject:point3];
     
     for ( TGWayPointView *point in self.wayPoints) {
@@ -576,6 +610,8 @@
     }
 }
 
+
+#pragma mark - action buttons of game
 //proximo plano
 
 -(void)nextPlan{
@@ -607,7 +643,7 @@
     }
 }
 
-#pragma mark - action buttons of game
+
 
 -(void) stopPlayMusic: (UIButton*) musicButton{
     if ([self.backgroundAudio isPlaying]) {
@@ -622,26 +658,76 @@
 
 
 
--(void)changeBackground{
-    _backGroundChooserView = [[UIView alloc]initWithFrame:self.backgroundImageView.frame];
-    [_backGroundChooserView setBackgroundColor:[UIColor orangeColor]];
-    UIButton *background1 = [[UIButton alloc]initWithFrame:CGRectMake(_backGroundChooserView.frame.size.width/2, 100, 100, 100)];
-    [background1 setBackgroundImage:[UIImage imageNamed:@"background2.jpg"] forState:UIControlStateNormal];
-    [background1 addTarget:self action:@selector(setBackgroundImage:) forControlEvents:UIControlEventTouchUpInside];
-    [_backGroundChooserView addSubview:background1];
+-(void)change:(UIButton*) button{
     
-    UIButton *background2 = [[UIButton alloc]initWithFrame:CGRectMake(_backGroundChooserView.frame.size.width/2, 250, 100, 100)];
-    [background2 setBackgroundImage:[UIImage imageNamed:@"background.jpg"] forState:UIControlStateNormal];
-    [background2 addTarget:self action:@selector(setBackgroundImage:) forControlEvents:UIControlEventTouchUpInside];
-    [_backGroundChooserView addSubview:background2];
-    _backGroundChooserView.layer.zPosition = 99;
-    [self.view addSubview:_backGroundChooserView];
+    switch (button.tag) {
+        case 1:
+             [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didChangeBackground:) name:@"didSelectSymbol" object:nil];
+            break;
+        case 2:
+             [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didChangePredator:) name:@"didSelectSymbol" object:nil];
+            break;
+        case 3:
+             [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didChangeWayPoint:) name:@"didSelectSymbol" object:nil];
+            break;
+        case 4:
+             [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didChangeTrace:) name:@"didSelectSymbol" object:nil];
+            break;
+    }
+   
+    TGSymbolPickerViewController *symbolPickerViewController = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil]instantiateViewControllerWithIdentifier:@"TGSymbolPickerViewController"];
+    [symbolPickerViewController setModalPresentationStyle:UIModalPresentationFormSheet];
+    [[symbolPickerViewController view]setFrame:CGRectMake(0, 0, 500, 500)];
+    [[KGModal sharedInstance]setShowCloseButton:NO];
+    [[KGModal sharedInstance]setTapOutsideToDismiss:YES];
+    [[KGModal sharedInstance]showWithContentViewController:symbolPickerViewController andAnimated:YES];
+
 }
 
--(void)setBackgroundImage:(UIButton*) backgroundButton{
-    [self.backgroundImageView setImage:backgroundButton.currentBackgroundImage];
-    [self.backGroundChooserView removeFromSuperview];
+
+#pragma mark - observers methods
+//metodo que recebe o retorno do observer para o plano de fundo
+
+- (void)didChangeBackground:(NSNotification*)notification
+{
+    Symbol *symbol = [notification object];
+    _backgroundSymbol = symbol;
+    [self.backgroundImageView setImage:[UIImage imageWithData:[symbol picture]]];
+     self.backgroundAudio = [[AVAudioPlayer alloc]initWithData:[symbol sound] error:nil];
+    [self.backgroundAudio setNumberOfLoops:0];
+    [self.backgroundAudio prepareToPlay];
+    [self.backgroundAudio play];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    //update data to DB
 }
+//metodo que recebe o retorno do observer para o predador
+- (void)didChangePredator:(NSNotification*)notification
+{
+    Symbol *symbol = [notification object];
+    _predatorView.image = [UIImage imageWithData:symbol.picture];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    //update data to DB
+}
+
+//metodo que recebe o retorno do observer para a presa
+- (void)didChangeWayPoint:(NSNotification*)notification
+{
+    _wayPointSymbol = [notification object];
+    [self makeWayPoints];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    //update data to DB
+}
+
+//metodo que recebe o retorno do observer para o tracado
+- (void)didChangeTrace:(NSNotification*)notification
+{
+    _traceSymbol = [notification object];
+     _pointTrace = [[TGGamePointTraceView alloc]initWithImage:[UIImage imageWithData:_traceSymbol.picture] andSound:[[AVAudioPlayer alloc]initWithData:_traceSymbol.sound error:nil]];
+      [[NSNotificationCenter defaultCenter] removeObserver:self];
+    //update data to DB
+}
+
+
 
 #pragma mark - audioPlayerDelegate
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
@@ -656,5 +742,9 @@
 
 
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
 
 @end

@@ -26,11 +26,12 @@
 }
 
 -(void)playSound{
+    if(_audio){
     [[self audio]setNumberOfLoops:1];
     [[self audio]prepareToPlay];
     [[self audio]play];
 }
-
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.
