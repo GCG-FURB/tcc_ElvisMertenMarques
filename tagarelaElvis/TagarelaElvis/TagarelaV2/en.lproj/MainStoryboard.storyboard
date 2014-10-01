@@ -8,7 +8,6 @@
         <!--Initial View Controller-->
         <scene sceneID="4">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
                 <viewController id="2" customClass="TGInitialViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FRP-sQ-RFX"/>
@@ -141,6 +140,7 @@
                         <segue destination="0f4-2s-hE3" kind="modal" identifier="segueToSymbolsListViewController" modalTransitionStyle="crossDissolve" id="cww-tu-lOl"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="690" y="-791"/>
         </scene>

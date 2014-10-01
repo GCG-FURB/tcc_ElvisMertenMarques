@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		145101A219D37764006D2234 /* 0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 145101A119D37764006D2234 /* 0@2x.png */; };
 		14A83D0219C9019B007F5630 /* background2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14A83CFA19C9019B007F5630 /* background2@2x.jpg */; };
 		14A83D0319C9019B007F5630 /* background3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14A83CFB19C9019B007F5630 /* background3@2x.jpg */; };
 		14A83D0419C9019B007F5630 /* background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14A83CFC19C9019B007F5630 /* background@2x.jpg */; };
@@ -23,6 +22,9 @@
 		14A83D1E19CB230B007F5630 /* TGBackgroundChooserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A83D1D19CB230B007F5630 /* TGBackgroundChooserView.m */; };
 		14A83D2119CC7019007F5630 /* TGPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A83D2019CC7019007F5630 /* TGPreviewView.m */; };
 		14A83D2419CCA398007F5630 /* TGHistoricView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A83D2319CCA398007F5630 /* TGHistoricView.m */; };
+		14AC713219DB69BB00989890 /* 0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14AC712F19DB69BB00989890 /* 0@2x.png */; };
+		14AC713319DB69BB00989890 /* 1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14AC713019DB69BB00989890 /* 1@2x.png */; };
+		14AC713419DB69BB00989890 /* 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14AC713119DB69BB00989890 /* 2@2x.png */; };
 		C30873B717AF372B00187F82 /* PatientSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = C30873B617AF372B00187F82 /* PatientSymbol.m */; };
 		C316D595174033CB00A62F82 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C316D594174033CB00A62F82 /* MessageUI.framework */; };
 		C316D59B174046E200A62F82 /* TGAlbunsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C316D59A174046E200A62F82 /* TGAlbunsListViewController.m */; };
@@ -143,7 +145,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		145101A119D37764006D2234 /* 0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "0@2x.png"; path = "../../../../../../../../Desktop/0@2x.png"; sourceTree = "<group>"; };
 		14A83CFA19C9019B007F5630 /* background2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background2@2x.jpg"; sourceTree = "<group>"; };
 		14A83CFB19C9019B007F5630 /* background3@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background3@2x.jpg"; sourceTree = "<group>"; };
 		14A83CFC19C9019B007F5630 /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpg"; sourceTree = "<group>"; };
@@ -165,6 +166,9 @@
 		14A83D2019CC7019007F5630 /* TGPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGPreviewView.m; sourceTree = "<group>"; };
 		14A83D2219CCA398007F5630 /* TGHistoricView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGHistoricView.h; sourceTree = "<group>"; };
 		14A83D2319CCA398007F5630 /* TGHistoricView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGHistoricView.m; sourceTree = "<group>"; };
+		14AC712F19DB69BB00989890 /* 0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0@2x.png"; sourceTree = "<group>"; };
+		14AC713019DB69BB00989890 /* 1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1@2x.png"; sourceTree = "<group>"; };
+		14AC713119DB69BB00989890 /* 2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2@2x.png"; sourceTree = "<group>"; };
 		C30873B517AF372B00187F82 /* PatientSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientSymbol.h; sourceTree = "<group>"; };
 		C30873B617AF372B00187F82 /* PatientSymbol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientSymbol.m; sourceTree = "<group>"; };
 		C316D594174033CB00A62F82 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -405,7 +409,9 @@
 		14A83CF919C9019B007F5630 /* GameImages */ = {
 			isa = PBXGroup;
 			children = (
-				145101A119D37764006D2234 /* 0@2x.png */,
+				14AC712F19DB69BB00989890 /* 0@2x.png */,
+				14AC713019DB69BB00989890 /* 1@2x.png */,
+				14AC713119DB69BB00989890 /* 2@2x.png */,
 				14A83D1A19CA5E4C007F5630 /* wayPoint@2x.png */,
 				14A83D1319CA3D75007F5630 /* icon.gif */,
 				14A83D0F19CA3C61007F5630 /* spray.mp3 */,
@@ -871,13 +877,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				145101A219D37764006D2234 /* 0@2x.png in Resources */,
 				14A83D0319C9019B007F5630 /* background3@2x.jpg in Resources */,
 				C333DFAB17139C0000AD7E1A /* InfoPlist.strings in Resources */,
 				C333DFB317139C0000AD7E1A /* Default.png in Resources */,
 				C333DFB517139C0000AD7E1A /* Default@2x.png in Resources */,
+				14AC713319DB69BB00989890 /* 1@2x.png in Resources */,
 				C333DFB717139C0000AD7E1A /* Default-568h@2x.png in Resources */,
 				C333DFBA17139C0000AD7E1A /* MainStoryboard.storyboard in Resources */,
+				14AC713419DB69BB00989890 /* 2@2x.png in Resources */,
 				C333DFD11713A34000AD7E1A /* patientPicked.png in Resources */,
 				C333DFD21713A34000AD7E1A /* specialistPicked.png in Resources */,
 				C333DFD31713A34000AD7E1A /* tutorPicked.png in Resources */,
@@ -887,6 +894,7 @@
 				C3A3695B171DFE7300A9F376 /* ipad-BG-pattern.png in Resources */,
 				14A83D1419CA3D75007F5630 /* icon.gif in Resources */,
 				C3A3695C171DFE7300A9F376 /* ipad-menubar-right@2x.png in Resources */,
+				14AC713219DB69BB00989890 /* 0@2x.png in Resources */,
 				C3A3695E171E1EC400A9F376 /* ipad-menubar-button.png in Resources */,
 				C3D8F1E317295E6700351CD0 /* logo-tagarela.png in Resources */,
 				C3D8F1E517295EA200351CD0 /* logo-tagarela@2x.png in Resources */,

@@ -22,6 +22,7 @@
 @property Symbol* wayPointSymbol;
 @property TGGamePointTraceView *pointTrace;
 @property UIImageView *predatorView;
+@property float scale; // escala para a imagem em NSdata
 @end
 
 @implementation TGBoardInteractorViewController
@@ -155,7 +156,7 @@
             
             [self.view addSubview:self.drawView];
             
-            [self makeWayPoints];
+           // [self makeWayPoints];
             
             
             //game part aloca o historico e preview
@@ -437,12 +438,8 @@
     //edicao teste! lembrar de tirar***********************************************************************
     imageView1.image = [UIImage imageNamed:@"0.png"];
     NSLog(@"%f", imageView1.image.size.width);
-    UIImage *scaledImage =
-    [UIImage imageWithCGImage:[imageView1.image CGImage]
-                        scale:(imageView1.image.scale * 0.5)
-                  orientation:(imageView1.image.imageOrientation)];
-    NSLog(@"%f", imageView1.image.size.width);
-    self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(scaledImage.CGImage));
+    _scale = imageView1.image.size.width/imageView1.frame.size.width;
+    self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(imageView1.image.CGImage));
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -524,21 +521,21 @@
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     if (self.isGame) {
     CGPoint location = [[touches anyObject] locationInView:self.view];
-    CGRect fingerRect = CGRectMake(location.x-5 , location.y-5, 20, 20); //dedo com sua dimensao
+    CGRect fingerRect = CGRectMake(location.x-30 , location.y-30, 60, 60); //dedo com sua dimensao
     
     if(CGRectIntersectsRect(fingerRect, _drawView.frame) && [self isWallPixel:location.x-258 :location.y-120]){
-        _predatorView.frame = CGRectMake(location.x-258 ,location.y-120, 50,50);
+        _predatorView.frame = CGRectMake(location.x-258 ,location.y-140, 20,20);
         _predatorView.alpha = 1;
         
         UIImageView* Imageview = [[UIImageView alloc]initWithImage:_pointTrace.trace];
-        Imageview.frame = CGRectMake(location.x-258 ,location.y-120, 20,20);
+        Imageview.frame = _predatorView.frame;
         [_pointTrace playSound];
         [self.drawView addSubview:Imageview];
         
         
         NSMutableArray *toDelete = [[NSMutableArray alloc]init]; //mutable para deletar itens do wayPoints. nao pode deletar dentro do for
         location = [[touches anyObject] locationInView:imageView1]; //faz o touch comparado a view menor para comparar com
-        fingerRect = CGRectMake(location.x-5, location.y-5, 50, 50);              // a posicao dos way points
+        fingerRect = CGRectMake(location.x-25, location.y-25, 50, 50);              // a posicao dos way points
         for(UIView *point in self.wayPoints){
             CGRect subviewFrame = point.frame;
             if(CGRectIntersectsRect(fingerRect, subviewFrame)){
@@ -562,14 +559,15 @@
 #pragma mark - alpha test
 //teste para ver o alpha do pixel
 - (BOOL)isWallPixel: (int) x :(int) y {
+    _scale = imageView1.image.size.width/imageView1.frame.size.width;
     
     const UInt8* data = CFDataGetBytePtr(_pixelData);
-    int pixelInfo = ((imageView1.image.size.width  * y) + x ) * 4; // The image is png
+    int pixelInfo = ((imageView1.image.size.width  * (y*_scale)) + (x*_scale) ) * 4; // The image is png
     //retira os valores do pixel
     //UInt8 red = data[pixelInfo];
     //UInt8 green = data[(pixelInfo + 1)];
     //UInt8 blue = data[pixelInfo + 2];
-    UInt8 alpha = data[pixelInfo + 3];
+    int alpha = data[pixelInfo + 3];
     
     if(x==0||y==0){
    // UIColor* color = [UIColor colorWithRed:red/255.f green:green/255.f blue:blue/255.f alpha:alpha/255.f]; // The pixel color info
@@ -585,8 +583,24 @@
 
 //desenhar as presas no caminho
 -(void)makeWayPoints{
-    
-    
+
+    //UInt8 alpha;
+    for (int x = 0; x< imageView1.image.size.width; x++) {
+        for (int y = 0; y< imageView1.image.size.height; y++){
+          const UInt8* data = CFDataGetBytePtr(_pixelData);
+          int pixelInfo = ((imageView1.image.size.width  * y) + x) * 4;
+          int alpha = data[pixelInfo + 3];
+            if (alpha!=0 && alpha!=255) {
+                NSLog(@"%i , %i", x,y);
+                UIImageView *point2 = [[UIImageView alloc]initWithImage:[UIImage imageWithData:_wayPointSymbol.picture]];
+                point2.frame =CGRectMake(x/_scale-20, y/_scale-20, 40, 40);
+                [point2 setContentMode:UIViewContentModeScaleAspectFit];
+                point2.clipsToBounds = YES;
+                [_wayPoints addObject:point2];
+            }
+        }
+    }
+    if([_wayPoints count]==0){
     UIImageView *point1 = [[UIImageView alloc]initWithImage:[UIImage imageWithData:_wayPointSymbol.picture]];
     point1.frame =CGRectMake(400, 400, 50, 50);
     [point1 setContentMode:UIViewContentModeScaleAspectFit];
@@ -604,6 +618,8 @@
     [point3 setContentMode:UIViewContentModeScaleAspectFit];
     point3.clipsToBounds = YES;
     [_wayPoints addObject:point3];
+    
+    }
     
     for ( TGWayPointView *point in self.wayPoints) {
         [self.drawView addSubview:point];
@@ -628,6 +644,7 @@
         //seta o pixelData para analise na hora do toque na tela. ao trocar de Plano sempre setar o pixelData
         self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(imageView1.image.CGImage));
         [[_drawView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        _scale = imageView1.image.size.width/imageView1.frame.size.width;
         [self makeWayPoints];
     }
     
@@ -736,7 +753,7 @@
 
 /* if an error occurs while decoding it will be reported to the delegate. */
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)erro{
-    NSLog(@"%@",erro);
+    NSLog(@"%@ ",erro);
 }
 
 
