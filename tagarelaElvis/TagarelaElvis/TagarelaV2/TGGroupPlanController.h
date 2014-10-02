@@ -24,7 +24,6 @@
                                               failHandler:(void(^)(NSString *error))failHandler;
 
 - (GroupPlan*)groupPlanForPlanWithPlanID:(int)planID;
-
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

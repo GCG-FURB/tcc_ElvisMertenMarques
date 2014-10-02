@@ -9,7 +9,7 @@
 #import "TGGamePointTraceView.h"
 #import <AVFoundation/AVFoundation.h>
 @interface TGGamePointTraceView()
-@property AVAudioPlayer* audio;
+
 
 @end
 

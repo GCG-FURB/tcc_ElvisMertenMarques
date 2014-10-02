@@ -16,6 +16,7 @@
 #import "TGCurrentUserManager.h"
 #import "PatientsRelationships.h"
 
+
 @interface TGInitialViewController : UIViewController <UIAlertViewDelegate>
 {
     TGInitialListViewController *initialListViewController;

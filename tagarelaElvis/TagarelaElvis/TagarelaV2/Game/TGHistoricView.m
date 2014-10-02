@@ -8,7 +8,7 @@
 
 #import "TGHistoricView.h"
 @interface TGHistoricView()
-@property int numberOfItemsInHistoric;
+
 @end
 
 @implementation TGHistoricView
@@ -27,6 +27,7 @@
 
 -(void)addOnHistoric: (UIView*) view{
     UIView* historicView = [[UIView alloc]initWithFrame:view.frame];
+    [historicView setAlpha:0];
     for (UIImageView* image in view.subviews ) {
         UIImageView* imageview = [[UIImageView alloc]initWithFrame:image.frame];
         imageview.image = image.image;
@@ -36,7 +37,16 @@
     historicView.frame = CGRectMake(100*self.numberOfItemsInHistoric+10, 0, 100, self.frame.size.height);
     [self addSubview:historicView];
     self.numberOfItemsInHistoric++;
-}
+    
+    [UIView animateWithDuration:1.0
+                          delay:0
+                        options: UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         historicView.alpha= 1;
+                     }
+                     completion:nil];
+     
+     }
 
 /*
 // Only override drawRect: if you perform custom drawing.

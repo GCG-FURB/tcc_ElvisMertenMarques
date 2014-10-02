@@ -205,6 +205,21 @@
     return NO;
 }
 
+#pragma mark - loadSymbols from game
+//metodo para carregar os symbols de traco, plano de fundo, predador e presa
+- (NSArray*)loadSymbolsForGroupPlanId: (int) groupPlanID
+{
+    NSError *err;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"SymbolPlan" inManagedObjectContext:[self managedObjectContext]];
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(ANY ID == %i)", groupPlanID];
+    
+    [fetchRequest setEntity:entity];
+//    [fetchRequest setPredicate:predicate];
+    
+    return [[self managedObjectContext]executeFetchRequest:fetchRequest error:&err];
+}
+
 
 
 @end

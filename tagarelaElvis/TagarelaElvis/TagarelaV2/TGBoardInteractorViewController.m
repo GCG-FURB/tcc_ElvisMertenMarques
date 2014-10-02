@@ -79,99 +79,7 @@
             // game part
             
             self.isGame = YES;
-            if(self.isGame){
-            self.wayPoints = [[NSMutableArray alloc] init];
-            
-            NSError *error;
-            [self setBackgroundAudio:[[AVAudioPlayer alloc] initWithData:_backgroundSymbol.sound error:&error]];
-            [[self backgroundAudio]setNumberOfLoops:0];
-            [[self backgroundAudio]prepareToPlay];
-            [[self backgroundAudio]play];
-            [[self backgroundAudio] setDelegate:self];
-                
-            _pointTrace = [[TGGamePointTraceView alloc]initWithImage:[UIImage imageWithData:_traceSymbol.picture] andSound:[[AVAudioPlayer alloc]initWithData:_traceSymbol.sound error:nil]];
-                
-            _predatorView = [[UIImageView alloc]initWithImage:[UIImage imageWithData:_predatorSymbol.picture]];
-            _predatorView.frame = CGRectMake(0, 0, 50, 50);
-            _predatorView.alpha = 0;
-            [imageView1 addSubview:_predatorView];
-            
-            //imagem de fundo
-            
-            self.backgroundImageView = [[UIImageView alloc]initWithFrame:CGRectMake( self.view.frame.size.width/2-200, 124, 700,500)];
-            [self.backgroundImageView setImage:[UIImage imageWithData:[_backgroundSymbol picture]]];
-            self.backgroundImageView.layer.zPosition = 0;
-            [self.view addSubview:self.backgroundImageView];
-
-            UIButton* musicButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 100, 100, 50)];
-            [musicButton setTitle:@"Musica" forState:UIControlStateNormal];
-            [musicButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [musicButton addTarget:self action: @selector(stopPlayMusic:) forControlEvents:UIControlEventTouchUpInside];
-            [self.view addSubview:musicButton];
-            
-            UIButton* backgroundButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 200, 100, 50)];
-            [backgroundButton setTitle:@"Fundo" forState:UIControlStateNormal];
-            [backgroundButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [backgroundButton addTarget:self action: @selector(change:) forControlEvents:UIControlEventTouchUpInside];
-            [backgroundButton setTag:1];
-            [self.view addSubview:backgroundButton];
-            
-            UIButton* predatorButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 300, 100, 50)];
-            [predatorButton setTitle:@"Predador" forState:UIControlStateNormal];
-            [predatorButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [predatorButton addTarget:self action: @selector(change:) forControlEvents:UIControlEventTouchUpInside];
-            [predatorButton setTag:2];
-            [self.view addSubview:predatorButton];
-                
-            UIButton* preyButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 400, 100, 50)];
-            [preyButton setTitle:@"presa" forState:UIControlStateNormal];
-            [preyButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [preyButton addTarget:self action: @selector(change:) forControlEvents:UIControlEventTouchUpInside];
-                [preyButton setTag:3];
-            [self.view addSubview:preyButton];
-                
-            UIButton* traceButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 500, 100, 50)];
-            [traceButton setTitle:@"traço" forState:UIControlStateNormal];
-            [traceButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [traceButton addTarget:self action: @selector(change:) forControlEvents:UIControlEventTouchUpInside];
-                [traceButton setTag:4];
-            [self.view addSubview:traceButton];
-                
-            UIButton* nextButton = [[UIButton alloc]initWithFrame:CGRectMake( 900, 624 , 100, 50)];
-                NSLog(@"%f",self.view.frame.size.width);
-            [nextButton setTitle:@"Proximo" forState:UIControlStateNormal];
-            [nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [nextButton addTarget:self action: @selector(nextPlan) forControlEvents:UIControlEventTouchUpInside];
-            [self.view addSubview:nextButton];
-                
-            UIButton* previousButton = [[UIButton alloc]initWithFrame:CGRectMake( 10, 624 , 100, 50)];
-            [previousButton setTitle:@"Anterior" forState:UIControlStateNormal];
-            [previousButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [previousButton addTarget:self action: @selector(previousPlan) forControlEvents:UIControlEventTouchUpInside];
-            [self.view addSubview:previousButton];
-            
-            self.drawView = [[UIView alloc]initWithFrame:imageView1.frame];
-            _drawView.layer.borderWidth = 2;
-            self.drawView.layer.zPosition = 2;
-            
-            [self.view addSubview:self.drawView];
-            
-           // [self makeWayPoints];
-            
-            
-            //game part aloca o historico e preview
-            self.historicView = [[TGHistoricView alloc]initWithFrame:CGRectMake( self.view.frame.size.width/2-200, self.view.frame.size.height-400, 700,100)];
-            [self.view addSubview:_historicView];
-            _groupPlanController = [[TGGroupPlanController alloc]init];
-            NSArray* arrayGroupPlans = [_groupPlanController loadPlansForGroupPlan:[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] andForSpecificTutor:[[[TGCurrentUserManager sharedCurrentUserManager]selectedTutorPatient]patientTutorID]];
-            
-            self.previewView = [[TGPreviewView alloc]initWithPlans:arrayGroupPlans andCurrentPlan: self.selectedPlan];
-            
-            [self.view addSubview:_previewView];
-
             }
-           
-        }
             break;
             
         case 1: {
@@ -436,10 +344,14 @@
     
     
     //edicao teste! lembrar de tirar***********************************************************************
-    imageView1.image = [UIImage imageNamed:@"0.png"];
+    imageView1.image = [UIImage imageNamed:@"B.png"];
     NSLog(@"%f", imageView1.image.size.width);
     _scale = imageView1.image.size.width/imageView1.frame.size.width;
     self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(imageView1.image.CGImage));
+    
+    if(self.isGame){
+        [self loadGameParts];
+    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -474,7 +386,10 @@
         [[KGModal sharedInstance]setShowCloseButton:YES];
         [[KGModal sharedInstance]setTapOutsideToDismiss:YES];
         [[KGModal sharedInstance]showWithContentViewController:symbolVideoViewController andAnimated:YES];*/
-    }            
+    }
+    
+
+
 }
 
 
@@ -512,6 +427,128 @@
 }
 
 #pragma mark - game methods
+    
+-(void)loadGameParts{
+    self.wayPoints = [[NSMutableArray alloc] init];
+    
+    NSError *error;
+    [self setBackgroundAudio:[[AVAudioPlayer alloc] initWithData:_backgroundSymbol.sound error:&error]];
+    [[self backgroundAudio]setNumberOfLoops:0];
+    [[self backgroundAudio]prepareToPlay];
+    [[self backgroundAudio]play];
+    [[self backgroundAudio] setDelegate:self];
+    
+    _pointTrace = [[TGGamePointTraceView alloc]initWithImage:[UIImage imageWithData:_traceSymbol.picture] andSound:[[AVAudioPlayer alloc]initWithData:_traceSymbol.sound error:nil]];
+    
+    _predatorView = [[UIImageView alloc]initWithImage:[UIImage imageWithData:_predatorSymbol.picture]];
+    _predatorView.frame = CGRectMake(0, 0, 50, 50);
+    _predatorView.alpha = 0;
+    _predatorView.layer.zPosition = 99;
+    [imageView1 addSubview:_predatorView];
+    
+    //imagem de fundo
+    
+    self.backgroundImageView = [[UIImageView alloc]initWithFrame:CGRectMake( self.view.frame.size.width/2-200, 124, 700,500)];
+    [self.backgroundImageView setImage:[UIImage imageWithData:[_backgroundSymbol picture]]];
+    self.backgroundImageView.layer.zPosition = 0;
+    [self.view addSubview:self.backgroundImageView];
+    
+    UIButton* musicButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 100, 100, 50)];
+    [musicButton setTitle:@"Musica" forState:UIControlStateNormal];
+    [musicButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [musicButton addTarget:self action: @selector(stopPlayMusic:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:musicButton];
+    
+    UIButton* backgroundButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 200, 100, 50)];
+    [backgroundButton setTitle:@"Fundo" forState:UIControlStateNormal];
+    [backgroundButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [backgroundButton addTarget:self action: @selector(change:) forControlEvents:UIControlEventTouchUpInside];
+    [backgroundButton setTag:1];
+    [self.view addSubview:backgroundButton];
+    
+    UIButton* predatorButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 300, 100, 50)];
+    [predatorButton setTitle:@"Predador" forState:UIControlStateNormal];
+    [predatorButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [predatorButton addTarget:self action: @selector(change:) forControlEvents:UIControlEventTouchUpInside];
+    [predatorButton setTag:2];
+    [self.view addSubview:predatorButton];
+    
+    UIButton* preyButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 400, 100, 50)];
+    [preyButton setTitle:@"presa" forState:UIControlStateNormal];
+    [preyButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [preyButton addTarget:self action: @selector(change:) forControlEvents:UIControlEventTouchUpInside];
+    [preyButton setTag:3];
+    [self.view addSubview:preyButton];
+    
+    UIButton* traceButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 500, 100, 50)];
+    [traceButton setTitle:@"traço" forState:UIControlStateNormal];
+    [traceButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [traceButton addTarget:self action: @selector(change:) forControlEvents:UIControlEventTouchUpInside];
+    [traceButton setTag:4];
+    [self.view addSubview:traceButton];
+    
+    UIButton* nextButton = [[UIButton alloc]initWithFrame:CGRectMake( 900, 624 , 100, 50)];
+    NSLog(@"%f",self.view.frame.size.width);
+    [nextButton setTitle:@"Proximo" forState:UIControlStateNormal];
+    [nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [nextButton addTarget:self action: @selector(nextPlan) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:nextButton];
+    
+    UIButton* previousButton = [[UIButton alloc]initWithFrame:CGRectMake( 10, 624 , 100, 50)];
+    [previousButton setTitle:@"Anterior" forState:UIControlStateNormal];
+    [previousButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [previousButton addTarget:self action: @selector(previousPlan) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:previousButton];
+    
+    self.drawView = [[UIView alloc]initWithFrame:imageView1.frame];
+    _drawView.layer.borderWidth = 2;
+    self.drawView.layer.zPosition = 2;
+    
+    [self.view addSubview:self.drawView];
+    
+    // [self makeWayPoints];
+    
+    
+    //game part aloca o historico e preview
+    self.historicView = [[TGHistoricView alloc]initWithFrame:CGRectMake( self.view.frame.size.width/2-200, self.view.frame.size.height-400, 700,100)];
+    [self.view addSubview:_historicView];
+    _groupPlanController = [[TGGroupPlanController alloc]init];
+    NSArray* arrayGroupPlans = [_groupPlanController loadPlansForGroupPlan:[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] andForSpecificTutor:[[[TGCurrentUserManager sharedCurrentUserManager]selectedTutorPatient]patientTutorID]];
+    self.previewView = [[TGPreviewView alloc]initWithPlans:arrayGroupPlans andCurrentPlan: self.selectedPlan];
+    
+    
+    NSArray *symbolsGame = [symbolPlanController loadSymbolsForGroupPlanId: [[self selectedPlan] serverID]];
+    if ([symbolsGame count]>0 && false) {
+        SymbolPlan *symbolPlan = [symbolsGame objectAtIndex:1];
+        NSArray* a =[[symbolPlan symbol] allObjects];
+        _backgroundSymbol = [symbolsGame objectAtIndex:1];
+        [self.backgroundImageView setImage:[UIImage imageWithData:[_backgroundSymbol picture]]];
+        self.backgroundAudio = [[AVAudioPlayer alloc]initWithData:[_backgroundSymbol sound] error:nil];
+        [self.backgroundAudio setNumberOfLoops:0];
+        [self.backgroundAudio prepareToPlay];
+        [self.backgroundAudio play];
+        
+        
+        symbolPlan = [symbolsGame objectAtIndex:1];
+        _predatorSymbol = [[[symbolPlan symbol]allObjects]objectAtIndex:0];
+        _predatorView.image = [UIImage imageWithData:_predatorSymbol.picture];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        
+        symbolPlan = [symbolsGame objectAtIndex:2];
+        _wayPointSymbol = [[[symbolPlan symbol]allObjects]objectAtIndex:0];
+        [self makeWayPoints];
+        
+        symbolPlan = [symbolsGame objectAtIndex:3];
+        _traceSymbol = [[[symbolPlan symbol]allObjects]objectAtIndex:0];
+        _pointTrace.trace = [UIImage imageWithData:_traceSymbol.picture];
+        _pointTrace.audio = [[AVAudioPlayer alloc]initWithData:_traceSymbol.sound error:nil];
+    }
+    
+    
+    
+    [self.view addSubview:_previewView];
+    
+}
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     _predatorView.alpha = 0;
@@ -524,7 +561,7 @@
     CGRect fingerRect = CGRectMake(location.x-30 , location.y-30, 60, 60); //dedo com sua dimensao
     
     if(CGRectIntersectsRect(fingerRect, _drawView.frame) && [self isWallPixel:location.x-258 :location.y-120]){
-        _predatorView.frame = CGRectMake(location.x-258 ,location.y-140, 20,20);
+        _predatorView.frame = CGRectMake(location.x-288 ,location.y-150, 60,60);
         _predatorView.alpha = 1;
         
         UIImageView* Imageview = [[UIImageView alloc]initWithImage:_pointTrace.trace];
@@ -547,7 +584,7 @@
         [self.wayPoints removeObjectsInArray:toDelete];
         
         if([self.wayPoints count]==0){
-            [self nextPlan];
+            [self nextPlanAnimation];
         }
     }else{
         [self.wrongPathAudio prepareToPlay];
@@ -559,6 +596,10 @@
 #pragma mark - alpha test
 //teste para ver o alpha do pixel
 - (BOOL)isWallPixel: (int) x :(int) y {
+    if (x<0||x>imageView1.frame.size.width|| y<0||y>imageView1.frame.size.height) {
+        return false;
+    }
+    
     _scale = imageView1.image.size.width/imageView1.frame.size.width;
     
     const UInt8* data = CFDataGetBytePtr(_pixelData);
@@ -630,10 +671,25 @@
 #pragma mark - action buttons of game
 //proximo plano
 
+-(void)nextPlanAnimation{
+        [UIView animateWithDuration:1.0
+                              delay: 1.0
+                            options: UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             self.drawView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.2, 0.2);
+                             self.drawView.frame = CGRectMake( _historicView.frame.origin.x+(100*_historicView.numberOfItemsInHistoric)+10,_historicView.frame.origin.y, 100,100);
+                             
+                         }
+                         completion:^(BOOL finished) {
+                             
+                             [self.historicView addOnHistoric:_drawView];
+                             self.drawView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
+                             self.drawView.frame = imageView1.frame;
+                             [self nextPlan];
+                         }];
+}
+
 -(void)nextPlan{
-    if ([self.drawView.subviews count]>20) {
-        [self.historicView addOnHistoric:_drawView];
-    }
     if([self.previewView isOver]){
         NSLog(@"finalizar");
         [self.previewView playSoundFromGroupPlan];
@@ -647,7 +703,7 @@
         _scale = imageView1.image.size.width/imageView1.frame.size.width;
         [self makeWayPoints];
     }
-    
+
 }
 
 -(void)previousPlan{
@@ -720,8 +776,8 @@
 //metodo que recebe o retorno do observer para o predador
 - (void)didChangePredator:(NSNotification*)notification
 {
-    Symbol *symbol = [notification object];
-    _predatorView.image = [UIImage imageWithData:symbol.picture];
+    _predatorSymbol = [notification object];
+    _predatorView.image = [UIImage imageWithData:_predatorSymbol.picture];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     //update data to DB
 }
@@ -730,7 +786,12 @@
 - (void)didChangeWayPoint:(NSNotification*)notification
 {
     _wayPointSymbol = [notification object];
-    [self makeWayPoints];
+    if ([_wayPoints count]==0) {
+        [self makeWayPoints];
+    }
+    for (UIImageView *image in _wayPoints) {
+        image.image = [UIImage imageWithData:_wayPointSymbol.picture];
+    }
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     //update data to DB
 }

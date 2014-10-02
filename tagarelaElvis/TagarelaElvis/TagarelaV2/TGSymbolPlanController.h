@@ -31,6 +31,8 @@
 
 - (void)loadSymbolsPlansFromBackendWithSuccessHandler:(void(^)())successHandler
                                           failHandler:(void(^)(NSString *error))failHandler;
+- (NSArray*)loadSymbolsForGroupPlanId: (int) groupPlanID;
+
 
 @property (strong, nonatomic) SymbolPlan *unsycedSymbolPlan;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

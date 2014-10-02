@@ -10,6 +10,6 @@
 
 @interface TGHistoricView : UIView
 -(void)addOnHistoric: (UIView*) view;
-
-
+-(int)nextPositionOfNewSymbol;
+@property int numberOfItemsInHistoric;
 @end

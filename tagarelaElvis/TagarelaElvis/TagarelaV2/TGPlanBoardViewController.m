@@ -320,7 +320,10 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self showPlanCreationScreen];
+    if (!selectedPlan) {
+        [self showPlanCreationScreen];
+    }
+ 
 }
 
 - (void)viewDidDisappear:(BOOL)animated

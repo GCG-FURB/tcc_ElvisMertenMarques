@@ -11,6 +11,7 @@
 
 @interface TGGamePointTraceView : UIView
 @property UIImage* trace;
+@property AVAudioPlayer* audio;
 -(id)initWithImage:(UIImage*)image andSound:(AVAudioPlayer*)audio;
 
 -(void)playSound;

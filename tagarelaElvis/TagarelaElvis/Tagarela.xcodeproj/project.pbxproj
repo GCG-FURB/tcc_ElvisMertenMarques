@@ -12,19 +12,21 @@
 		14A83D0419C9019B007F5630 /* background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14A83CFC19C9019B007F5630 /* background@2x.jpg */; };
 		14A83D0519C9019B007F5630 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A83CFD19C9019B007F5630 /* background@2x.png */; };
 		14A83D0619C9019B007F5630 /* TGGamePointTraceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A83CFF19C9019B007F5630 /* TGGamePointTraceView.m */; };
-		14A83D0719C9019B007F5630 /* TGPrincipalGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A83D0119C9019B007F5630 /* TGPrincipalGameViewController.m */; };
 		14A83D0C19C9D452007F5630 /* FreedomDance.wav in Resources */ = {isa = PBXBuildFile; fileRef = 14A83D0B19C9D452007F5630 /* FreedomDance.wav */; };
 		14A83D1119CA3C61007F5630 /* spray.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 14A83D0F19CA3C61007F5630 /* spray.mp3 */; };
 		14A83D1219CA3C61007F5630 /* wrongPath.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 14A83D1019CA3C61007F5630 /* wrongPath.mp3 */; };
 		14A83D1419CA3D75007F5630 /* icon.gif in Resources */ = {isa = PBXBuildFile; fileRef = 14A83D1319CA3D75007F5630 /* icon.gif */; };
 		14A83D1919CA54BF007F5630 /* TGWayPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A83D1819CA54BF007F5630 /* TGWayPointView.m */; };
 		14A83D1B19CA5E4C007F5630 /* wayPoint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A83D1A19CA5E4C007F5630 /* wayPoint@2x.png */; };
-		14A83D1E19CB230B007F5630 /* TGBackgroundChooserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A83D1D19CB230B007F5630 /* TGBackgroundChooserView.m */; };
 		14A83D2119CC7019007F5630 /* TGPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A83D2019CC7019007F5630 /* TGPreviewView.m */; };
 		14A83D2419CCA398007F5630 /* TGHistoricView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A83D2319CCA398007F5630 /* TGHistoricView.m */; };
 		14AC713219DB69BB00989890 /* 0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14AC712F19DB69BB00989890 /* 0@2x.png */; };
 		14AC713319DB69BB00989890 /* 1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14AC713019DB69BB00989890 /* 1@2x.png */; };
 		14AC713419DB69BB00989890 /* 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14AC713119DB69BB00989890 /* 2@2x.png */; };
+		14AC713919DCB40500989890 /* A.png in Resources */ = {isa = PBXBuildFile; fileRef = 14AC713519DCB40500989890 /* A.png */; };
+		14AC713A19DCB40500989890 /* B.png in Resources */ = {isa = PBXBuildFile; fileRef = 14AC713619DCB40500989890 /* B.png */; };
+		14AC713B19DCB40500989890 /* C.png in Resources */ = {isa = PBXBuildFile; fileRef = 14AC713719DCB40500989890 /* C.png */; };
+		14AC713C19DCB40500989890 /* D.png in Resources */ = {isa = PBXBuildFile; fileRef = 14AC713819DCB40500989890 /* D.png */; };
 		C30873B717AF372B00187F82 /* PatientSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = C30873B617AF372B00187F82 /* PatientSymbol.m */; };
 		C316D595174033CB00A62F82 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C316D594174033CB00A62F82 /* MessageUI.framework */; };
 		C316D59B174046E200A62F82 /* TGAlbunsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C316D59A174046E200A62F82 /* TGAlbunsListViewController.m */; };
@@ -151,8 +153,6 @@
 		14A83CFD19C9019B007F5630 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		14A83CFE19C9019B007F5630 /* TGGamePointTraceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGGamePointTraceView.h; sourceTree = "<group>"; };
 		14A83CFF19C9019B007F5630 /* TGGamePointTraceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGGamePointTraceView.m; sourceTree = "<group>"; };
-		14A83D0019C9019B007F5630 /* TGPrincipalGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGPrincipalGameViewController.h; sourceTree = "<group>"; };
-		14A83D0119C9019B007F5630 /* TGPrincipalGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGPrincipalGameViewController.m; sourceTree = "<group>"; };
 		14A83D0B19C9D452007F5630 /* FreedomDance.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = FreedomDance.wav; sourceTree = "<group>"; };
 		14A83D0F19CA3C61007F5630 /* spray.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = spray.mp3; sourceTree = "<group>"; };
 		14A83D1019CA3C61007F5630 /* wrongPath.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wrongPath.mp3; sourceTree = "<group>"; };
@@ -160,8 +160,6 @@
 		14A83D1719CA54BF007F5630 /* TGWayPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGWayPointView.h; sourceTree = "<group>"; };
 		14A83D1819CA54BF007F5630 /* TGWayPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGWayPointView.m; sourceTree = "<group>"; };
 		14A83D1A19CA5E4C007F5630 /* wayPoint@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wayPoint@2x.png"; sourceTree = "<group>"; };
-		14A83D1C19CB230B007F5630 /* TGBackgroundChooserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGBackgroundChooserView.h; path = GameImages/TGBackgroundChooserView.h; sourceTree = "<group>"; };
-		14A83D1D19CB230B007F5630 /* TGBackgroundChooserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGBackgroundChooserView.m; path = GameImages/TGBackgroundChooserView.m; sourceTree = "<group>"; };
 		14A83D1F19CC7019007F5630 /* TGPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGPreviewView.h; sourceTree = "<group>"; };
 		14A83D2019CC7019007F5630 /* TGPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGPreviewView.m; sourceTree = "<group>"; };
 		14A83D2219CCA398007F5630 /* TGHistoricView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGHistoricView.h; sourceTree = "<group>"; };
@@ -169,6 +167,10 @@
 		14AC712F19DB69BB00989890 /* 0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0@2x.png"; sourceTree = "<group>"; };
 		14AC713019DB69BB00989890 /* 1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1@2x.png"; sourceTree = "<group>"; };
 		14AC713119DB69BB00989890 /* 2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2@2x.png"; sourceTree = "<group>"; };
+		14AC713519DCB40500989890 /* A.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = A.png; path = "../../../../TCC2013-2-21-WagnerJReetz/OUTROS/Imagens/Servidor/planos/Letras Maiúsculas/simbolos/A.png"; sourceTree = "<group>"; };
+		14AC713619DCB40500989890 /* B.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = B.png; path = "../../../../TCC2013-2-21-WagnerJReetz/OUTROS/Imagens/Servidor/planos/Letras Maiúsculas/simbolos/B.png"; sourceTree = "<group>"; };
+		14AC713719DCB40500989890 /* C.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = C.png; path = "../../../../TCC2013-2-21-WagnerJReetz/OUTROS/Imagens/Servidor/planos/Letras Maiúsculas/simbolos/C.png"; sourceTree = "<group>"; };
+		14AC713819DCB40500989890 /* D.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = D.png; path = "../../../../TCC2013-2-21-WagnerJReetz/OUTROS/Imagens/Servidor/planos/Letras Maiúsculas/simbolos/D.png"; sourceTree = "<group>"; };
 		C30873B517AF372B00187F82 /* PatientSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientSymbol.h; sourceTree = "<group>"; };
 		C30873B617AF372B00187F82 /* PatientSymbol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientSymbol.m; sourceTree = "<group>"; };
 		C316D594174033CB00A62F82 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -390,12 +392,8 @@
 			isa = PBXGroup;
 			children = (
 				14A83CF919C9019B007F5630 /* GameImages */,
-				14A83D1C19CB230B007F5630 /* TGBackgroundChooserView.h */,
-				14A83D1D19CB230B007F5630 /* TGBackgroundChooserView.m */,
 				14A83CFE19C9019B007F5630 /* TGGamePointTraceView.h */,
 				14A83CFF19C9019B007F5630 /* TGGamePointTraceView.m */,
-				14A83D0019C9019B007F5630 /* TGPrincipalGameViewController.h */,
-				14A83D0119C9019B007F5630 /* TGPrincipalGameViewController.m */,
 				14A83D1719CA54BF007F5630 /* TGWayPointView.h */,
 				14A83D1819CA54BF007F5630 /* TGWayPointView.m */,
 				14A83D1F19CC7019007F5630 /* TGPreviewView.h */,
@@ -409,6 +407,10 @@
 		14A83CF919C9019B007F5630 /* GameImages */ = {
 			isa = PBXGroup;
 			children = (
+				14AC713519DCB40500989890 /* A.png */,
+				14AC713619DCB40500989890 /* B.png */,
+				14AC713719DCB40500989890 /* C.png */,
+				14AC713819DCB40500989890 /* D.png */,
 				14AC712F19DB69BB00989890 /* 0@2x.png */,
 				14AC713019DB69BB00989890 /* 1@2x.png */,
 				14AC713119DB69BB00989890 /* 2@2x.png */,
@@ -883,6 +885,7 @@
 				C333DFB517139C0000AD7E1A /* Default@2x.png in Resources */,
 				14AC713319DB69BB00989890 /* 1@2x.png in Resources */,
 				C333DFB717139C0000AD7E1A /* Default-568h@2x.png in Resources */,
+				14AC713C19DCB40500989890 /* D.png in Resources */,
 				C333DFBA17139C0000AD7E1A /* MainStoryboard.storyboard in Resources */,
 				14AC713419DB69BB00989890 /* 2@2x.png in Resources */,
 				C333DFD11713A34000AD7E1A /* patientPicked.png in Resources */,
@@ -891,6 +894,7 @@
 				14A83D0519C9019B007F5630 /* background@2x.png in Resources */,
 				C3E109131715088C00E9CB07 /* add-imagem-gray.png in Resources */,
 				C31AD5101719CC6300F5652A /* SVProgressHUD.bundle in Resources */,
+				14AC713919DCB40500989890 /* A.png in Resources */,
 				C3A3695B171DFE7300A9F376 /* ipad-BG-pattern.png in Resources */,
 				14A83D1419CA3D75007F5630 /* icon.gif in Resources */,
 				C3A3695C171DFE7300A9F376 /* ipad-menubar-right@2x.png in Resources */,
@@ -908,6 +912,7 @@
 				14A83D0419C9019B007F5630 /* background@2x.jpg in Resources */,
 				C3D8F1F417298B5F00351CD0 /* 2x3.png in Resources */,
 				C3D8F1F517298B5F00351CD0 /* 3x1.png in Resources */,
+				14AC713B19DCB40500989890 /* C.png in Resources */,
 				C3D8F1F617298B5F00351CD0 /* 3x2.png in Resources */,
 				14A83D1219CA3C61007F5630 /* wrongPath.mp3 in Resources */,
 				C3D8F1F717298B5F00351CD0 /* 3x3.png in Resources */,
@@ -918,6 +923,7 @@
 				C3A02C7E172C788A00F6944C /* criarSimboloButtonImg.png in Resources */,
 				C3A02C80172C78B500F6944C /* verSimbolosButtonImg.png in Resources */,
 				C3290C421744380200B43E72 /* Localizable.strings in Resources */,
+				14AC713A19DCB40500989890 /* B.png in Resources */,
 				C3AEA2AB17864A08007BD238 /* visualizarHistoricoUsoSimbolos.png in Resources */,
 				C3E8AF2F178CC5E400C99ECF /* notes_texture_1.png in Resources */,
 				C3E8AF30178CC5E400C99ECF /* notes_texture_2.png in Resources */,
@@ -936,7 +942,6 @@
 				C333DFAD17139C0000AD7E1A /* main.m in Sources */,
 				C39EE35C18EBA002002958B9 /* TGGroupPlanController.m in Sources */,
 				C333DFB117139C0000AD7E1A /* AppDelegate.m in Sources */,
-				14A83D1E19CB230B007F5630 /* TGBackgroundChooserView.m in Sources */,
 				C333DFD61713A50900AD7E1A /* TGInitialViewController.m in Sources */,
 				C333DFD91713A54000AD7E1A /* TGUserPickerViewController.m in Sources */,
 				C333DFDC1713ABE800AD7E1A /* TGUserCreatorViewController.m in Sources */,
@@ -948,7 +953,6 @@
 				C3E1091917150A9400E9CB07 /* TGImagePickerViewController.m in Sources */,
 				C3C7E8F6171629D5004C3D44 /* TGSymbolCreatorViewController.m in Sources */,
 				C37350AC18ECDD140069FCA1 /* TGGroupPlanListViewController.m in Sources */,
-				14A83D0719C9019B007F5630 /* TGPrincipalGameViewController.m in Sources */,
 				C3C7E8FD17162CDD004C3D44 /* TGCategoriesListViewController.m in Sources */,
 				C3C7E90317162F9E004C3D44 /* TGCategoryController.m in Sources */,
 				C3FB31B21716538E00E5C47D /* TGSymbolController.m in Sources */,

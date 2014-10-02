@@ -72,7 +72,16 @@
     NSArray* symbolPlansArray = [_symbolPlanController loadSymbolPlansFromPlan:plan];
     SymbolPlan *symbolPlan = [symbolPlansArray objectAtIndex:0];
     Symbol *symbolFromPlan = [[[symbolPlan symbol]allObjects]objectAtIndex:0];
-    self.borderSelected.frame = CGRectMake(80*_currentPlan+10, 0, 80, self.frame.size.height);
+    [UIView animateWithDuration:0.5
+                          delay:0
+                        options: UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         self.borderSelected.frame = CGRectMake(80*_currentPlan+10, 0, 80, self.frame.size.height);
+
+                     
+                     }
+                     completion:nil];
+    
     return [UIImage imageWithData:[symbolFromPlan picture]];
 }
 
@@ -132,6 +141,7 @@
     
     
 }
+
 
 
 /*

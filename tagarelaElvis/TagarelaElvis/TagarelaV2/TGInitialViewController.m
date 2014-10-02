@@ -1,5 +1,4 @@
 #import "TGInitialViewController.h"
-#import "TGPrincipalGameViewController.h"
 @interface TGInitialViewController ()
 
 @end
@@ -175,6 +174,26 @@
             [[KGModal sharedInstance]showWithContentViewController:userAuthenticatiorViewController andAnimated:YES];
         }        
     }
+    if (alertView.tag==2) {
+        switch (buttonIndex) {
+            case 1:
+                [self performSegueWithIdentifier:@"segueToPlanCreatorBoardViewController" sender:self];
+                break;
+            case 2:{
+                [self performSegueWithIdentifier:@"segueToPlanCreatorBoardViewController" sender:self];
+                TGSelectedPlan *selectedPlan1 = [[TGSelectedPlan alloc]init];
+                selectedPlan1.planLayout = 0;
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"didSelectPlanLayout" object:selectedPlan1];
+                [[KGModal sharedInstance]hideAnimated:YES];
+                
+            }break;
+            case 3:
+                [self performSegueWithIdentifier:@"segueToPlanCreatorBoardViewController" sender:self];
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 - (void)showUserPickerScreen
@@ -296,7 +315,15 @@
             [alertView show];
         }
     } else {
-        [self performSegueWithIdentifier:@"segueToPlanCreatorBoardViewController" sender:self];
+        
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Tagarela"
+                                                          message:@"Qual categoria voce quer criar o novo Plano?"
+                                                         delegate:self
+                                                cancelButtonTitle:@"Cancelar"
+                                                otherButtonTitles:@"Prancha", @"Jogo",@"Quebra - Cabeça", nil];
+        message.tag=2;
+        [message show];
+        
     }
 }
 
@@ -322,5 +349,6 @@
     
     [[self initialTableView]performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];    
 }
+
 
 @end
