@@ -183,6 +183,7 @@
                 [self performSegueWithIdentifier:@"segueToPlanCreatorBoardViewController" sender:self];
                 TGSelectedPlan *selectedPlan1 = [[TGSelectedPlan alloc]init];
                 selectedPlan1.planLayout = 0;
+                selectedPlan1.type = buttonIndex;
                 [[NSNotificationCenter defaultCenter]postNotificationName:@"didSelectPlanLayout" object:selectedPlan1];
                 [[KGModal sharedInstance]hideAnimated:YES];
                 

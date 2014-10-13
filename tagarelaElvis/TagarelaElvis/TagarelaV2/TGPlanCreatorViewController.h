@@ -6,6 +6,7 @@
 
 @property (nonatomic) NSString* planName;
 @property (nonatomic) int planLayout;
+@property (nonatomic) int type;
 
 @end
 

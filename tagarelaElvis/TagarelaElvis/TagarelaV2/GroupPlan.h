@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class GroupPlanRelationship, Plan;
+@class GroupPlanRelationship, Plan, Game_plan_symbols;
 
 @interface GroupPlan : NSManagedObject
 
@@ -18,6 +18,7 @@
 @property (nonatomic) int16_t userID;
 @property (nonatomic, retain) NSSet *plan;
 @property (nonatomic, retain) NSSet *groupPlanRelationship;
+@property (nonatomic, retain) Game_plan_symbols* symbolsFromGame;
 @end
 
 @interface GroupPlan (CoreDataGeneratedAccessors)

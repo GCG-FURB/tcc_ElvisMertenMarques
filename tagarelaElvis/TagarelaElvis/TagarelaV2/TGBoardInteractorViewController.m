@@ -344,7 +344,7 @@
     
     
     //edicao teste! lembrar de tirar***********************************************************************
-    imageView1.image = [UIImage imageNamed:@"B.png"];
+    imageView1.image = [UIImage imageNamed:@"A.png"];
     NSLog(@"%f", imageView1.image.size.width);
     _scale = imageView1.image.size.width/imageView1.frame.size.width;
     self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(imageView1.image.CGImage));
@@ -440,12 +440,6 @@
     
     _pointTrace = [[TGGamePointTraceView alloc]initWithImage:[UIImage imageWithData:_traceSymbol.picture] andSound:[[AVAudioPlayer alloc]initWithData:_traceSymbol.sound error:nil]];
     
-    _predatorView = [[UIImageView alloc]initWithImage:[UIImage imageWithData:_predatorSymbol.picture]];
-    _predatorView.frame = CGRectMake(0, 0, 50, 50);
-    _predatorView.alpha = 0;
-    _predatorView.layer.zPosition = 99;
-    [imageView1 addSubview:_predatorView];
-    
     //imagem de fundo
     
     self.backgroundImageView = [[UIImageView alloc]initWithFrame:CGRectMake( self.view.frame.size.width/2-200, 124, 700,500)];
@@ -506,6 +500,11 @@
     
     [self.view addSubview:self.drawView];
     
+    _predatorView = [[UIImageView alloc]initWithImage:[UIImage imageWithData:_predatorSymbol.picture]];
+    _predatorView.frame = CGRectMake(0, 0, 60, 60);
+    _predatorView.alpha = 0;
+    _predatorView.layer.zPosition = 99;
+    [_drawView addSubview:_predatorView];
     // [self makeWayPoints];
     
     
@@ -524,7 +523,7 @@
         _backgroundSymbol = [symbolsGame objectAtIndex:1];
         [self.backgroundImageView setImage:[UIImage imageWithData:[_backgroundSymbol picture]]];
         self.backgroundAudio = [[AVAudioPlayer alloc]initWithData:[_backgroundSymbol sound] error:nil];
-        [self.backgroundAudio setNumberOfLoops:0];
+        [self.backgroundAudio setNumberOfLoops:-1];
         [self.backgroundAudio prepareToPlay];
         [self.backgroundAudio play];
         
@@ -563,9 +562,10 @@
     if(CGRectIntersectsRect(fingerRect, _drawView.frame) && [self isWallPixel:location.x-258 :location.y-120]){
         _predatorView.frame = CGRectMake(location.x-288 ,location.y-150, 60,60);
         _predatorView.alpha = 1;
+        _predatorView.layer.zPosition=99;
         
         UIImageView* Imageview = [[UIImageView alloc]initWithImage:_pointTrace.trace];
-        Imageview.frame = _predatorView.frame;
+        Imageview.frame = CGRectMake(location.x-288 ,location.y-150, 60,60);
         [_pointTrace playSound];
         [self.drawView addSubview:Imageview];
         
@@ -732,10 +732,9 @@
 
 
 -(void)change:(UIButton*) button{
-    
     switch (button.tag) {
         case 1:
-             [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didChangeBackground:) name:@"didSelectSymbol" object:nil];
+            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didChangeBackground:andTag:) name:@"didSelectSymbol" object:nil];
             break;
         case 2:
              [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didChangePredator:) name:@"didSelectSymbol" object:nil];
@@ -761,7 +760,7 @@
 #pragma mark - observers methods
 //metodo que recebe o retorno do observer para o plano de fundo
 
-- (void)didChangeBackground:(NSNotification*)notification
+- (void)didChangeBackground:(NSNotification*)notification andTag: (int) tag
 {
     Symbol *symbol = [notification object];
     _backgroundSymbol = symbol;

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1490C7FC19E81EC50042687D /* GamePlanSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 1490C7FB19E81EC50042687D /* GamePlanSymbols.m */; };
+		1490C7FF19E8563D0042687D /* GamePlanSymbols+GamePlanSymbolsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1490C7FE19E8563D0042687D /* GamePlanSymbols+GamePlanSymbolsController.m */; };
 		14A83D0219C9019B007F5630 /* background2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14A83CFA19C9019B007F5630 /* background2@2x.jpg */; };
 		14A83D0319C9019B007F5630 /* background3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14A83CFB19C9019B007F5630 /* background3@2x.jpg */; };
 		14A83D0419C9019B007F5630 /* background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14A83CFC19C9019B007F5630 /* background@2x.jpg */; };
@@ -147,6 +149,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1490C7FA19E81EC50042687D /* GamePlanSymbols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GamePlanSymbols.h; path = Game/GamePlanSymbols.h; sourceTree = "<group>"; };
+		1490C7FB19E81EC50042687D /* GamePlanSymbols.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GamePlanSymbols.m; path = Game/GamePlanSymbols.m; sourceTree = "<group>"; };
+		1490C7FD19E8563D0042687D /* GamePlanSymbols+GamePlanSymbolsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GamePlanSymbols+GamePlanSymbolsController.h"; sourceTree = "<group>"; };
+		1490C7FE19E8563D0042687D /* GamePlanSymbols+GamePlanSymbolsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GamePlanSymbols+GamePlanSymbolsController.m"; sourceTree = "<group>"; };
 		14A83CFA19C9019B007F5630 /* background2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background2@2x.jpg"; sourceTree = "<group>"; };
 		14A83CFB19C9019B007F5630 /* background3@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background3@2x.jpg"; sourceTree = "<group>"; };
 		14A83CFC19C9019B007F5630 /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpg"; sourceTree = "<group>"; };
@@ -748,6 +754,10 @@
 		C3C7E8F317162933004C3D44 /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
+				1490C7FA19E81EC50042687D /* GamePlanSymbols.h */,
+				1490C7FB19E81EC50042687D /* GamePlanSymbols.m */,
+				1490C7FD19E8563D0042687D /* GamePlanSymbols+GamePlanSymbolsController.h */,
+				1490C7FE19E8563D0042687D /* GamePlanSymbols+GamePlanSymbolsController.m */,
 				C3578F2F18F8D9AB007B10BF /* GroupPlan.h */,
 				C3578F3018F8D9AB007B10BF /* GroupPlan.m */,
 				C3578F2C18F8D9AA007B10BF /* GroupPlanRelationship.h */,
@@ -987,8 +997,10 @@
 				C347968E18D13E540099047D /* AFHTTPClient.m in Sources */,
 				C347969318D13E540099047D /* AFPropertyListRequestOperation.m in Sources */,
 				C3A02C6E172C70A100F6944C /* MGTileMenuController.m in Sources */,
+				1490C7FC19E81EC50042687D /* GamePlanSymbols.m in Sources */,
 				C39EE35518EB952E002958B9 /* Plan.m in Sources */,
 				C3A02C6F172C70A100F6944C /* MGTileMenuView.m in Sources */,
+				1490C7FF19E8563D0042687D /* GamePlanSymbols+GamePlanSymbolsController.m in Sources */,
 				C316D59B174046E200A62F82 /* TGAlbunsListViewController.m in Sources */,
 				C3423257180A2B9200CE47D9 /* PatientsRelationships.m in Sources */,
 				C316D5AA1740669E00A62F82 /* TGAlbumContentsViewController.m in Sources */,
