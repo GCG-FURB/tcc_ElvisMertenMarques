@@ -35,6 +35,13 @@
     
     groupPlanController = [[TGGroupPlanController alloc]init];
     groupPlanArray = [groupPlanController loadGroupPlansForSpecificUserWithID:currentUserID];
+        NSMutableArray* array =[NSMutableArray new];
+        for (GroupPlan* groupPlan in groupPlanArray) {
+            if (_type==groupPlan.type) {
+                [array addObject:groupPlan];
+            }
+        }
+    groupPlanArray = array;
     
     [[self groupPlanTableView]reloadData];
     
@@ -84,8 +91,15 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [groupPlanController createGroupPlanWithName:[[alertView textFieldAtIndex:0]text] andUserID:currentUserID successHandler:^() {
+    [groupPlanController createGroupPlanWithName:[[alertView textFieldAtIndex:0]text] andUserID:currentUserID withType:_type successHandler:^() {
         groupPlanArray = [groupPlanController loadGroupPlansForSpecificUserWithID:currentUserID];
+        NSMutableArray *array = [NSMutableArray new];
+        for (GroupPlan* groupPlan in groupPlanArray) {
+            if (_type==groupPlan.type) {
+                [array addObject:groupPlan];
+            }
+        }
+        groupPlanArray = array;
         [[self groupPlanTableView]reloadData];
         
     } failHandler:^(NSString *error) {

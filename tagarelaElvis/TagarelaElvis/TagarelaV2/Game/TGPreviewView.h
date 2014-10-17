@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Plan.h"
-@interface TGPreviewView : UIView
+@interface TGPreviewView : UIScrollView
 @property (strong) NSMutableArray* plans;
 
 - (id)initWithPlans:(NSArray*)plans andCurrentPlan: (Plan*) currentPlan;

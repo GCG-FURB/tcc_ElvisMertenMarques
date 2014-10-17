@@ -5,6 +5,9 @@
 #import "TGHistoricView.h"
 #import "TGGroupPlanController.h"
 #import "TGSymbolPickerViewController.h"
+#import "GamePlanSymbols+GamePlanSymbolsController.h"
+#import "TGPlanCreatorViewController.h"
+#import "TGPlanBoardViewController.h"
 
 @interface TGBoardInteractorViewController ()
 @property BOOL isGame;
@@ -32,7 +35,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.isGame = NO;
-    }
+        }
     return self;
 }
 
@@ -77,8 +80,11 @@
             [imageViewsArray addObject:imageView1];
             
             // game part
+            _groupPlanController = [[TGGroupPlanController alloc]init];
+            if ([_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]].type==1) {
+                self.isGame = YES;
+            }
             
-            self.isGame = YES;
             }
             break;
             
@@ -343,21 +349,23 @@
     }
     
     
-    //edicao teste! lembrar de tirar***********************************************************************
-    imageView1.image = [UIImage imageNamed:@"A.png"];
-    NSLog(@"%f", imageView1.image.size.width);
-    _scale = imageView1.image.size.width/imageView1.frame.size.width;
-    self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(imageView1.image.CGImage));
+
     
     if(self.isGame){
         [self loadGameParts];
+        //edicao teste! lembrar de tirar***********************************************************************
+        
+        imageView1.image = [UIImage imageNamed:@"A.png"];
+        NSLog(@"%f", imageView1.image.size.width);
+        _scale = imageView1.image.size.width/imageView1.frame.size.width;
+        self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(imageView1.image.CGImage));
     }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];
-    if ([[touch view]isKindOfClass:[UIImageView class]]) {
+    if ([[touch view]isKindOfClass:[UIImageView class]] && !_isGame) {
         SymbolPlan *symbolPlan = [symbolPlansArray objectAtIndex:[[touch view]tag]];
         Symbol *symbolFromPlan = [[[symbolPlan symbol]allObjects]objectAtIndex:0];
         
@@ -429,23 +437,7 @@
 #pragma mark - game methods
     
 -(void)loadGameParts{
-    self.wayPoints = [[NSMutableArray alloc] init];
-    
-    NSError *error;
-    [self setBackgroundAudio:[[AVAudioPlayer alloc] initWithData:_backgroundSymbol.sound error:&error]];
-    [[self backgroundAudio]setNumberOfLoops:0];
-    [[self backgroundAudio]prepareToPlay];
-    [[self backgroundAudio]play];
-    [[self backgroundAudio] setDelegate:self];
-    
-    _pointTrace = [[TGGamePointTraceView alloc]initWithImage:[UIImage imageWithData:_traceSymbol.picture] andSound:[[AVAudioPlayer alloc]initWithData:_traceSymbol.sound error:nil]];
-    
-    //imagem de fundo
-    
-    self.backgroundImageView = [[UIImageView alloc]initWithFrame:CGRectMake( self.view.frame.size.width/2-200, 124, 700,500)];
-    [self.backgroundImageView setImage:[UIImage imageWithData:[_backgroundSymbol picture]]];
-    self.backgroundImageView.layer.zPosition = 0;
-    [self.view addSubview:self.backgroundImageView];
+   //buttons
     
     UIButton* musicButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 100, 100, 50)];
     [musicButton setTitle:@"Musica" forState:UIControlStateNormal];
@@ -494,56 +486,35 @@
     [previousButton addTarget:self action: @selector(previousPlan) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:previousButton];
     
+    
     self.drawView = [[UIView alloc]initWithFrame:imageView1.frame];
     _drawView.layer.borderWidth = 2;
     self.drawView.layer.zPosition = 2;
-    
     [self.view addSubview:self.drawView];
     
-    _predatorView = [[UIImageView alloc]initWithImage:[UIImage imageWithData:_predatorSymbol.picture]];
-    _predatorView.frame = CGRectMake(0, 0, 60, 60);
-    _predatorView.alpha = 0;
-    _predatorView.layer.zPosition = 99;
-    [_drawView addSubview:_predatorView];
-    // [self makeWayPoints];
-    
+    self.wayPoints = [[NSMutableArray alloc] init];
     
     //game part aloca o historico e preview
-    self.historicView = [[TGHistoricView alloc]initWithFrame:CGRectMake( self.view.frame.size.width/2-200, self.view.frame.size.height-400, 700,100)];
+    self.historicView = [[TGHistoricView alloc]initWithFrame:CGRectMake( 170, 624, 700,100)];
     [self.view addSubview:_historicView];
-    _groupPlanController = [[TGGroupPlanController alloc]init];
+    
+ 
     NSArray* arrayGroupPlans = [_groupPlanController loadPlansForGroupPlan:[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] andForSpecificTutor:[[[TGCurrentUserManager sharedCurrentUserManager]selectedTutorPatient]patientTutorID]];
+    
     self.previewView = [[TGPreviewView alloc]initWithPlans:arrayGroupPlans andCurrentPlan: self.selectedPlan];
     
     
-    NSArray *symbolsGame = [symbolPlanController loadSymbolsForGroupPlanId: [[self selectedPlan] serverID]];
-    if ([symbolsGame count]>0 && false) {
-        SymbolPlan *symbolPlan = [symbolsGame objectAtIndex:1];
-        NSArray* a =[[symbolPlan symbol] allObjects];
-        _backgroundSymbol = [symbolsGame objectAtIndex:1];
-        [self.backgroundImageView setImage:[UIImage imageWithData:[_backgroundSymbol picture]]];
-        self.backgroundAudio = [[AVAudioPlayer alloc]initWithData:[_backgroundSymbol sound] error:nil];
-        [self.backgroundAudio setNumberOfLoops:-1];
-        [self.backgroundAudio prepareToPlay];
-        [self.backgroundAudio play];
-        
-        
-        symbolPlan = [symbolsGame objectAtIndex:1];
-        _predatorSymbol = [[[symbolPlan symbol]allObjects]objectAtIndex:0];
-        _predatorView.image = [UIImage imageWithData:_predatorSymbol.picture];
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
-        
-        symbolPlan = [symbolsGame objectAtIndex:2];
-        _wayPointSymbol = [[[symbolPlan symbol]allObjects]objectAtIndex:0];
-        [self makeWayPoints];
-        
-        symbolPlan = [symbolsGame objectAtIndex:3];
-        _traceSymbol = [[[symbolPlan symbol]allObjects]objectAtIndex:0];
-        _pointTrace.trace = [UIImage imageWithData:_traceSymbol.picture];
-        _pointTrace.audio = [[AVAudioPlayer alloc]initWithData:_traceSymbol.sound error:nil];
-    }
-    
-    
+    [GamePlanSymbols loadSymbolsFromPlanGame:[[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] serverID] withCompletionBlobk:^(NSDictionary *symbolsGame) {
+        if (symbolsGame) {
+            _backgroundSymbol = [symbolPlanController loadSymbolsGameForGroupPlanId:[[symbolsGame objectForKey:@"plan_background_symbol_id"] integerValue]];
+            _predatorSymbol = [symbolPlanController loadSymbolsGameForGroupPlanId:[[symbolsGame objectForKey:@"predator_symbol_id"] integerValue]];
+            _wayPointSymbol =[symbolPlanController loadSymbolsGameForGroupPlanId:[[symbolsGame objectForKey:@"prey_symbol_id"] integerValue]];
+            _traceSymbol = [symbolPlanController loadSymbolsGameForGroupPlanId:[[symbolsGame objectForKey:@"path_symbol_id"] integerValue]];
+            
+            [self startSymbols];
+                    }
+    }];
+     
     
     [self.view addSubview:_previewView];
     
@@ -551,6 +522,42 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     _predatorView.alpha = 0;
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    if (_backgroundAudio) {
+         [_backgroundAudio stop];
+    }
+   
+}
+//apos a view aparecer esse metodo e chamado para verificar se nao existe symbolos
+//deve ser chamado aqui pois carrega outra view controller e essa view precisa estar totalmente carregada primeiro
+-(void)viewDidAppear:(BOOL)animated{
+    if (self.isGame) {
+     [GamePlanSymbols loadSymbolsFromPlanGame:[[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] serverID] withCompletionBlobk:^(NSDictionary *symbolsGame) {
+         if (!symbolsGame) {
+             UIAlertView  *alertView = [[UIAlertView alloc]initWithTitle:@"Tagarela" message:@"Esse plano ainda nao possui os 4 simbolos necessarios. que são: plano de fundo, presa, predador e o tracado. Por favor escolha a seguir." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+             [alertView show];
+             
+             [[NSNotificationCenter defaultCenter]addObserverForName:@"didSelectGroupSymbols" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+                 NSArray* symbols = [note object];
+                 
+                 _backgroundSymbol= [[symbols objectAtIndex:0] selectedSymbol];
+                 _wayPointSymbol= [[symbols objectAtIndex:1] selectedSymbol];
+                 _predatorSymbol= [[symbols objectAtIndex:2]selectedSymbol];
+                 _traceSymbol= [[symbols objectAtIndex:3]selectedSymbol];
+                 
+                 [self startSymbols];
+                 [self refreshDB];
+             }];
+             [self performSegueWithIdentifier:@"segueToBoardViewController" sender:self];
+             TGSelectedPlan *selectedPlan1 = [[TGSelectedPlan alloc]init];
+             selectedPlan1.planLayout = 4;
+             selectedPlan1.type = 1;
+             [[NSNotificationCenter defaultCenter]postNotificationName:@"didSelectPlanLayout" object:selectedPlan1];
+             [[KGModal sharedInstance]hideAnimated:YES];
+         }
+     }];
+}
 }
 
 //método presente na classe
@@ -677,7 +684,7 @@
                             options: UIViewAnimationOptionCurveLinear
                          animations:^{
                              self.drawView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.2, 0.2);
-                             self.drawView.frame = CGRectMake( _historicView.frame.origin.x+(100*_historicView.numberOfItemsInHistoric)+10,_historicView.frame.origin.y, 100,100);
+                             self.drawView.frame = CGRectMake( _historicView.frame.origin.x+(100*[_historicView nextPositionOnhistoric])+10,_historicView.frame.origin.y, 100,100);
                              
                          }
                          completion:^(BOOL finished) {
@@ -692,8 +699,21 @@
 -(void)nextPlan{
     if([self.previewView isOver]){
         NSLog(@"finalizar");
-        [self.previewView playSoundFromGroupPlan];
-        [[_drawView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        UILabel* finishLabel = [[UILabel alloc]initWithFrame:_backgroundImageView.frame];
+        finishLabel.text = @"Parabéns plano finalizado!";
+        finishLabel.textAlignment = NSTextAlignmentCenter;
+        finishLabel.font = [UIFont fontWithName:@"times" size:50];
+        [UIView animateWithDuration:1.0
+                              delay: 1.0
+                            options: UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             imageView1.alpha=0;
+                             [self.previewView playSoundFromGroupPlan];
+                             [self.drawView removeFromSuperview];
+                             _backgroundImageView.alpha = 0;
+                         } completion:^(BOOL finished) {
+                             [self.view addSubview:finishLabel];
+                         }];
     }else{
         [self.previewView playSoundFromCurrentPlan];
         [imageView1 setImage:[self.previewView nextPlanOnPreview]];
@@ -729,12 +749,11 @@
     }
 }
 
-
-
 -(void)change:(UIButton*) button{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     switch (button.tag) {
         case 1:
-            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didChangeBackground:andTag:) name:@"didSelectSymbol" object:nil];
+             [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didChangeBackground:) name:@"didSelectSymbol" object:nil];
             break;
         case 2:
              [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didChangePredator:) name:@"didSelectSymbol" object:nil];
@@ -760,17 +779,17 @@
 #pragma mark - observers methods
 //metodo que recebe o retorno do observer para o plano de fundo
 
-- (void)didChangeBackground:(NSNotification*)notification andTag: (int) tag
+- (void)didChangeBackground:(NSNotification*)notification
 {
     Symbol *symbol = [notification object];
     _backgroundSymbol = symbol;
     [self.backgroundImageView setImage:[UIImage imageWithData:[symbol picture]]];
      self.backgroundAudio = [[AVAudioPlayer alloc]initWithData:[symbol sound] error:nil];
-    [self.backgroundAudio setNumberOfLoops:0];
+    [self.backgroundAudio setNumberOfLoops:-1];
     [self.backgroundAudio prepareToPlay];
     [self.backgroundAudio play];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    //update data to DB
+   [self refreshDB];
 }
 //metodo que recebe o retorno do observer para o predador
 - (void)didChangePredator:(NSNotification*)notification
@@ -778,7 +797,7 @@
     _predatorSymbol = [notification object];
     _predatorView.image = [UIImage imageWithData:_predatorSymbol.picture];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    //update data to DB
+   [self refreshDB];
 }
 
 //metodo que recebe o retorno do observer para a presa
@@ -792,7 +811,7 @@
         image.image = [UIImage imageWithData:_wayPointSymbol.picture];
     }
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    //update data to DB
+    [self refreshDB];
 }
 
 //metodo que recebe o retorno do observer para o tracado
@@ -801,10 +820,40 @@
     _traceSymbol = [notification object];
      _pointTrace = [[TGGamePointTraceView alloc]initWithImage:[UIImage imageWithData:_traceSymbol.picture] andSound:[[AVAudioPlayer alloc]initWithData:_traceSymbol.sound error:nil]];
       [[NSNotificationCenter defaultCenter] removeObserver:self];
-    //update data to DB
+    [self refreshDB];
+    
 }
 
+//atualiza o banco de dados dos simbolos do jogo
+-(void)refreshDB{
+    NSMutableArray* symbolsId = [NSMutableArray new];
+    [symbolsId addObject:[NSNumber numberWithInt:[_backgroundSymbol serverID]]];
+    [symbolsId addObject:[NSNumber numberWithInt:[_traceSymbol serverID]]];
+    [symbolsId addObject:[NSNumber numberWithInt:[_wayPointSymbol serverID]]];
+    [symbolsId addObject:[NSNumber numberWithInt:[_predatorSymbol serverID]]];
+    
+    [GamePlanSymbols changeGamePlanSymbolsIds: symbolsId ofGroupPlan: [[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] serverID]];
+}
 
+//inicia symbols do jogo
+-(void)startSymbols{
+    _backgroundImageView = [[UIImageView alloc]initWithFrame:CGRectMake(170, 124, 700,500)];
+    _backgroundImageView.image = [UIImage imageWithData:_backgroundSymbol.picture];
+    self.backgroundAudio = [[AVAudioPlayer alloc]initWithData:[_backgroundSymbol sound] error:nil];
+    [self.backgroundAudio setNumberOfLoops:-1];
+    [self.backgroundAudio prepareToPlay];
+    [self.backgroundAudio play];
+    [self.view addSubview:_backgroundImageView];
+    
+    [self makeWayPoints];
+
+    
+    _predatorView= [[UIImageView alloc ]initWithImage:[UIImage imageWithData:_predatorSymbol.picture]];
+    _predatorView.alpha = 0;
+    [self.drawView addSubview:_predatorView];
+    
+    _pointTrace = [[TGGamePointTraceView alloc]initWithImage:[UIImage imageWithData:_traceSymbol.picture] andSound:[[AVAudioPlayer alloc] initWithData:_traceSymbol.sound error:nil]];
+}
 
 #pragma mark - audioPlayerDelegate
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{

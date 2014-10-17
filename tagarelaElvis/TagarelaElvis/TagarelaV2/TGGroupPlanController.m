@@ -24,6 +24,20 @@
     return [[self managedObjectContext]executeFetchRequest:fetchRequest error:&err];
 }
 
+- (NSArray*)loadGroupPlansForSpecificUserWithID:(int)userID andType:(int)type
+{
+    NSError *err;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"GroupPlan" inManagedObjectContext:[self managedObjectContext]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(type == %@) AND (userID == %d)", type, userID];
+    
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:predicate];
+    
+    return [[self managedObjectContext]executeFetchRequest:fetchRequest error:&err];
+}
+
+
 - (NSArray*)loadPlansForGroupPlan:(GroupPlan*)groupPlan
               andForSpecificTutor:(int)tutorID
 {
@@ -138,18 +152,21 @@
 
 - (void)createGroupPlanWithName:(NSString *)name
                       andUserID:(int)userID
+                       withType:(int)type
                  successHandler:(void(^)())successHandler
                     failHandler:(void(^)(NSString *error))failHandler
 {
     if ([self connectionIsAvailable]) {
         [self createGroupPlanInBackendWithName:name
                                      andUserID:userID
+                                      withType:type
                                 successHandler:successHandler
                                    failHandler:failHandler];
     } else {
         [self createGroupPlanInDeviceWithName:name
                                     andUserID:userID
                                   andServerID:-1
+                                     withType:type
                                successHandler:successHandler
                                   failHandler:failHandler];
     }
@@ -157,10 +174,11 @@
 
 - (void)createGroupPlanInBackendWithName:(NSString *)name
                                andUserID:(int)userID
+                                withType:(int)type
                           successHandler:(void(^)())successHandler
                              failHandler:(void(^)(NSString *error))failHandler
 {
-    id params = @{@"name": name, @"user_id": [NSNumber numberWithInt:userID]};
+    id params = @{@"name": name, @"user_id": [NSNumber numberWithInt:userID], @"type": [NSNumber numberWithInt:type]};
     
     [[TGBackendAPIClient sharedAPIClient]postPath:@"/group_plans/create.json"
                                        parameters:params
@@ -169,7 +187,7 @@
                                                   NSData *jsonData = [[operation responseString]dataUsingEncoding:NSUTF8StringEncoding];
                                                   NSDictionary *serverJson = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
                                                   if (serverJson) {                                                      
-                                                      [self createGroupPlanInDeviceWithName:name andUserID:userID andServerID:[[serverJson objectForKey:@"id"]intValue] successHandler:successHandler failHandler:failHandler];
+                                                      [self createGroupPlanInDeviceWithName:name andUserID:userID andServerID:[[serverJson objectForKey:@"id"]intValue] withType:type successHandler:successHandler failHandler:failHandler];
                                                   }
                                               }
                                           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -223,6 +241,7 @@
 - (void)createGroupPlanInDeviceWithName:(NSString *)name
                               andUserID:(int)userID
                             andServerID:(int)serverID
+                               withType:(int)type
                          successHandler:(void(^)())successHandler
                             failHandler:(void(^)(NSString *error))failHandler
 {
@@ -231,6 +250,7 @@
     GroupPlan *gp = [NSEntityDescription insertNewObjectForEntityForName:@"GroupPlan" inManagedObjectContext:[self managedObjectContext]];
     [gp setServerID:serverID];
     [gp setName:name];
+    [gp setType:type];
     [gp setUserID:userID];
     
     if (![[self managedObjectContext]save:&error]) {

@@ -8,7 +8,7 @@
 
 #import "TGHistoricView.h"
 @interface TGHistoricView()
-
+@property int numberOfItemsInHistoric;
 @end
 
 @implementation TGHistoricView
@@ -18,9 +18,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.numberOfItemsInHistoric = 0;
-        [self setBackgroundColor:[UIColor whiteColor]];
+        [self setBackgroundColor:[UIColor clearColor]];
         // Initialization code
         self.autoresizesSubviews = YES;
+        [self setScrollEnabled:YES];
     }
     return self;
 }
@@ -35,6 +36,7 @@
     }
     historicView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.2, 0.2);
     historicView.frame = CGRectMake(100*self.numberOfItemsInHistoric+10, 0, 100, self.frame.size.height);
+    [self setContentSize:CGSizeMake(100*self.numberOfItemsInHistoric+10, self.frame.size.height)];
     [self addSubview:historicView];
     self.numberOfItemsInHistoric++;
     
@@ -48,6 +50,12 @@
      
      }
 
+-(int)nextPositionOnhistoric{
+    if (_numberOfItemsInHistoric>7) {
+        return 7;
+    }
+    return _numberOfItemsInHistoric;
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

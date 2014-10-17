@@ -10,8 +10,7 @@
 
 @implementation GamePlanSymbols (GamePlanSymbolsController)
 
--(NSDictionary*) loadSymbolsFromPlanGame:(int) planId{
-    NSDictionary *symbols;
++(void) loadSymbolsFromPlanGame:(int) planId withCompletionBlobk:(void(^)(NSDictionary* dic))completionBlock{
     [[TGBackendAPIClient sharedAPIClient]getPath:@"/game_plan_symbols/index.json"
                                       parameters:nil
                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -20,15 +19,21 @@
                                                NSDictionary *serverJson = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
                                                  if (serverJson) {
                                                      NSLog(@"%@", serverJson);
+                                                     for (NSDictionary* dictionary in serverJson) {
+                                                         if ([[dictionary objectForKey:@"plan_id"] integerValue] == planId) {
+                                                             completionBlock(dictionary);
+                                                             return;
+                                                         }
+                                                     }
+                                                     completionBlock(nil); //passara por aqui somente se nao existir o id certo dos simbolos do jogo.
                                                  }
                                              }
                                          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                              NSLog(@"error.description INDEX %@", error.description);
                                          }];
-    return symbols; 
 }
 
--(void) changeGamePlanSymbolsIds: (NSArray*) symbolsId ofGroupPlan: (int) groupPlanId{
++(void) changeGamePlanSymbolsIds: (NSArray*) symbolsId ofGroupPlan: (int) groupPlanId{
     id params = @{@"plan_id": [NSNumber numberWithInt:groupPlanId],
                   @"plan_background_symbol_id": [symbolsId objectAtIndex:0],
                   @"path_symbol_id": [symbolsId objectAtIndex:1],

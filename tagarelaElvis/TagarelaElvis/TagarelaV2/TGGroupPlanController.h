@@ -5,6 +5,7 @@
 @interface TGGroupPlanController : NSObject
 
 - (NSArray*)loadGroupPlansForSpecificUserWithID:(int)userID;
+- (NSArray*)loadGroupPlansForSpecificUserWithID:(int)userID andType:(int)type;
 
 - (NSArray*)loadPlansForGroupPlan:(GroupPlan*)groupPlan
               andForSpecificTutor:(int)tutorID;
@@ -15,7 +16,7 @@
 - (void)loadGroupPlanRelationshipsFromBackendWithSuccessHandler:(void(^)())successHandler
                                                     failHandler:(void(^)(NSString *error))failHandler;
 
-- (void)createGroupPlanWithName:(NSString *)name andUserID:(int)userID
+- (void)createGroupPlanWithName:(NSString *)name andUserID:(int)userID withType:(int)type
                  successHandler:(void(^)())successHandler
                     failHandler:(void(^)(NSString *error))failHandler;
 

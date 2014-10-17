@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TGHistoricView : UIView
+@interface TGHistoricView : UIScrollView
 -(void)addOnHistoric: (UIView*) view;
--(int)nextPositionOfNewSymbol;
-@property int numberOfItemsInHistoric;
+-(int)nextPositionOnhistoric;
+
 @end

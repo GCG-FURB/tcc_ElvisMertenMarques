@@ -20,6 +20,7 @@
     <entity name="GroupPlan" representedClassName="GroupPlan" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="serverID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="userID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="groupPlanRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GroupPlanRelationship" inverseName="groupPlan" inverseEntity="GroupPlanRelationship" syncable="YES"/>
         <relationship name="plan" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Plan" inverseName="groupPlan" inverseEntity="Plan" syncable="YES"/>
@@ -95,7 +96,8 @@
     </entity>
     <elements>
         <element name="Category" positionX="-9" positionY="-207" width="128" height="133"/>
-        <element name="GroupPlan" positionX="259" positionY="11" width="128" height="133"/>
+        <element name="GamePlanSymbols" positionX="9" positionY="-25" width="135" height="148"/>
+        <element name="GroupPlan" positionX="259" positionY="11" width="128" height="148"/>
         <element name="GroupPlanRelationship" positionX="241" positionY="162" width="128" height="88"/>
         <element name="ObservationHistoric" positionX="-279" positionY="-108" width="128" height="118"/>
         <element name="PatientsRelationships" positionX="-360" positionY="36" width="128" height="148"/>
@@ -105,6 +107,5 @@
         <element name="SymbolHistoric" positionX="-342" positionY="234" width="128" height="118"/>
         <element name="SymbolPlan" positionX="7" positionY="243" width="128" height="105"/>
         <element name="User" positionX="-279" positionY="-253" width="128" height="118"/>
-        <element name="GamePlanSymbols" positionX="9" positionY="-25" width="135" height="148"/>
     </elements>
 </model>

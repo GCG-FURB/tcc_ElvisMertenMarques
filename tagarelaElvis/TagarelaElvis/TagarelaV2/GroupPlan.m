@@ -9,7 +9,7 @@
 #import "GroupPlan.h"
 #import "GroupPlanRelationship.h"
 #import "Plan.h"
-#import "Game_plan_symbols.h"
+#import "GamePlanSymbols.h"
 
 
 @implementation GroupPlan
@@ -20,5 +20,5 @@
 @dynamic plan;
 @dynamic groupPlanRelationship;
 @dynamic symbolsFromGame;
-
+@dynamic type;
 @end

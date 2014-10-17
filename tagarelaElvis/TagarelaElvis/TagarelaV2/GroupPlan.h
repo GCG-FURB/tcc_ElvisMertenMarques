@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic) int16_t serverID;
 @property (nonatomic) int16_t userID;
+@property (nonatomic) int16_t type;
 @property (nonatomic, retain) NSSet *plan;
 @property (nonatomic, retain) NSSet *groupPlanRelationship;
 @property (nonatomic, retain) Game_plan_symbols* symbolsFromGame;

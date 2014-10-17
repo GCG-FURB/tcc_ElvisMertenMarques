@@ -207,17 +207,18 @@
 
 #pragma mark - loadSymbols from game
 //metodo para carregar os symbols de traco, plano de fundo, predador e presa
-- (NSArray*)loadSymbolsForGroupPlanId: (int) groupPlanID
+- (Symbol*)loadSymbolsGameForGroupPlanId: (int) symbolID
 {
     NSError *err;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"SymbolPlan" inManagedObjectContext:[self managedObjectContext]];
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(ANY ID == %i)", groupPlanID];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Symbol" inManagedObjectContext:[self managedObjectContext]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(ANY serverID == %i)", symbolID];
     
     [fetchRequest setEntity:entity];
-//    [fetchRequest setPredicate:predicate];
+    [fetchRequest setPredicate:predicate];
     
-    return [[self managedObjectContext]executeFetchRequest:fetchRequest error:&err];
+    Symbol* symbol = [[[self managedObjectContext]executeFetchRequest:fetchRequest error:&err] objectAtIndex:0];
+    return symbol;
 }
 
 

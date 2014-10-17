@@ -25,7 +25,7 @@
     self = [super init];
     if (self) {
         self.frame = CGRectMake(170, 45, 800, 80);
-        self.currentPlan = [plans indexOfObject:currentPlan];
+        self.currentPlan = (int)[plans indexOfObject:currentPlan];
         NSLog(@"%i", self.currentPlan);
         _symbolPlanController = [[TGSymbolPlanController alloc]init];
         NSArray* symbolPlansArray;
@@ -49,6 +49,8 @@
 
         _speechSynthesizer = [[AVSpeechSynthesizer alloc]init];
         _speechVoice = [AVSpeechSynthesisVoice voiceWithLanguage:@"pt-BR"];
+        self.contentSize = CGSizeMake(80*[plans count]+10, 80);
+         [self setScrollEnabled:YES];
     }
     
     

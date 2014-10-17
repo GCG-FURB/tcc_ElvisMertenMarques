@@ -341,16 +341,25 @@
 
 - (IBAction)finishCreation:(id)sender
 {
+    if (selectedPlan.planLayout ==4 && selectedPlan.type==1) {
+        //so entra quando for para escolher os 4 simbolos do jogo
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"didSelectGroupSymbols" object:planSymbols];
+        [self.navigationController popViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
     TGGroupPlanListViewController *categoryListViewController = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil]instantiateViewControllerWithIdentifier:@"TGGroupPlanListViewController"];
+    categoryListViewController.type = selectedPlan.type;
     [categoryListViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     [[categoryListViewController view]setFrame:CGRectMake(0, 0, 540, 270)];
     [[KGModal sharedInstance]setShowCloseButton:NO];
     [[KGModal sharedInstance]setTapOutsideToDismiss:NO];
     [[KGModal sharedInstance]showWithContentViewController:categoryListViewController andAnimated:YES];
+    }
 }
 
 - (void)finishCreation
 {
+   
     NSMutableString *planName = [[NSMutableString alloc]initWithCapacity:0];
     
     for (int i = 0; i < [planSymbols count]; i++) {
