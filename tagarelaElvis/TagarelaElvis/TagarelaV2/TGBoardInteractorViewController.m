@@ -631,7 +631,7 @@
 
 //desenhar as presas no caminho
 -(void)makeWayPoints{
-
+    [_wayPoints removeAllObjects];
     //UInt8 alpha;
     for (int x = 0; x< imageView1.image.size.width; x++) {
         for (int y = 0; y< imageView1.image.size.height; y++){
@@ -688,33 +688,35 @@
                              
                          }
                          completion:^(BOOL finished) {
-                             
+                             if([self.previewView isOver]){
+                                 NSLog(@"finalizar");
+                                 UILabel* finishLabel = [[UILabel alloc]initWithFrame:_backgroundImageView.frame];
+                                 finishLabel.text = @"Parabéns plano finalizado!";
+                                 finishLabel.textAlignment = NSTextAlignmentCenter;
+                                 finishLabel.font = [UIFont fontWithName:@"times" size:50];
+                                 [UIView animateWithDuration:1.0
+                                                       delay: 1.0
+                                                     options: UIViewAnimationOptionCurveLinear
+                                                  animations:^{
+                                                      imageView1.alpha=0;
+                                                      [self.previewView playSoundFromGroupPlan];
+                                                      [self.drawView removeFromSuperview];
+                                                      _backgroundImageView.alpha = 0;
+                                                  } completion:^(BOOL finished) {
+                                                      [self.view addSubview:finishLabel];
+                                                  }];
+                             }
                              [self.historicView addOnHistoric:_drawView];
                              self.drawView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
                              self.drawView.frame = imageView1.frame;
                              [self nextPlan];
-                         }];
+                             }];
+   
+    
 }
 
 -(void)nextPlan{
-    if([self.previewView isOver]){
-        NSLog(@"finalizar");
-        UILabel* finishLabel = [[UILabel alloc]initWithFrame:_backgroundImageView.frame];
-        finishLabel.text = @"Parabéns plano finalizado!";
-        finishLabel.textAlignment = NSTextAlignmentCenter;
-        finishLabel.font = [UIFont fontWithName:@"times" size:50];
-        [UIView animateWithDuration:1.0
-                              delay: 1.0
-                            options: UIViewAnimationOptionCurveLinear
-                         animations:^{
-                             imageView1.alpha=0;
-                             [self.previewView playSoundFromGroupPlan];
-                             [self.drawView removeFromSuperview];
-                             _backgroundImageView.alpha = 0;
-                         } completion:^(BOOL finished) {
-                             [self.view addSubview:finishLabel];
-                         }];
-    }else{
+    if(![self.previewView isOver]){
         [self.previewView playSoundFromCurrentPlan];
         [imageView1 setImage:[self.previewView nextPlanOnPreview]];
         //seta o pixelData para analise na hora do toque na tela. ao trocar de Plano sempre setar o pixelData

@@ -121,22 +121,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TagarelaV2/TGBoardInteractorViewController.m"
-            timestampString = "435248329.757715"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "641"
-            endingLineNumber = "641"
-            landmarkName = "-makeWayPoints"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "TagarelaV2/TGGroupPlanListViewController.m"
             timestampString = "435085271.49907"
             startingColumnNumber = "9223372036854775807"
@@ -201,7 +185,7 @@
                   symbolName = "-[TGSymbolCreatorViewController finishCreation:]"
                   moduleName = "Tagarela"
                   urlString = "file:///Users/elvis/Documents/Projetos/TagarelaIOS/tagarelaElvis/TagarelaElvis/TagarelaV2/TGSymbolCreatorViewController.m"
-                  timestampString = "435252340.271403"
+                  timestampString = "435262188.700834"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "276"
@@ -215,7 +199,7 @@
                   symbolName = "__48-[TGSymbolCreatorViewController finishCreation:]_block_invoke_2"
                   moduleName = "Tagarela"
                   urlString = "file:///Users/elvis/Documents/Projetos/TagarelaIOS/tagarelaElvis/TagarelaElvis/TagarelaV2/TGSymbolCreatorViewController.m"
-                  timestampString = "435252340.271701"
+                  timestampString = "435262188.701031"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "276"
@@ -318,22 +302,6 @@
             startingLineNumber = "49"
             endingLineNumber = "49"
             landmarkName = "+changeGamePlanSymbolsIds:ofGroupPlan:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TagarelaV2/TGPlanBoardViewController.m"
-            timestampString = "435083324.846312"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "-didSelectGroupPlan:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
