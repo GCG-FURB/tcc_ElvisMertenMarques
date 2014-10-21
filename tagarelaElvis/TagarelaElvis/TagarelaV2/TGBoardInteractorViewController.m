@@ -706,6 +706,7 @@
                                                       [self.view addSubview:finishLabel];
                                                   }];
                              }
+                             [self.previewView playSoundFromCurrentPlan];
                              [self.historicView addOnHistoric:_drawView];
                              self.drawView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
                              self.drawView.frame = imageView1.frame;
@@ -717,7 +718,6 @@
 
 -(void)nextPlan{
     if(![self.previewView isOver]){
-        [self.previewView playSoundFromCurrentPlan];
         [imageView1 setImage:[self.previewView nextPlanOnPreview]];
         //seta o pixelData para analise na hora do toque na tela. ao trocar de Plano sempre setar o pixelData
         self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(imageView1.image.CGImage));

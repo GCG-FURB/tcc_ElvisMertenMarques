@@ -32,7 +32,6 @@
 {
     Reachability *networkReachability = [Reachability reachabilityWithHostName:GOOGLE];
     NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
-    
     return (networkStatus == NotReachable) ? NO : YES;
 }
 
@@ -49,7 +48,7 @@
     NSString *encodedSoundString = [[self encodeBase64WithData:sound]stringByReplacingOccurrencesOfString:@"+" withString:@"@"];
     
     int userID = 0;
-    
+   // NSLog(@"%@", [self encodeBase64WithData:UIImagePNGRepresentation(picture)]);
     switch ([[[TGCurrentUserManager sharedCurrentUserManager]currentUser]type]) {
         case 0:
             if ([[TGCurrentUserManager sharedCurrentUserManager]selectedTutorPatient]) {
