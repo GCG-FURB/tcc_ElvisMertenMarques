@@ -9,16 +9,8 @@
 /* Begin PBXBuildFile section */
 		1490C7FC19E81EC50042687D /* GamePlanSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 1490C7FB19E81EC50042687D /* GamePlanSymbols.m */; };
 		1490C7FF19E8563D0042687D /* GamePlanSymbols+GamePlanSymbolsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1490C7FE19E8563D0042687D /* GamePlanSymbols+GamePlanSymbolsController.m */; };
-		14A83D0219C9019B007F5630 /* background2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14A83CFA19C9019B007F5630 /* background2@2x.jpg */; };
-		14A83D0319C9019B007F5630 /* background3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14A83CFB19C9019B007F5630 /* background3@2x.jpg */; };
-		14A83D0419C9019B007F5630 /* background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14A83CFC19C9019B007F5630 /* background@2x.jpg */; };
-		14A83D0519C9019B007F5630 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A83CFD19C9019B007F5630 /* background@2x.png */; };
 		14A83D0619C9019B007F5630 /* TGGamePointTraceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A83CFF19C9019B007F5630 /* TGGamePointTraceView.m */; };
-		14A83D0C19C9D452007F5630 /* FreedomDance.wav in Resources */ = {isa = PBXBuildFile; fileRef = 14A83D0B19C9D452007F5630 /* FreedomDance.wav */; };
-		14A83D1119CA3C61007F5630 /* spray.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 14A83D0F19CA3C61007F5630 /* spray.mp3 */; };
 		14A83D1219CA3C61007F5630 /* wrongPath.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 14A83D1019CA3C61007F5630 /* wrongPath.mp3 */; };
-		14A83D1419CA3D75007F5630 /* icon.gif in Resources */ = {isa = PBXBuildFile; fileRef = 14A83D1319CA3D75007F5630 /* icon.gif */; };
-		14A83D1919CA54BF007F5630 /* TGWayPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A83D1819CA54BF007F5630 /* TGWayPointView.m */; };
 		14A83D1B19CA5E4C007F5630 /* wayPoint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A83D1A19CA5E4C007F5630 /* wayPoint@2x.png */; };
 		14A83D2119CC7019007F5630 /* TGPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A83D2019CC7019007F5630 /* TGPreviewView.m */; };
 		14A83D2419CCA398007F5630 /* TGHistoricView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A83D2319CCA398007F5630 /* TGHistoricView.m */; };
@@ -153,18 +145,9 @@
 		1490C7FB19E81EC50042687D /* GamePlanSymbols.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GamePlanSymbols.m; path = Game/GamePlanSymbols.m; sourceTree = "<group>"; };
 		1490C7FD19E8563D0042687D /* GamePlanSymbols+GamePlanSymbolsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GamePlanSymbols+GamePlanSymbolsController.h"; sourceTree = "<group>"; };
 		1490C7FE19E8563D0042687D /* GamePlanSymbols+GamePlanSymbolsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GamePlanSymbols+GamePlanSymbolsController.m"; sourceTree = "<group>"; };
-		14A83CFA19C9019B007F5630 /* background2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background2@2x.jpg"; sourceTree = "<group>"; };
-		14A83CFB19C9019B007F5630 /* background3@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background3@2x.jpg"; sourceTree = "<group>"; };
-		14A83CFC19C9019B007F5630 /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpg"; sourceTree = "<group>"; };
-		14A83CFD19C9019B007F5630 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		14A83CFE19C9019B007F5630 /* TGGamePointTraceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGGamePointTraceView.h; sourceTree = "<group>"; };
 		14A83CFF19C9019B007F5630 /* TGGamePointTraceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGGamePointTraceView.m; sourceTree = "<group>"; };
-		14A83D0B19C9D452007F5630 /* FreedomDance.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = FreedomDance.wav; sourceTree = "<group>"; };
-		14A83D0F19CA3C61007F5630 /* spray.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = spray.mp3; sourceTree = "<group>"; };
 		14A83D1019CA3C61007F5630 /* wrongPath.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wrongPath.mp3; sourceTree = "<group>"; };
-		14A83D1319CA3D75007F5630 /* icon.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = icon.gif; sourceTree = "<group>"; };
-		14A83D1719CA54BF007F5630 /* TGWayPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGWayPointView.h; sourceTree = "<group>"; };
-		14A83D1819CA54BF007F5630 /* TGWayPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGWayPointView.m; sourceTree = "<group>"; };
 		14A83D1A19CA5E4C007F5630 /* wayPoint@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wayPoint@2x.png"; sourceTree = "<group>"; };
 		14A83D1F19CC7019007F5630 /* TGPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGPreviewView.h; sourceTree = "<group>"; };
 		14A83D2019CC7019007F5630 /* TGPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGPreviewView.m; sourceTree = "<group>"; };
@@ -400,8 +383,6 @@
 				14A83CF919C9019B007F5630 /* GameImages */,
 				14A83CFE19C9019B007F5630 /* TGGamePointTraceView.h */,
 				14A83CFF19C9019B007F5630 /* TGGamePointTraceView.m */,
-				14A83D1719CA54BF007F5630 /* TGWayPointView.h */,
-				14A83D1819CA54BF007F5630 /* TGWayPointView.m */,
 				14A83D1F19CC7019007F5630 /* TGPreviewView.h */,
 				14A83D2019CC7019007F5630 /* TGPreviewView.m */,
 				14A83D2219CCA398007F5630 /* TGHistoricView.h */,
@@ -421,14 +402,7 @@
 				14AC713019DB69BB00989890 /* 1@2x.png */,
 				14AC713119DB69BB00989890 /* 2@2x.png */,
 				14A83D1A19CA5E4C007F5630 /* wayPoint@2x.png */,
-				14A83D1319CA3D75007F5630 /* icon.gif */,
-				14A83D0F19CA3C61007F5630 /* spray.mp3 */,
 				14A83D1019CA3C61007F5630 /* wrongPath.mp3 */,
-				14A83D0B19C9D452007F5630 /* FreedomDance.wav */,
-				14A83CFA19C9019B007F5630 /* background2@2x.jpg */,
-				14A83CFB19C9019B007F5630 /* background3@2x.jpg */,
-				14A83CFC19C9019B007F5630 /* background@2x.jpg */,
-				14A83CFD19C9019B007F5630 /* background@2x.png */,
 			);
 			path = GameImages;
 			sourceTree = "<group>";
@@ -889,7 +863,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14A83D0319C9019B007F5630 /* background3@2x.jpg in Resources */,
 				C333DFAB17139C0000AD7E1A /* InfoPlist.strings in Resources */,
 				C333DFB317139C0000AD7E1A /* Default.png in Resources */,
 				C333DFB517139C0000AD7E1A /* Default@2x.png in Resources */,
@@ -901,25 +874,20 @@
 				C333DFD11713A34000AD7E1A /* patientPicked.png in Resources */,
 				C333DFD21713A34000AD7E1A /* specialistPicked.png in Resources */,
 				C333DFD31713A34000AD7E1A /* tutorPicked.png in Resources */,
-				14A83D0519C9019B007F5630 /* background@2x.png in Resources */,
 				C3E109131715088C00E9CB07 /* add-imagem-gray.png in Resources */,
 				C31AD5101719CC6300F5652A /* SVProgressHUD.bundle in Resources */,
 				14AC713919DCB40500989890 /* A.png in Resources */,
 				C3A3695B171DFE7300A9F376 /* ipad-BG-pattern.png in Resources */,
-				14A83D1419CA3D75007F5630 /* icon.gif in Resources */,
 				C3A3695C171DFE7300A9F376 /* ipad-menubar-right@2x.png in Resources */,
 				14AC713219DB69BB00989890 /* 0@2x.png in Resources */,
 				C3A3695E171E1EC400A9F376 /* ipad-menubar-button.png in Resources */,
 				C3D8F1E317295E6700351CD0 /* logo-tagarela.png in Resources */,
 				C3D8F1E517295EA200351CD0 /* logo-tagarela@2x.png in Resources */,
-				14A83D0C19C9D452007F5630 /* FreedomDance.wav in Resources */,
 				C3D8F1EF17298B5F00351CD0 /* 1x1.png in Resources */,
 				C3D8F1F017298B5F00351CD0 /* 1x2.png in Resources */,
 				C3D8F1F117298B5F00351CD0 /* 1x3.png in Resources */,
 				C3D8F1F217298B5F00351CD0 /* 2x1.png in Resources */,
-				14A83D1119CA3C61007F5630 /* spray.mp3 in Resources */,
 				C3D8F1F317298B5F00351CD0 /* 2x2.png in Resources */,
-				14A83D0419C9019B007F5630 /* background@2x.jpg in Resources */,
 				C3D8F1F417298B5F00351CD0 /* 2x3.png in Resources */,
 				C3D8F1F517298B5F00351CD0 /* 3x1.png in Resources */,
 				14AC713B19DCB40500989890 /* C.png in Resources */,
@@ -929,7 +897,6 @@
 				C3A02C5E172C70A100F6944C /* CloseButton.png in Resources */,
 				C3A02C60172C70A100F6944C /* CloseButton@2x.png in Resources */,
 				C3A02C7C172C782F00F6944C /* criarPlanoButtonImg.png in Resources */,
-				14A83D0219C9019B007F5630 /* background2@2x.jpg in Resources */,
 				C3A02C7E172C788A00F6944C /* criarSimboloButtonImg.png in Resources */,
 				C3A02C80172C78B500F6944C /* verSimbolosButtonImg.png in Resources */,
 				C3290C421744380200B43E72 /* Localizable.strings in Resources */,
@@ -980,7 +947,6 @@
 				C3F9F270171CBCE40041CA5D /* DraggableLocation.m in Sources */,
 				C3F9F271171CBCE40041CA5D /* DraggableView.m in Sources */,
 				C3F9F272171CBCE40041CA5D /* NSObject+PerformBlock.m in Sources */,
-				14A83D1919CA54BF007F5630 /* TGWayPointView.m in Sources */,
 				C3F9F275171CE4E40041CA5D /* TGSymbolPickerViewController.m in Sources */,
 				C3F9F278171CF2BD0041CA5D /* TGSymbolPickerCell.m in Sources */,
 				C3A36964171E2CC500A9F376 /* TGPlanController.m in Sources */,

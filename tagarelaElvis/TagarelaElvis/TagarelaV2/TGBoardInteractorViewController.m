@@ -1,6 +1,5 @@
 #import "TGBoardInteractorViewController.h"
 #import "TGGamePointTraceView.h"
-#import "TGWayPointView.h"
 #import "TGPreviewView.h"
 #import "TGHistoricView.h"
 #import "TGGroupPlanController.h"
@@ -26,6 +25,7 @@
 @property TGGamePointTraceView *pointTrace;
 @property UIImageView *predatorView;
 @property float scale; // escala para a imagem em NSdata
+@property UIImageView *wayPointImageView;
 @end
 
 @implementation TGBoardInteractorViewController
@@ -353,12 +353,14 @@
     
     if(self.isGame){
         [self loadGameParts];
-        //edicao teste! lembrar de tirar***********************************************************************
-        
-        imageView1.image = [UIImage imageNamed:@"A.png"];
-        NSLog(@"%f", imageView1.image.size.width);
+         self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(imageView1.image.CGImage));
         _scale = imageView1.image.size.width/imageView1.frame.size.width;
-        self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(imageView1.image.CGImage));
+        //edicao teste! lembrar de tirar***********************************************************************
+//        
+//        imageView1.image = [UIImage imageNamed:@"A.png"];
+//        NSLog(@"%f", imageView1.image.size.width);
+        
+       
     }
 }
 
@@ -488,7 +490,7 @@
     
     
     self.drawView = [[UIView alloc]initWithFrame:imageView1.frame];
-    _drawView.layer.borderWidth = 2;
+//    _drawView.layer.borderWidth = 2;
     self.drawView.layer.zPosition = 2;
     [self.view addSubview:self.drawView];
     
@@ -607,8 +609,6 @@
         return false;
     }
     
-    _scale = imageView1.image.size.width/imageView1.frame.size.width;
-    
     const UInt8* data = CFDataGetBytePtr(_pixelData);
     int pixelInfo = ((imageView1.image.size.width  * (y*_scale)) + (x*_scale) ) * 4; // The image is png
     //retira os valores do pixel
@@ -640,7 +640,7 @@
           int alpha = data[pixelInfo + 3];
             if (alpha!=0 && alpha!=255) {
                 NSLog(@"%i , %i", x,y);
-                UIImageView *point2 = [[UIImageView alloc]initWithImage:[UIImage imageWithData:_wayPointSymbol.picture]];
+                UIImageView *point2 = [[UIImageView alloc]initWithImage:_wayPointImageView.image];
                 point2.frame =CGRectMake(x/_scale-20, y/_scale-20, 40, 40);
                 [point2 setContentMode:UIViewContentModeScaleAspectFit];
                 point2.clipsToBounds = YES;
@@ -669,7 +669,7 @@
     
     }
     
-    for ( TGWayPointView *point in self.wayPoints) {
+    for ( UIImageView *point in self.wayPoints) {
         [self.drawView addSubview:point];
     }
 }
@@ -847,14 +847,20 @@
     [self.backgroundAudio play];
     [self.view addSubview:_backgroundImageView];
     
-    [self makeWayPoints];
-
-    
     _predatorView= [[UIImageView alloc ]initWithImage:[UIImage imageWithData:_predatorSymbol.picture]];
     _predatorView.alpha = 0;
+    _predatorView.layer.zPosition =99;
     [self.drawView addSubview:_predatorView];
     
     _pointTrace = [[TGGamePointTraceView alloc]initWithImage:[UIImage imageWithData:_traceSymbol.picture] andSound:[[AVAudioPlayer alloc] initWithData:_traceSymbol.sound error:nil]];
+    
+    NSString *soundPath =[[NSBundle mainBundle] pathForResource:@"wrongPath" ofType:@"mp3"];
+    NSURL *soundURL = [NSURL fileURLWithPath:soundPath];
+    _wrongPathAudio = [[AVAudioPlayer alloc]initWithContentsOfURL:soundURL error:nil];
+    
+    
+    _wayPointImageView = [[UIImageView alloc ]initWithImage:[UIImage imageWithData:_wayPointSymbol.picture]];
+    [self makeWayPoints];
 }
 
 #pragma mark - audioPlayerDelegate
