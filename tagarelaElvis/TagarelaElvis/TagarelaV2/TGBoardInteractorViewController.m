@@ -526,11 +526,9 @@
     _predatorView.alpha = 0;
 }
 -(void)viewDidDisappear:(BOOL)animated{
-    if (_backgroundAudio) {
-         [_backgroundAudio stop];
-    }
-   
+    self.view = nil;
 }
+
 //apos a view aparecer esse metodo e chamado para verificar se nao existe symbolos
 //deve ser chamado aqui pois carrega outra view controller e essa view precisa estar totalmente carregada primeiro
 -(void)viewDidAppear:(BOOL)animated{
