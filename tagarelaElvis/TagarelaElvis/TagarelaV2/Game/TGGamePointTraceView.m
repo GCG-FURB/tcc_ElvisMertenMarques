@@ -27,7 +27,7 @@
 
 -(void)playSound{
     if(_audio){
-    [[self audio]setNumberOfLoops:1];
+    [[self audio]setNumberOfLoops:0];
     [[self audio]prepareToPlay];
     [[self audio]play];
 }

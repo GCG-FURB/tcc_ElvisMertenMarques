@@ -32,7 +32,7 @@
     UITouch *touch = [touches anyObject];
     if ([[touch view]isKindOfClass:[UIImageView class]]) {        
         TGUserCreatorViewController *userPickerViewController = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil]instantiateViewControllerWithIdentifier:@"TGUserCreatorViewController"];
-        [userPickerViewController setUserType:[[touch view]tag]];
+        [userPickerViewController setUserType:(int)[[touch view]tag]];
         [[userPickerViewController view]setFrame:CGRectMake(0, 0, 540, 270)];
         [[KGModal sharedInstance]setShowCloseButton:NO];
         [[KGModal sharedInstance]setTapOutsideToDismiss:NO];

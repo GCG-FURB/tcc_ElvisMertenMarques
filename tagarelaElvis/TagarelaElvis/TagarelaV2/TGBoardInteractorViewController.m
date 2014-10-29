@@ -508,10 +508,10 @@
     
     [GamePlanSymbols loadSymbolsFromPlanGame:[[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] serverID] withCompletionBlobk:^(NSDictionary *symbolsGame) {
         if (symbolsGame) {
-            _backgroundSymbol = [symbolPlanController loadSymbolsGameForGroupPlanId:[[symbolsGame objectForKey:@"plan_background_symbol_id"] integerValue]];
-            _predatorSymbol = [symbolPlanController loadSymbolsGameForGroupPlanId:[[symbolsGame objectForKey:@"predator_symbol_id"] integerValue]];
-            _wayPointSymbol =[symbolPlanController loadSymbolsGameForGroupPlanId:[[symbolsGame objectForKey:@"prey_symbol_id"] integerValue]];
-            _traceSymbol = [symbolPlanController loadSymbolsGameForGroupPlanId:[[symbolsGame objectForKey:@"path_symbol_id"] integerValue]];
+            _backgroundSymbol = [symbolPlanController loadSymbolsGameForGroupPlanId:(int)[[symbolsGame objectForKey:@"plan_background_symbol_id"] integerValue]];
+            _predatorSymbol = [symbolPlanController loadSymbolsGameForGroupPlanId:(int)[[symbolsGame objectForKey:@"predator_symbol_id"] integerValue]];
+            _wayPointSymbol =[symbolPlanController loadSymbolsGameForGroupPlanId:(int)[[symbolsGame objectForKey:@"prey_symbol_id"] integerValue]];
+            _traceSymbol = [symbolPlanController loadSymbolsGameForGroupPlanId:(int)[[symbolsGame objectForKey:@"path_symbol_id"] integerValue]];
             
             [self startSymbols];
                     }
@@ -525,10 +525,25 @@
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     _predatorView.alpha = 0;
 }
--(void)viewDidDisappear:(BOOL)animated{
+-(void)viewDidDisappear:(BOOL)animated{ //nao entendo pq mas foi preciso desalocar manualmente
+    _backgroundAudio = nil;
+    _backgroundImageView = nil;
+    _backgroundSymbol=nil;
+    _predatorSymbol=nil;
+    _predatorView = nil;
+    _previewView = nil;
+    _historicView = nil;
+    _traceSymbol = nil;
+    _pointTrace = nil;
     self.view = nil;
+    _wrongPathAudio = nil;
+    _wayPoints =nil;
+    _pixelData = nil;
+    _drawView =NULL;
+    _groupPlanController=nil;
+    _wayPointSymbol = nil;
+    _wayPointImageView=nil;
 }
-
 //apos a view aparecer esse metodo e chamado para verificar se nao existe symbolos
 //deve ser chamado aqui pois carrega outra view controller e essa view precisa estar totalmente carregada primeiro
 -(void)viewDidAppear:(BOOL)animated{
@@ -784,6 +799,7 @@
     Symbol *symbol = [notification object];
     _backgroundSymbol = symbol;
     [self.backgroundImageView setImage:[UIImage imageWithData:[symbol picture]]];
+    [self.backgroundAudio stop];
      self.backgroundAudio = [[AVAudioPlayer alloc]initWithData:[symbol sound] error:nil];
     [self.backgroundAudio setNumberOfLoops:-1];
     [self.backgroundAudio prepareToPlay];

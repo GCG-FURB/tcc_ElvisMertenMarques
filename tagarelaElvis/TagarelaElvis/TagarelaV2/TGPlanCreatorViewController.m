@@ -52,7 +52,7 @@
 {
     UITouch *touch = [touches anyObject];
     if ([[touch view]isKindOfClass:[UIImageView class]]) {        
-        TGSelectedPlan *selectedPlan = [[TGSelectedPlan alloc]initWithLayout:[[touch view]tag]];
+        TGSelectedPlan *selectedPlan = [[TGSelectedPlan alloc]initWithLayout:(int)[[touch view]tag]];
         [[NSNotificationCenter defaultCenter]postNotificationName:@"didSelectPlanLayout" object:selectedPlan];
         [[KGModal sharedInstance]hideAnimated:YES];
     }

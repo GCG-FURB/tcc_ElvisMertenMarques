@@ -70,7 +70,7 @@
     Category *symbolCategory = [symbol category];
     TGSelectedSymbolPlan *selectedSymbol = [[TGSelectedSymbolPlan alloc]init];
     [selectedSymbol setSelectedSymbol:symbol];
-    [selectedSymbol setSelectedSymbolPosition:[selectedImageView tag]];
+    [selectedSymbol setSelectedSymbolPosition:(int)[selectedImageView tag]];
     [selectedImageView setImage:[UIImage imageWithData:[symbol picture]]];
     [[selectedImageView layer]setBorderWidth:10.0];
     [[selectedImageView layer]setBorderColor:[[UIColor colorWithRed:[symbolCategory red]/255.0f green:[symbolCategory green]/255.0f blue:[symbolCategory blue]/255.0f alpha:1]CGColor]];
