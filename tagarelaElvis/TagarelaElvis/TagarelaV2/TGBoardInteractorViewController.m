@@ -524,6 +524,7 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     _predatorView.alpha = 0;
+    [_backgroundAudio setVolume:1];
 }
 -(void)viewDidDisappear:(BOOL)animated{ //nao entendo pq mas foi preciso desalocar manualmente
     _backgroundAudio = nil;
@@ -588,6 +589,7 @@
         
         UIImageView* Imageview = [[UIImageView alloc]initWithImage:_pointTrace.trace];
         Imageview.frame = CGRectMake(location.x-288 ,location.y-150, 60,60);
+        [_backgroundAudio setVolume:0.2];
         [_pointTrace playSound];
         [self.drawView addSubview:Imageview];
         
@@ -707,6 +709,7 @@
                                  finishLabel.text = @"Parabéns plano finalizado!";
                                  finishLabel.textAlignment = NSTextAlignmentCenter;
                                  finishLabel.font = [UIFont fontWithName:@"times" size:50];
+                                 [_backgroundAudio setVolume:0.2];
                                  [UIView animateWithDuration:1.0
                                                        delay: 1.0
                                                      options: UIViewAnimationOptionCurveLinear
@@ -719,11 +722,13 @@
                                                       [self.view addSubview:finishLabel];
                                                   }];
                              }
+                             [_backgroundAudio setVolume:0.2];
                              [self.previewView playSoundFromCurrentPlan];
                              [self.historicView addOnHistoric:_drawView];
                              self.drawView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
                              self.drawView.frame = imageView1.frame;
                              [self nextPlan];
+                             [_backgroundAudio setVolume:1];
                              }];
    
     

@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TagarelaV2/TGBoardInteractorViewController.m"
-            timestampString = "436122009.458407"
+            timestampString = "436796805.363374"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "582"
-            endingLineNumber = "582"
+            startingLineNumber = "583"
+            endingLineNumber = "583"
             landmarkName = "-touchesMoved:withEvent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -270,22 +270,6 @@
             startingLineNumber = "284"
             endingLineNumber = "284"
             landmarkName = "-loadSymbolsFromBackendWithIds:successHandler:failHandler:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TagarelaV2/TGGroupPlanController.m"
-            timestampString = "436291394.445745"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "-createGroupPlanInBackendWithName:andUserID:withType:successHandler:failHandler:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
