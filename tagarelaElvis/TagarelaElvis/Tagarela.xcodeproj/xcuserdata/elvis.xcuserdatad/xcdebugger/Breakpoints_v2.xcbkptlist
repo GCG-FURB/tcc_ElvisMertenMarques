@@ -264,11 +264,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TagarelaV2/TGSymbolController.m"
-            timestampString = "435614109.059301"
+            timestampString = "436886537.301438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "284"
-            endingLineNumber = "284"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
             landmarkName = "-loadSymbolsFromBackendWithIds:successHandler:failHandler:"
             landmarkType = "5">
          </BreakpointContent>
@@ -286,6 +286,38 @@
             startingLineNumber = "164"
             endingLineNumber = "164"
             landmarkName = "-loadSymbolsPlansFromBackendWithSuccessHandler:failHandler:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TagarelaV2/TGSymbolController.m"
+            timestampString = "436887575.312531"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "278"
+            endingLineNumber = "278"
+            landmarkName = "-loadSymbolsFromBackendWithIds:successHandler:failHandler:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TagarelaV2/TGSymbolController.m"
+            timestampString = "436888342.918139"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "-loadSymbolsFromBackendWithSuccessHandler:failHandler:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

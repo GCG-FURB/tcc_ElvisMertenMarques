@@ -261,13 +261,14 @@
                        successHandler:(void(^)())successHandler
                           failHandler:(void(^)(NSString *error))failHandler
 {
-    id params = @{@"symbols_id": symbolIDS};
+   // id params = @{@"symbols_id": symbolIDS};
     
     if ([symbolIDS count] == 0) {
         successHandler();
         return;
     }
-    
+    for(NSNumber *param in symbolIDS){
+        id params = @{@"symbols_id": param};// voltar ao antigo comentar essa parte e descomentar os outros
     [[TGBackendAPIClient sharedAPIClient]getPath:@"/private_symbols/find_symbols_with_ids.json"
                                       parameters:params
                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -275,7 +276,8 @@
                                                  NSData *jsonData = [[operation responseString]dataUsingEncoding:NSUTF8StringEncoding];
                                                  NSDictionary *serverJson = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
                                                  if (serverJson) {
-                                                     for (NSDictionary *serverSymbol in serverJson) {
+                                                     //for (NSDictionary *serverSymbol in serverJson) { //estouro de string precisa ser feita uma requisicao por vez
+                                                     NSDictionary *serverSymbol = serverJson;
                                                          int serverID = [[serverSymbol objectForKey:@"id"]intValue];
                                                          
                                                          if (![self symbolExistsWithID:serverID]) {
@@ -291,8 +293,8 @@
                                                                  failHandler(NSLocalizedString(@"errorMessageInsertingPrivateSymbol", nil));
                                                              }
                                                          }
-                                                     }
-                                                     successHandler();
+                                                     //}
+                                                     //successHandler();
                                                  }
                                              } else {
                                                  failHandler(@"Erro ao carregar os símbolos");
@@ -301,7 +303,8 @@
                                              failHandler([error description]);
                                          }];    
 }
-
+    successHandler();//e comentar essa
+}
 - (BOOL)specialistPatientsHasSymbolWithID:(int)symbolID
 {
     NSError *err;

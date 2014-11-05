@@ -83,7 +83,7 @@
                                             <action selector="createSymbol:" destination="2" id="EQb-eh-VEB"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Criar Plano" id="bNq-ru-C3G">
+                                    <barButtonItem title="Criar Prancha" id="bNq-ru-C3G">
                                         <connections>
                                             <action selector="createPlan:" destination="2" id="NWB-Fo-gts"/>
                                         </connections>
@@ -1566,8 +1566,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="5Ha-Kx-8Ta"/>
         <segue reference="oqr-zH-Ju5"/>
-        <segue reference="eLa-1g-MxP"/>
-        <segue reference="zBe-NS-S0R"/>
+        <segue reference="WBr-wz-ZCp"/>
     </inferredMetricsTieBreakers>
 </document>
