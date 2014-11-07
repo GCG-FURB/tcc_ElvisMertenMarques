@@ -828,9 +828,11 @@
     if ([_wayPoints count]==0) {
         [self makeWayPoints];
     }
+    _wayPointImageView.image = [UIImage imageWithData:_wayPointSymbol.picture];
     for (UIImageView *image in _wayPoints) {
-        image.image = [UIImage imageWithData:_wayPointSymbol.picture];
+        image.image = _wayPointImageView.image;
     }
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self refreshDB];
 }
