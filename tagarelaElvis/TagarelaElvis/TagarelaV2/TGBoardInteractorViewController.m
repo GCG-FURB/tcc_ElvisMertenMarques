@@ -663,6 +663,7 @@
             }
         }
     }
+    //se nao tiver presas ele cria para nao deixar vazio e concluir a prancha de primeira. para casos sem o alpha
     if([_wayPoints count]==0){
     UIImageView *point1 = [[UIImageView alloc]initWithImage:[UIImage imageWithData:_wayPointSymbol.picture]];
     point1.frame =CGRectMake(400, 400, 50, 50);
@@ -687,6 +688,7 @@
     for ( UIImageView *point in self.wayPoints) {
         [self.drawView addSubview:point];
     }
+    [self.drawView addSubview:_predatorView];
 }
 
 
