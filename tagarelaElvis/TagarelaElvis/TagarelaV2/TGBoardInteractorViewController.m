@@ -442,7 +442,7 @@
    //buttons
     
     UIButton* musicButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 100, 100, 50)];
-    [musicButton setTitle:@"Musica" forState:UIControlStateNormal];
+    [musicButton setTitle:@"Música" forState:UIControlStateNormal];
     [musicButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [musicButton addTarget:self action: @selector(stopPlayMusic:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:musicButton];
@@ -477,7 +477,7 @@
     
     UIButton* nextButton = [[UIButton alloc]initWithFrame:CGRectMake( 900, 624 , 100, 50)];
     NSLog(@"%f",self.view.frame.size.width);
-    [nextButton setTitle:@"Proximo" forState:UIControlStateNormal];
+    [nextButton setTitle:@"Próximo" forState:UIControlStateNormal];
     [nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [nextButton addTarget:self action: @selector(nextPlan) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:nextButton];
@@ -507,7 +507,7 @@
     
     
     [GamePlanSymbols loadSymbolsFromPlanGame:[[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] serverID] withCompletionBlobk:^(NSDictionary *symbolsGame) {
-        if (symbolsGame) {
+        if (symbolsGame && self.isViewLoaded && self.view.window) {
             _backgroundSymbol = [symbolPlanController loadSymbolsGameForGroupPlanId:(int)[[symbolsGame objectForKey:@"plan_background_symbol_id"] integerValue]];
             _predatorSymbol = [symbolPlanController loadSymbolsGameForGroupPlanId:(int)[[symbolsGame objectForKey:@"predator_symbol_id"] integerValue]];
             _wayPointSymbol =[symbolPlanController loadSymbolsGameForGroupPlanId:(int)[[symbolsGame objectForKey:@"prey_symbol_id"] integerValue]];
@@ -548,10 +548,10 @@
 //apos a view aparecer esse metodo e chamado para verificar se nao existe symbolos
 //deve ser chamado aqui pois carrega outra view controller e essa view precisa estar totalmente carregada primeiro
 -(void)viewDidAppear:(BOOL)animated{
-    if (self.isGame) {
+    if (self.isGame && !self.backgroundSymbol) { //testa se algum simbolo ja esta carregado. para nao carregar novamente
      [GamePlanSymbols loadSymbolsFromPlanGame:[[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] serverID] withCompletionBlobk:^(NSDictionary *symbolsGame) {
          if (!symbolsGame) {
-             UIAlertView  *alertView = [[UIAlertView alloc]initWithTitle:@"Tagarela" message:@"Esse plano ainda nao possui os 4 simbolos necessarios. que são: plano de fundo, presa, predador e o tracado. Por favor escolha a seguir." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+             UIAlertView  *alertView = [[UIAlertView alloc]initWithTitle:@"Tagarela" message:@"Esse plano ainda não possui os 4 símbolos necessários. que são: plano de fundo, presa, predador e o traçado. Por favor escolha a seguir." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
              [alertView show];
              
              [[NSNotificationCenter defaultCenter]addObserverForName:@"didSelectGroupSymbols" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
@@ -864,6 +864,11 @@
 -(void)startSymbols{
     _backgroundImageView = [[UIImageView alloc]initWithFrame:CGRectMake(170, 124, 700,500)];
     _backgroundImageView.image = [UIImage imageWithData:_backgroundSymbol.picture];
+    
+    if (_backgroundAudio) {
+        [_backgroundAudio stop];
+        _backgroundAudio = nil;
+    }
     self.backgroundAudio = [[AVAudioPlayer alloc]initWithData:[_backgroundSymbol sound] error:nil];
     [self.backgroundAudio setNumberOfLoops:-1];
     [self.backgroundAudio prepareToPlay];
