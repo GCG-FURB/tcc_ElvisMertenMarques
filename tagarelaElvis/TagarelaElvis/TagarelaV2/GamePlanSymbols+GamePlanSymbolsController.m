@@ -18,14 +18,18 @@
                                                  NSData *jsonData = [[operation responseString]dataUsingEncoding:NSUTF8StringEncoding];
                                                NSDictionary *serverJson = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
                                                  if (serverJson) {
-                                                     NSLog(@"%@", serverJson);
+                                                     //NSLog(@"%@", serverJson);
+                                                     NSMutableArray *array = [NSMutableArray new];
                                                      for (NSDictionary* dictionary in serverJson) {
                                                          if ([[dictionary objectForKey:@"plan_id"] integerValue] == planId) {
-                                                             completionBlock(dictionary);
-                                                             return;
+                                                             [array addObject:dictionary];
                                                          }
                                                      }
+                                                     if ([array count]>0) {
+                                                         completionBlock([array lastObject]);
+                                                     }else{
                                                      completionBlock(nil); //passara por aqui somente se nao existir o id certo dos simbolos do jogo.
+                                                     }
                                                  }
                                              }
                                          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

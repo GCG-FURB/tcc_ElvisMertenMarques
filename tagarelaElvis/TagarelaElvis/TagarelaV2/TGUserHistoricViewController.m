@@ -27,7 +27,7 @@
     
     [self loadObservations];
     
-    lenghtOfLoadedText = [[[[self userHistoricTextView]text]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]length];
+    lenghtOfLoadedText = (int)[[[[self userHistoricTextView]text]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]length];
 }
 
 - (void)initObjects

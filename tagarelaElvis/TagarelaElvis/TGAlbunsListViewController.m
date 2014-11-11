@@ -66,7 +66,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    selectedIndex = [indexPath row];
+    selectedIndex = (int)[indexPath row];
     [self performSegueWithIdentifier:@"segueToAlbumContents" sender:nil];
 }
 

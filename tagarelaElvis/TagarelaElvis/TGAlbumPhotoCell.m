@@ -20,7 +20,7 @@
 {
     UITouch *touch = [touches anyObject];
     if ([[touch view]isKindOfClass:[UIImageView class]]) {
-       [[NSNotificationCenter defaultCenter]postNotificationName:@"didSelectImage" object:[NSNumber numberWithInt:[[touch view]tag]]];
+       [[NSNotificationCenter defaultCenter]postNotificationName:@"didSelectImage" object:[NSNumber numberWithInt:(int)[[touch view]tag]]];
     }
 }
 

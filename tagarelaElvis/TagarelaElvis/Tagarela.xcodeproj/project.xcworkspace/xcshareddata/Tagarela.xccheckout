@@ -12,17 +12,13 @@
 	<dict>
 		<key>154E7189C1E65C4F38A5891C4231ECD293B3FA54</key>
 		<string>https://bitbucket.org/VisEdu-Saude/elvismmarques.git</string>
-		<key>44C76AA987EC278069DFAACB764C0B2004148D30</key>
-		<string>https://bitbucket.org/VisEdu-Saude/visedu-saude.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>tagarela/AlanFCF/Tagarela.xcodeproj</string>
+	<string>tagarelaElvis/TagarelaElvis/Tagarela.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>154E7189C1E65C4F38A5891C4231ECD293B3FA54</key>
 		<string>../../../..</string>
-		<key>44C76AA987EC278069DFAACB764C0B2004148D30</key>
-		<string>../../../../../Tagarela</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://bitbucket.org/VisEdu-Saude/elvismmarques.git</string>
@@ -32,14 +28,6 @@
 	<string>154E7189C1E65C4F38A5891C4231ECD293B3FA54</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>44C76AA987EC278069DFAACB764C0B2004148D30</string>
-			<key>IDESourceControlWCCName</key>
-			<string>Tagarela</string>
-		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

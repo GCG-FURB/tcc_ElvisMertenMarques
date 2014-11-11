@@ -1,5 +1,4 @@
 #import "TGGroupPlanController.h"
-
 @implementation TGGroupPlanController
 
 - (id)init
@@ -70,6 +69,10 @@
                                                              [gp setServerID:serverID];
                                                              [gp setName:[serverDic objectForKey:@"name"]];
                                                              [gp setUserID:[[serverDic objectForKey:@"user_id"]intValue]];
+                                                             if ([[serverDic objectForKey:@"group_plan_type"] isKindOfClass:[NSNumber class]]) {
+                                                                 [gp setType:[[serverDic objectForKey:@"group_plan_type"] integerValue]];
+                                                             }
+                                                             
                                                              
                                                              if (![[self managedObjectContext]save:nil]) {
                                                                  failHandler(NSLocalizedString(@"errorMessageInsertingCategory", nil));
@@ -178,7 +181,7 @@
                           successHandler:(void(^)())successHandler
                              failHandler:(void(^)(NSString *error))failHandler
 {
-    id params = @{@"name": name, @"user_id": [NSNumber numberWithInt:userID], @"type": [NSNumber numberWithInt:type]};
+    id params = @{@"name": name, @"user_id": [NSNumber numberWithInt:userID], @"group_plan_type": [NSNumber numberWithInt:type]};
     
     [[TGBackendAPIClient sharedAPIClient]postPath:@"/group_plans/create.json"
                                        parameters:params

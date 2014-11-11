@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Initial View Controller-->
@@ -83,7 +83,7 @@
                                             <action selector="createSymbol:" destination="2" id="EQb-eh-VEB"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Criar Plano" id="bNq-ru-C3G">
+                                    <barButtonItem title="Criar Prancha" id="bNq-ru-C3G">
                                         <connections>
                                             <action selector="createPlan:" destination="2" id="NWB-Fo-gts"/>
                                         </connections>
@@ -648,8 +648,14 @@
                                     <outlet property="delegate" destination="2Rq-oC-FJk" id="CuQ-0b-QhG"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Histórico de uso dos símbolos" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bim-gZ-XgH">
+                                <rect key="frame" x="131" y="11" width="239" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="0.42352941176470588" green="0.70196078431372544" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RMO-7g-u8y">
-                                <rect key="frame" x="0.0" y="0.0" width="500" height="44"/>
+                                <rect key="frame" x="0.0" y="8" width="500" height="44"/>
                                 <items>
                                     <barButtonItem title="Fechar" id="0EV-v6-ywO">
                                         <connections>
@@ -658,12 +664,6 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Histórico de uso dos símbolos" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bim-gZ-XgH">
-                                <rect key="frame" x="131" y="11" width="239" height="21"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" red="0.42352941176470588" green="0.70196078431372544" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1566,8 +1566,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="eLa-1g-MxP"/>
-        <segue reference="zBe-NS-S0R"/>
-        <segue reference="bXh-J9-Uc1"/>
+        <segue reference="5Ha-Kx-8Ta"/>
+        <segue reference="oqr-zH-Ju5"/>
+        <segue reference="WBr-wz-ZCp"/>
     </inferredMetricsTieBreakers>
 </document>

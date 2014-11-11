@@ -79,11 +79,8 @@
                         options: UIViewAnimationOptionCurveLinear
                      animations:^{
                          self.borderSelected.frame = CGRectMake(80*_currentPlan+10, 0, 80, self.frame.size.height);
-
-                     
                      }
                      completion:nil];
-    
     return [UIImage imageWithData:[symbolFromPlan picture]];
 }
 

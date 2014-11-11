@@ -251,7 +251,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (shoudLoadPatients) {
-        selectedIndex = [indexPath row];
+        selectedIndex = (int)[indexPath row];
         
         switch ([[[TGCurrentUserManager sharedCurrentUserManager]currentUser]type]) {
             case 0:
@@ -279,7 +279,7 @@
                 [[NSNotificationCenter defaultCenter]postNotificationName:@"didSelectTutorFromList" object:[patientsArray objectAtIndex:selectedIndex]];
                 break;
             case 2:
-                [self showPatientTutorsAfterSelectionForIndexPath:[indexPath row]];
+                [self showPatientTutorsAfterSelectionForIndexPath:(int)[indexPath row]];
                 break;
         }
     } else if (plansLoaded) {
