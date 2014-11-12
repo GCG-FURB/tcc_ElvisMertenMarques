@@ -46,9 +46,18 @@
 {
     NSString *encodedImageString = [[self encodeBase64WithData:UIImagePNGRepresentation(picture)]stringByReplacingOccurrencesOfString:@"+" withString:@"@"];
     NSString *encodedSoundString = [[self encodeBase64WithData:sound]stringByReplacingOccurrencesOfString:@"+" withString:@"@"];
+
+    
+    //****carregamento de imagens manualmente se ja tiver o audo no bundle**********
+//    picture = [UIImage imageNamed:@"gelatina.png"];
+//    NSString *encodedImageString = [[self encodeBase64WithData:UIImagePNGRepresentation(picture)]stringByReplacingOccurrencesOfString:@"+" withString:@"@"];
+//    
+//    NSString *soundPath =[[NSBundle mainBundle] pathForResource:@"GelatinaLima" ofType:@"m4a"];
+//    NSURL *soundURL = [NSURL fileURLWithPath:soundPath];
+//    sound = [[NSData alloc]initWithContentsOfURL:soundURL];
+//    NSString *encodedSoundString = [[self encodeBase64WithData:sound]stringByReplacingOccurrencesOfString:@"+" withString:@"@"];
     
     int userID = 0;
-   // NSLog(@"%@", [self encodeBase64WithData:UIImagePNGRepresentation(picture)]);
     switch ([[[TGCurrentUserManager sharedCurrentUserManager]currentUser]type]) {
         case 0:
             if ([[TGCurrentUserManager sharedCurrentUserManager]selectedTutorPatient]) {

@@ -524,7 +524,8 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     _predatorView.alpha = 0;
-    [_backgroundAudio setVolume:1];
+    [_backgroundAudio setVolume:0.7];
+    [_pointTrace stopSound];
 }
 -(void)viewDidDisappear:(BOOL)animated{ //nao entendo pq mas foi preciso desalocar manualmente
     _backgroundAudio = nil;
@@ -696,6 +697,8 @@
 //proximo plano
 
 -(void)nextPlanAnimation{
+    [_backgroundAudio setVolume:0.2];
+    [self.previewView playSoundFromCurrentPlan];
         [UIView animateWithDuration:1.0
                               delay: 1.0
                             options: UIViewAnimationOptionCurveLinear
@@ -724,13 +727,13 @@
                                                       [self.view addSubview:finishLabel];
                                                   }];
                              }
-                             [_backgroundAudio setVolume:0.2];
-                             [self.previewView playSoundFromCurrentPlan];
+//                             [_backgroundAudio setVolume:0.2];
+//                             [self.previewView playSoundFromCurrentPlan];
                              [self.historicView addOnHistoric:_drawView];
                              self.drawView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
                              self.drawView.frame = imageView1.frame;
                              [self nextPlan];
-                             [_backgroundAudio setVolume:1];
+                             [_backgroundAudio setVolume:0.7];
                              }];
    
     
@@ -872,6 +875,7 @@
     self.backgroundAudio = [[AVAudioPlayer alloc]initWithData:[_backgroundSymbol sound] error:nil];
     [self.backgroundAudio setNumberOfLoops:-1];
     [self.backgroundAudio prepareToPlay];
+    [self.backgroundAudio setVolume:0.7];
     [self.backgroundAudio play];
     [self.view addSubview:_backgroundImageView];
     
