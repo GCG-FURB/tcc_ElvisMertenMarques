@@ -16,6 +16,7 @@
 
 -(void)playSound;
 
+-(void)stopSound;
 @end
 
 
