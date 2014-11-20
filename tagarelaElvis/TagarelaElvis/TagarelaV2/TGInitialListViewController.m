@@ -6,14 +6,14 @@
 
 @implementation TGInitialListViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-
-    }
-    return self;
-}
+//- (id)initWithStyle:(UITableViewStyle)style
+//{
+//    self = [super initWithStyle:style];
+//    if (self) {
+//
+//    }
+//    return self;
+//}
 
 - (id)init
 {
@@ -25,10 +25,10 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
+//- (void)viewDidLoad
+//{
+//    [super viewDidLoad];
+//}
 
 - (void)initObjects
 {
@@ -108,10 +108,10 @@
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
+//- (void)didReceiveMemoryWarning
+//{
+//    [super didReceiveMemoryWarning];
+//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

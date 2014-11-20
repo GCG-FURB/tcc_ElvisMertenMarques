@@ -352,7 +352,9 @@
 
     
     if(self.isGame){
+    
         [self loadGameParts];
+      
          self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(imageView1.image.CGImage));
         _scale = imageView1.image.size.width/imageView1.frame.size.width;
         //edicao teste! lembrar de tirar***********************************************************************
@@ -440,7 +442,7 @@
     
 -(void)loadGameParts{
    //buttons
-    
+    NSLog(@"iniciando game Parts");
     UIButton* musicButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 100, 100, 50)];
     [musicButton setTitle:@"Música" forState:UIControlStateNormal];
     [musicButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -519,7 +521,7 @@
      
     
     [self.view addSubview:_previewView];
-    
+      NSLog(@"fim gameParts");
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -580,6 +582,7 @@
 //método presente na classe
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     if (self.isGame) {
+        NSLog(@"Inicio traçado");
     CGPoint location = [[touches anyObject] locationInView:self.view];
     CGRect fingerRect = CGRectMake(location.x-30 , location.y-30, 60, 60); //dedo com sua dimensao
     
@@ -616,6 +619,7 @@
         [self.wrongPathAudio play];
     }
 }
+    NSLog(@"fim traçado");
 }
 
 #pragma mark - alpha test
@@ -632,21 +636,19 @@
     //UInt8 green = data[(pixelInfo + 1)];
     //UInt8 blue = data[pixelInfo + 2];
     int alpha = data[pixelInfo + 3];
-    
-    if(x==0||y==0){
-   // UIColor* color = [UIColor colorWithRed:red/255.f green:green/255.f blue:blue/255.f alpha:alpha/255.f]; // The pixel color info
-    }
+
     if (alpha==0){
-        NSLog(@"a=%i, x=%i y=%i",alpha,x,y);
+       // NSLog(@"a=%i, x=%i y=%i",alpha,x,y);
         return NO;
     }else{
-        NSLog(@"a=%i, x=%i y=%i",alpha,x,y);
+        //NSLog(@"a=%i, x=%i y=%i",alpha,x,y);
         return YES;
     }
 }
 
 //desenhar as presas no caminho
 -(void)makeWayPoints{
+    NSLog(@"iniciando waypoints");
     [_wayPoints removeAllObjects];
     //UInt8 alpha;
     for (int x = 0; x< imageView1.image.size.width; x++) {
@@ -655,7 +657,7 @@
           int pixelInfo = ((imageView1.image.size.width  * y) + x) * 4;
           int alpha = data[pixelInfo + 3];
             if (alpha!=0 && alpha!=255) {
-                NSLog(@"%i , %i", x,y);
+                //NSLog(@"%i , %i", x,y);
                 UIImageView *point2 = [[UIImageView alloc]initWithImage:_wayPointImageView.image];
                 point2.frame =CGRectMake(x/_scale-20, y/_scale-20, 40, 40);
                 [point2 setContentMode:UIViewContentModeScaleAspectFit];
@@ -690,6 +692,7 @@
         [self.drawView addSubview:point];
     }
     [self.drawView addSubview:_predatorView];
+    NSLog(@"fim waypoints");
 }
 
 
@@ -711,7 +714,7 @@
                              if([self.previewView isOver]){
                                  NSLog(@"finalizar");
                                  UILabel* finishLabel = [[UILabel alloc]initWithFrame:_backgroundImageView.frame];
-                                 finishLabel.text = @"Parabéns plano finalizado!";
+                                 finishLabel.text = @"Parabéns, plano finalizado!";
                                  finishLabel.textAlignment = NSTextAlignmentCenter;
                                  finishLabel.font = [UIFont fontWithName:@"times" size:50];
                                  [_backgroundAudio setVolume:0.2];

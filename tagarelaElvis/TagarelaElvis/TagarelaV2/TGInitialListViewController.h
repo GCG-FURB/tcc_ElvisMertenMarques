@@ -4,7 +4,7 @@
 #import "TGCurrentUserManager.h"
 #import "TGGroupPlanController.h"
 
-@interface TGInitialListViewController : UITableViewController <UIAlertViewDelegate>
+@interface TGInitialListViewController : UITableView <UIAlertViewDelegate>
 {
     TGPlanController *planController;
     TGTutorPatientsController *tutorPatientsController;
