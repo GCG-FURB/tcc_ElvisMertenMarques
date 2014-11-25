@@ -24,7 +24,7 @@
 {
     self = [super init];
     if (self) {
-        self.frame = CGRectMake(170, 45, 800, 80);
+        self.frame = CGRectMake(170, 45, 720, 80);
         self.currentPlan = (int)[plans indexOfObject:currentPlan];
         NSLog(@"%i", self.currentPlan);
         _symbolPlanController = [[TGSymbolPlanController alloc]init];
@@ -43,6 +43,12 @@
         self.plans = [[NSMutableArray alloc]initWithArray:plans];
     
         self.borderSelected =[[UIImageView alloc]initWithFrame:CGRectMake(80*_currentPlan+10, 0, 80, self.frame.size.height)];
+        if (_currentPlan >=4 && _currentPlan <= [_plans count]-4) {
+            [self setContentOffset:CGPointMake(80*(self.currentPlan-4)+10,0) animated:YES];
+        }
+        if (_currentPlan > [_plans count]-5) {
+            [self setContentOffset:CGPointMake(80*([self.plans count]-4)+10,0) animated:YES];
+        }
         self.borderSelected.layer.borderColor = [UIColor redColor].CGColor;
         self.borderSelected.layer.borderWidth = 2;
         [self addSubview:self.borderSelected];
@@ -78,6 +84,9 @@
                           delay:0
                         options: UIViewAnimationOptionCurveLinear
                      animations:^{
+                         if (_currentPlan >=4 && _currentPlan < [_plans count]-4) {
+                              [self setContentOffset:CGPointMake(80*(self.currentPlan-4)+10,0) animated:YES];
+                         }
                          self.borderSelected.frame = CGRectMake(80*_currentPlan+10, 0, 80, self.frame.size.height);
                      }
                      completion:nil];

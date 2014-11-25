@@ -130,6 +130,7 @@
         [backButton setStyle:UIBarButtonItemStyleBordered];
         [backButton setTitle:NSLocalizedString(@"labelVoltar", nil)];
         [backButton setAction:@selector(backToPatientsList)];
+        [backButton setTarget:self];
         [toolbar setItems:@[backButton]];        
     }
     

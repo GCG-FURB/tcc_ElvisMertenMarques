@@ -36,14 +36,18 @@
     }
     historicView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.2, 0.2);
     historicView.frame = CGRectMake(100*self.numberOfItemsInHistoric+10, 0, 100, self.frame.size.height);
+    self.numberOfItemsInHistoric++;
     [self setContentSize:CGSizeMake(100*self.numberOfItemsInHistoric+10, self.frame.size.height)];
     [self addSubview:historicView];
-    self.numberOfItemsInHistoric++;
+    
+    
     
     [UIView animateWithDuration:1.0
                           delay:0
                         options: UIViewAnimationOptionCurveLinear
                      animations:^{
+                         
+
                          historicView.alpha= 1;
                      }
                      completion:nil];
@@ -51,9 +55,10 @@
      }
 
 -(int)nextPositionOnhistoric{
-    if (_numberOfItemsInHistoric>7) {
-        return 7;
-    }
+    if (_numberOfItemsInHistoric>6) {
+        [self setContentOffset:CGPointMake(100*(self.numberOfItemsInHistoric-6)+10,0) animated:YES];
+        return 6;
+        }
     return _numberOfItemsInHistoric;
 }
 /*
