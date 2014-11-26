@@ -10,6 +10,6 @@
 
 @interface GamePlanSymbols (GamePlanSymbolsController)
 //+(NSDictionary*) loadSymbolsFromPlanGame:(int) planId;
-+(void) loadSymbolsFromPlanGame:(int) planId withCompletionBlobk:(void(^)(NSDictionary* dic))completionBlock;
-+(void) changeGamePlanSymbolsIds: (NSArray*) symbolsId ofGroupPlan: (int) groupPlanId;
++(void) loadSymbolsFromPlanGame:(int) planId withCompletionBlock:(void(^)(NSDictionary* dic))completionBlock;
++(void) changeGamePlanSymbolsIds: (NSDictionary*) symbolsId ofGroupPlan: (int) groupPlanId;
 @end

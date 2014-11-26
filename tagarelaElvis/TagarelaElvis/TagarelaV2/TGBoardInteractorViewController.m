@@ -352,11 +352,9 @@
 
     
     if(self.isGame){
-    
-        [self loadGameParts];
-      
          self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(imageView1.image.CGImage));
         _scale = imageView1.image.size.width/imageView1.frame.size.width;
+         [self loadGameParts];
         //edicao teste! lembrar de tirar***********************************************************************
 //        
 //        imageView1.image = [UIImage imageNamed:@"A.png"];
@@ -507,16 +505,15 @@
     
     self.previewView = [[TGPreviewView alloc]initWithPlans:arrayGroupPlans andCurrentPlan: self.selectedPlan];
     
-    
-    [GamePlanSymbols loadSymbolsFromPlanGame:[[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] serverID] withCompletionBlobk:^(NSDictionary *symbolsGame) {
-        if (symbolsGame && self.isViewLoaded && self.view.window) {
+    [GamePlanSymbols loadSymbolsFromPlanGame:[[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] serverID] withCompletionBlock:^(NSDictionary *symbolsGame) {
+        if (symbolsGame && !_backgroundSymbol) {
             _backgroundSymbol = [symbolPlanController loadSymbolsGameForGroupPlanId:(int)[[symbolsGame objectForKey:@"plan_background_symbol_id"] integerValue]];
             _predatorSymbol = [symbolPlanController loadSymbolsGameForGroupPlanId:(int)[[symbolsGame objectForKey:@"predator_symbol_id"] integerValue]];
             _wayPointSymbol =[symbolPlanController loadSymbolsGameForGroupPlanId:(int)[[symbolsGame objectForKey:@"prey_symbol_id"] integerValue]];
             _traceSymbol = [symbolPlanController loadSymbolsGameForGroupPlanId:(int)[[symbolsGame objectForKey:@"path_symbol_id"] integerValue]];
-            
-            [self startSymbols];
+                [self startSymbols];
                     }
+        
     }];
      
     
@@ -547,12 +544,13 @@
     _groupPlanController=nil;
     _wayPointSymbol = nil;
     _wayPointImageView=nil;
+    _isGame = NO;
 }
 //apos a view aparecer esse metodo e chamado para verificar se nao existe symbolos
 //deve ser chamado aqui pois carrega outra view controller e essa view precisa estar totalmente carregada primeiro
 -(void)viewDidAppear:(BOOL)animated{
     if (self.isGame && !self.backgroundSymbol) { //testa se algum simbolo ja esta carregado. para nao carregar novamente
-     [GamePlanSymbols loadSymbolsFromPlanGame:[[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] serverID] withCompletionBlobk:^(NSDictionary *symbolsGame) {
+     [GamePlanSymbols loadSymbolsFromPlanGame:[[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] serverID] withCompletionBlock:^(NSDictionary *symbolsGame) {
          if (!symbolsGame) {
              UIAlertView  *alertView = [[UIAlertView alloc]initWithTitle:@"Tagarela" message:@"Esse plano ainda não possui os 4 símbolos necessários. que são: plano de fundo, presa, predador e o traçado. Por favor escolha a seguir." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
              [alertView show];
@@ -567,6 +565,7 @@
                  
                  [self startSymbols];
                  [self refreshDB];
+                 
              }];
              [self performSegueWithIdentifier:@"segueToBoardViewController" sender:self];
              TGSelectedPlan *selectedPlan1 = [[TGSelectedPlan alloc]init];
@@ -857,11 +856,11 @@
 
 //atualiza o banco de dados dos simbolos do jogo
 -(void)refreshDB{
-    NSMutableArray* symbolsId = [NSMutableArray new];
-    [symbolsId addObject:[NSNumber numberWithInt:[_backgroundSymbol serverID]]];
-    [symbolsId addObject:[NSNumber numberWithInt:[_traceSymbol serverID]]];
-    [symbolsId addObject:[NSNumber numberWithInt:[_wayPointSymbol serverID]]];
-    [symbolsId addObject:[NSNumber numberWithInt:[_predatorSymbol serverID]]];
+    NSDictionary* symbolsId =
+    @{@"plan_background_symbol_id": [NSNumber numberWithInt:[_backgroundSymbol serverID]],
+      @"path_symbol_id": [NSNumber numberWithInt:[_traceSymbol serverID]],
+      @"prey_symbol_id": [NSNumber numberWithInt:[_wayPointSymbol serverID]],
+      @"predator_symbol_id": [NSNumber numberWithInt:[_predatorSymbol serverID]]};
     
     [GamePlanSymbols changeGamePlanSymbolsIds: symbolsId ofGroupPlan: [[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] serverID]];
 }
