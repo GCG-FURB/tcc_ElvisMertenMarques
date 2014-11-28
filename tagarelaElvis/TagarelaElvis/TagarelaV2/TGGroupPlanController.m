@@ -1,4 +1,5 @@
 #import "TGGroupPlanController.h"
+#import "GamePlanSymbols+GamePlanSymbolsController.h"
 @implementation TGGroupPlanController
 
 - (id)init
@@ -69,13 +70,30 @@
                                                              [gp setServerID:serverID];
                                                              [gp setName:[serverDic objectForKey:@"name"]];
                                                              [gp setUserID:[[serverDic objectForKey:@"user_id"]intValue]];
+                                                             //parte para game e quebra cabeça
                                                              if ([[serverDic objectForKey:@"group_plan_type"] isKindOfClass:[NSNumber class]]) {
                                                                  [gp setType:[[serverDic objectForKey:@"group_plan_type"] integerValue]];
+                                                                 if (gp.type ==1) {
+                                                                     [Game_plan_symbols loadSymbolsFromPlanGame:gp.serverID withCompletionBlock:^(NSDictionary *dic) {
+                                                                         if (dic) {
+                                                                             [Game_plan_symbols updateSymbolsFromGamePlan:gp.type withSymbols:dic];
+                                                                         }
+                                                                     }];
+                                                                 }
                                                              }
-                                                             
                                                              
                                                              if (![[self managedObjectContext]save:nil]) {
                                                                  failHandler(NSLocalizedString(@"errorMessageInsertingCategory", nil));
+                                                             }
+                                                         }else {
+                                                             if ([[serverDic objectForKey:@"group_plan_type"] isKindOfClass:[NSNumber class]]) {
+                                                                 if ([serverDic objectForKey:@"group_plan_type"] ==[NSNumber numberWithInt:1]) {
+                                                                     [Game_plan_symbols loadSymbolsFromPlanGame:[[serverDic objectForKey:@"id"] integerValue] withCompletionBlock:^(NSDictionary *dic) {
+                                                                         if (dic) {
+                                                                             [Game_plan_symbols updateSymbolsFromGamePlan:[[serverDic objectForKey:@"id"] integerValue] withSymbols:dic];
+                                                                         }
+                                                                     }];
+                                                                 }
                                                              }
                                                          }
                                                      }

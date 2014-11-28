@@ -422,7 +422,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jPb-aC-v5j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2709" y="-1934"/>
+            <point key="canvasLocation" x="2683" y="-1934"/>
         </scene>
         <!--Patient Chooser View Controller-->
         <scene sceneID="PXx-HW-f1H">
@@ -1566,8 +1566,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="bXh-J9-Uc1"/>
-        <segue reference="WBr-wz-ZCp"/>
+        <segue reference="oqr-zH-Ju5"/>
         <segue reference="5Ha-Kx-8Ta"/>
+        <segue reference="zBe-NS-S0R"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -8,14 +8,15 @@
 
 #import "GamePlanSymbols+GamePlanSymbolsController.h"
 
-@implementation GamePlanSymbols (GamePlanSymbolsController)
+@implementation Game_plan_symbols (GamePlanSymbolsController)
 
 
 
 +(void) loadSymbolsFromPlanGame:(int) planId withCompletionBlock:(void(^)(NSDictionary* dic))completionBlock{
     if ([self connectionIsAvailable]) {
+        id params = @{@"plan_id":[NSNumber numberWithInt:planId]};
     [[TGBackendAPIClient sharedAPIClient]getPath:@"/game_plan_symbols/index.json"
-                                      parameters:nil
+                                      parameters:params
                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                              if (operation) {
                                                  NSData *jsonData = [[operation responseString]dataUsingEncoding:NSUTF8StringEncoding];
@@ -29,8 +30,7 @@
                                                          }
                                                      }
                                                      if ([array count]>0) {
-                                                         [self updateSymbolsFromGamePlan:planId withSymbols: [array lastObject]];
-                                                         completionBlock([array lastObject]);
+                                                        completionBlock([array lastObject]);
                                                     
                                                      }else{
                                                      completionBlock(nil); //passara por aqui somente se nao existir o id certo dos simbolos do jogo.
@@ -41,7 +41,7 @@
                                              NSLog(@"error.description INDEX %@", error.description);
                                          }];
     }else
-        completionBlock ([self loadSymbolsInBackendFromPlanGame:planId]);
+        completionBlock (nil);
 }
 
 +(NSDictionary *)loadSymbolsInBackendFromPlanGame:(int)planId {
@@ -57,7 +57,7 @@
     NSArray *results = [context executeFetchRequest:fetchRequest error:&err];
     
     if ([results count] > 0) {
-        GamePlanSymbols *symbols = [results lastObject];
+        Game_plan_symbols *symbols = [results lastObject];
         NSMutableDictionary *gamePlanSymbols = [NSMutableDictionary new];
         [gamePlanSymbols setObject:symbols.plan_ID forKey:@"plan_id"];
         [gamePlanSymbols setObject:symbols.background_symbol_id forKey:@"plan_background_symbol_id"];
@@ -94,7 +94,7 @@
 }
 
 +(void) changeGamePlanSymbolsIdsBackend:(NSDictionary *)symbolsId ofGroupPlan:(int)groupPlanId{
-    GamePlanSymbols *gameSymbols;
+    Game_plan_symbols *gameSymbols;
     NSManagedObjectContext *context =[(AppDelegate*)[UIApplication sharedApplication].delegate backgroundObjectContext];
     NSError *err;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
@@ -108,18 +108,30 @@
     
     if ([results count] > 0) {
         gameSymbols = [results lastObject];
-        gameSymbols.background_symbol_id =[symbolsId objectForKey:@"plan_background_symbol_id"];
-        gameSymbols.path_symbol_id = [symbolsId objectForKey:@"path_symbol_id"];
-        gameSymbols.prey_id = [symbolsId objectForKey:@"prey_symbol_id"];
-        gameSymbols.predator_symbol_id = [symbolsId objectForKey:@"predator_symbol_id"];
     }else{
         gameSymbols = [NSEntityDescription insertNewObjectForEntityForName:@"GamePlanSymbols" inManagedObjectContext:context];
+    }
         gameSymbols.background_symbol_id =[symbolsId objectForKey:@"plan_background_symbol_id"];
         gameSymbols.path_symbol_id = [symbolsId objectForKey:@"path_symbol_id"];
         gameSymbols.prey_id = [symbolsId objectForKey:@"prey_symbol_id"];
         gameSymbols.predator_symbol_id = [symbolsId objectForKey:@"predator_symbol_id"];
         gameSymbols.plan_ID = [NSNumber numberWithInt:groupPlanId];
-    }
+        
+    if ([symbolsId objectForKey:@"updated_at"]){
+            NSMutableString *stringServerDate = [symbolsId objectForKey:@"updated_at"];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+            [dateFormatter setLocale:enUSPOSIXLocale];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+            gameSymbols.update_at =[dateFormatter dateFromString:stringServerDate];
+    }else
+            gameSymbols.update_at = [NSDate date];
+        
+        if ([symbolsId objectForKey:@"id"])
+            gameSymbols.server_ID = [symbolsId objectForKey:@"id"];
+        else
+            gameSymbols.server_ID = 0;
+    
     [context save:nil];
 }
 
@@ -132,7 +144,7 @@
 }
 
 +(void)updateSymbolsFromGamePlan: (int)groupPlanId withSymbols:(NSDictionary *) symbolsgame{
-    GamePlanSymbols *gameSymbols;
+    Game_plan_symbols *gameSymbolsInbackend;
     NSManagedObjectContext *context =[(AppDelegate*)[UIApplication sharedApplication].delegate backgroundObjectContext];
     NSError *err;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
@@ -145,17 +157,32 @@
     NSArray *results = [context executeFetchRequest:fetchRequest error:&err];
     
     if ([results count] > 0) {
-        gameSymbols = [results lastObject];
+        gameSymbolsInbackend = [results lastObject];
+        if ([gameSymbolsInbackend.path_symbol_id integerValue] != [[symbolsgame objectForKey:@"path_symbol_id"] integerValue]||
+            [gameSymbolsInbackend.background_symbol_id integerValue] != [[symbolsgame objectForKey:@"plan_background_symbol_id"] integerValue]||
+            [gameSymbolsInbackend.predator_symbol_id integerValue] != [[symbolsgame objectForKey:@"predator_symbol_id"] integerValue]||
+            [gameSymbolsInbackend.prey_id integerValue] != [[symbolsgame objectForKey:@"prey_symbol_id"] integerValue]) {
         
-        if (gameSymbols.server_ID != [symbolsgame objectForKey:@"serverID"]) {
-            if (gameSymbols.server_ID < [symbolsgame objectForKey:@"serverID"]) {
-                NSLog(@"menor");
+        NSMutableString *stringServerDate = [symbolsgame objectForKey:@"updated_at"];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+        [dateFormatter setLocale:enUSPOSIXLocale];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+        NSDate *serverDate = [dateFormatter dateFromString:stringServerDate];
+            if ([gameSymbolsInbackend.update_at timeIntervalSinceDate:serverDate]<2) {
+                [self changeGamePlanSymbolsIdsBackend:symbolsgame ofGroupPlan:groupPlanId];
+            }else if([gameSymbolsInbackend.update_at timeIntervalSinceDate:serverDate]>2){
+                NSMutableDictionary *gameSymbolsDictionary = [NSMutableDictionary new];
+                [gameSymbolsDictionary setObject:gameSymbolsInbackend.plan_ID forKey:@"plan_id"];
+                [gameSymbolsDictionary setObject:gameSymbolsInbackend.background_symbol_id forKey:@"plan_background_symbol_id"];
+                [gameSymbolsDictionary setObject:gameSymbolsInbackend.path_symbol_id forKey:@"path_symbol_id"];
+                [gameSymbolsDictionary setObject:gameSymbolsInbackend.prey_id forKey:@"prey_symbol_id"];
+                [gameSymbolsDictionary setObject:gameSymbolsInbackend.predator_symbol_id forKey:@"predator_symbol_id"];
+                [self changeGamePlanSymbolsIds:gameSymbolsDictionary ofGroupPlan:groupPlanId];
             }
         }
-    [context save:nil];
+    }else if ([results count]==0 && symbolsgame) //nao existe no plano dentro do dispositivo mas veio do servidor
+     [self changeGamePlanSymbolsIdsBackend:symbolsgame ofGroupPlan:groupPlanId];
 }
-
-}
-
 
 @end

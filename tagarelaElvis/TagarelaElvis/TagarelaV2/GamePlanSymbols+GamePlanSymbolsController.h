@@ -6,10 +6,12 @@
 //  Copyright (c) 2014 Alan Filipe Cardozo Fabeni. All rights reserved.
 //
 
-#import "GamePlanSymbols.h"
+#import "Game_plan_symbols.h"
 
-@interface GamePlanSymbols (GamePlanSymbolsController)
+@interface Game_plan_symbols (GamePlanSymbolsController)
 //+(NSDictionary*) loadSymbolsFromPlanGame:(int) planId;
 +(void) loadSymbolsFromPlanGame:(int) planId withCompletionBlock:(void(^)(NSDictionary* dic))completionBlock;
 +(void) changeGamePlanSymbolsIds: (NSDictionary*) symbolsId ofGroupPlan: (int) groupPlanId;
++(NSDictionary *)loadSymbolsInBackendFromPlanGame:(int)planId;
++(void)updateSymbolsFromGamePlan: (int)groupPlanId withSymbols:(NSDictionary *) symbolsgame;
 @end

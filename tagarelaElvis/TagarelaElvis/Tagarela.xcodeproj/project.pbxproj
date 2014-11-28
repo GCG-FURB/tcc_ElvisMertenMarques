@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1490C7FC19E81EC50042687D /* GamePlanSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 1490C7FB19E81EC50042687D /* GamePlanSymbols.m */; };
 		1490C7FF19E8563D0042687D /* GamePlanSymbols+GamePlanSymbolsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1490C7FE19E8563D0042687D /* GamePlanSymbols+GamePlanSymbolsController.m */; };
 		14A83D0619C9019B007F5630 /* TGGamePointTraceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A83CFF19C9019B007F5630 /* TGGamePointTraceView.m */; };
 		14A83D1219CA3C61007F5630 /* wrongPath.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 14A83D1019CA3C61007F5630 /* wrongPath.mp3 */; };
@@ -30,6 +29,7 @@
 		14C7894D1A13BFD4003A74A8 /* PLAYFUL_curto_5s.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 14C13B4D1A13964300B8FB4E /* PLAYFUL_curto_5s.m4a */; };
 		14C7894E1A13BFD4003A74A8 /* SIMPLE2_curto_5s.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 14C13B4E1A13964300B8FB4E /* SIMPLE2_curto_5s.m4a */; };
 		14C7894F1A13BFD4003A74A8 /* TRAVEL_curto_5s.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 14C13B4F1A13964300B8FB4E /* TRAVEL_curto_5s.m4a */; };
+		14E77E6E1A28DD3200AE8299 /* Game_plan_symbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E77E6D1A28DD3200AE8299 /* Game_plan_symbols.m */; };
 		C30873B717AF372B00187F82 /* PatientSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = C30873B617AF372B00187F82 /* PatientSymbol.m */; };
 		C316D595174033CB00A62F82 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C316D594174033CB00A62F82 /* MessageUI.framework */; };
 		C316D59B174046E200A62F82 /* TGAlbunsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C316D59A174046E200A62F82 /* TGAlbunsListViewController.m */; };
@@ -150,8 +150,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1490C7FA19E81EC50042687D /* GamePlanSymbols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GamePlanSymbols.h; path = Game/GamePlanSymbols.h; sourceTree = "<group>"; };
-		1490C7FB19E81EC50042687D /* GamePlanSymbols.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GamePlanSymbols.m; path = Game/GamePlanSymbols.m; sourceTree = "<group>"; };
 		1490C7FD19E8563D0042687D /* GamePlanSymbols+GamePlanSymbolsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GamePlanSymbols+GamePlanSymbolsController.h"; sourceTree = "<group>"; };
 		1490C7FE19E8563D0042687D /* GamePlanSymbols+GamePlanSymbolsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GamePlanSymbols+GamePlanSymbolsController.m"; sourceTree = "<group>"; };
 		14A83CFE19C9019B007F5630 /* TGGamePointTraceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGGamePointTraceView.h; sourceTree = "<group>"; };
@@ -178,6 +176,8 @@
 		14C13B521A13966400B8FB4E /* Erro.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Erro.m4a; sourceTree = "<group>"; };
 		14C13B531A13966400B8FB4E /* GelatinaLima.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = GelatinaLima.m4a; sourceTree = "<group>"; };
 		14C13B541A13966400B8FB4E /* ketchup.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = ketchup.m4a; sourceTree = "<group>"; };
+		14E77E6C1A28DD3200AE8299 /* Game_plan_symbols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game_plan_symbols.h; sourceTree = "<group>"; };
+		14E77E6D1A28DD3200AE8299 /* Game_plan_symbols.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game_plan_symbols.m; sourceTree = "<group>"; };
 		C30873B517AF372B00187F82 /* PatientSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientSymbol.h; sourceTree = "<group>"; };
 		C30873B617AF372B00187F82 /* PatientSymbol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientSymbol.m; sourceTree = "<group>"; };
 		C316D594174033CB00A62F82 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -539,6 +539,8 @@
 				C371286418D25CD60096409B /* TGBackendAPIClient.m */,
 				C333DFB817139C0000AD7E1A /* MainStoryboard.storyboard */,
 				C3E109041714FD2100E9CB07 /* TGCoreDataModel.xcdatamodeld */,
+				14E77E6C1A28DD3200AE8299 /* Game_plan_symbols.h */,
+				14E77E6D1A28DD3200AE8299 /* Game_plan_symbols.m */,
 				C3290C411744380200B43E72 /* Localizable.strings */,
 				C333DFA717139C0000AD7E1A /* Supporting Files */,
 			);
@@ -755,8 +757,6 @@
 		C3C7E8F317162933004C3D44 /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				1490C7FA19E81EC50042687D /* GamePlanSymbols.h */,
-				1490C7FB19E81EC50042687D /* GamePlanSymbols.m */,
 				1490C7FD19E8563D0042687D /* GamePlanSymbols+GamePlanSymbolsController.h */,
 				1490C7FE19E8563D0042687D /* GamePlanSymbols+GamePlanSymbolsController.m */,
 				C3578F2F18F8D9AB007B10BF /* GroupPlan.h */,
@@ -969,6 +969,7 @@
 				C3C7E8FD17162CDD004C3D44 /* TGCategoriesListViewController.m in Sources */,
 				C3C7E90317162F9E004C3D44 /* TGCategoryController.m in Sources */,
 				C3FB31B21716538E00E5C47D /* TGSymbolController.m in Sources */,
+				14E77E6E1A28DD3200AE8299 /* Game_plan_symbols.m in Sources */,
 				C3D62B301717993F00EC22AD /* KGModal.m in Sources */,
 				C3D62B351717A65300EC22AD /* TGUserAuthenticatorViewController.m in Sources */,
 				C31AD50C1719C57A00F5652A /* TGSyncUserContentController.m in Sources */,
@@ -999,7 +1000,6 @@
 				C347968E18D13E540099047D /* AFHTTPClient.m in Sources */,
 				C347969318D13E540099047D /* AFPropertyListRequestOperation.m in Sources */,
 				C3A02C6E172C70A100F6944C /* MGTileMenuController.m in Sources */,
-				1490C7FC19E81EC50042687D /* GamePlanSymbols.m in Sources */,
 				C39EE35518EB952E002958B9 /* Plan.m in Sources */,
 				C3A02C6F172C70A100F6944C /* MGTileMenuView.m in Sources */,
 				1490C7FF19E8563D0042687D /* GamePlanSymbols+GamePlanSymbolsController.m in Sources */,

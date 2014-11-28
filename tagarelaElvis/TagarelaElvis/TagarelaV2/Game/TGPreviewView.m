@@ -26,7 +26,6 @@
     if (self) {
         self.frame = CGRectMake(170, 45, 720, 80);
         self.currentPlan = (int)[plans indexOfObject:currentPlan];
-        NSLog(@"%i", self.currentPlan);
         _symbolPlanController = [[TGSymbolPlanController alloc]init];
         NSArray* symbolPlansArray;
         

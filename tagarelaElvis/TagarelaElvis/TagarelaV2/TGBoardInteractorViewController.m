@@ -10,22 +10,22 @@
 
 @interface TGBoardInteractorViewController ()
 @property BOOL isGame;
-@property AVAudioPlayer* backgroundAudio;
-@property AVAudioPlayer* wrongPathAudio;
+@property (strong,nonatomic)AVAudioPlayer* backgroundAudio;
+@property (strong,nonatomic)AVAudioPlayer* wrongPathAudio;
 @property (strong,nonatomic)NSMutableArray* wayPoints;
 @property CFDataRef pixelData;
-@property TGPreviewView* previewView;
-@property TGHistoricView* historicView;
-@property UIView* drawView;
-@property TGGroupPlanController* groupPlanController;
-@property Symbol* backgroundSymbol;
-@property Symbol* traceSymbol;
-@property Symbol* predatorSymbol;
-@property Symbol* wayPointSymbol;
-@property TGGamePointTraceView *pointTrace;
-@property UIImageView *predatorView;
+@property (strong,nonatomic)TGPreviewView* previewView;
+@property (strong,nonatomic)TGHistoricView* historicView;
+@property (strong,nonatomic)UIView* drawView;
+@property (strong,nonatomic)TGGroupPlanController* groupPlanController;
+@property (strong,nonatomic)Symbol* backgroundSymbol;
+@property (strong,nonatomic)Symbol* traceSymbol;
+@property (strong,nonatomic)Symbol* predatorSymbol;
+@property (strong,nonatomic)Symbol* wayPointSymbol;
+@property (strong,nonatomic)TGGamePointTraceView *pointTrace;
+@property (strong,nonatomic)UIImageView *predatorView;
 @property float scale; // escala para a imagem em NSdata
-@property UIImageView *wayPointImageView;
+@property (strong,nonatomic)UIImageView *wayPointImageView;
 @end
 
 @implementation TGBoardInteractorViewController
@@ -505,7 +505,7 @@
     
     self.previewView = [[TGPreviewView alloc]initWithPlans:arrayGroupPlans andCurrentPlan: self.selectedPlan];
     
-    [GamePlanSymbols loadSymbolsFromPlanGame:[[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] serverID] withCompletionBlock:^(NSDictionary *symbolsGame) {
+    NSDictionary *symbolsGame = [Game_plan_symbols loadSymbolsInBackendFromPlanGame:[[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] serverID]];
         if (symbolsGame && !_backgroundSymbol) {
             _backgroundSymbol = [symbolPlanController loadSymbolsGameForGroupPlanId:(int)[[symbolsGame objectForKey:@"plan_background_symbol_id"] integerValue]];
             _predatorSymbol = [symbolPlanController loadSymbolsGameForGroupPlanId:(int)[[symbolsGame objectForKey:@"predator_symbol_id"] integerValue]];
@@ -513,9 +513,6 @@
             _traceSymbol = [symbolPlanController loadSymbolsGameForGroupPlanId:(int)[[symbolsGame objectForKey:@"path_symbol_id"] integerValue]];
                 [self startSymbols];
                     }
-        
-    }];
-     
     
     [self.view addSubview:_previewView];
       NSLog(@"fim gameParts");
@@ -527,6 +524,7 @@
     [_pointTrace stopSound];
 }
 -(void)viewDidDisappear:(BOOL)animated{ //nao entendo pq mas foi preciso desalocar manualmente
+    [_backgroundAudio stop];
     _backgroundAudio = nil;
     _backgroundImageView = nil;
     _backgroundSymbol=nil;
@@ -545,12 +543,13 @@
     _wayPointSymbol = nil;
     _wayPointImageView=nil;
     _isGame = NO;
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 //apos a view aparecer esse metodo e chamado para verificar se nao existe symbolos
 //deve ser chamado aqui pois carrega outra view controller e essa view precisa estar totalmente carregada primeiro
 -(void)viewDidAppear:(BOOL)animated{
     if (self.isGame && !self.backgroundSymbol) { //testa se algum simbolo ja esta carregado. para nao carregar novamente
-     [GamePlanSymbols loadSymbolsFromPlanGame:[[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] serverID] withCompletionBlock:^(NSDictionary *symbolsGame) {
+        NSDictionary *symbolsGame = [Game_plan_symbols loadSymbolsInBackendFromPlanGame:[[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] serverID]];
          if (!symbolsGame) {
              UIAlertView  *alertView = [[UIAlertView alloc]initWithTitle:@"Tagarela" message:@"Esse plano ainda não possui os 4 símbolos necessários. que são: plano de fundo, presa, predador e o traçado. Por favor escolha a seguir." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
              [alertView show];
@@ -574,7 +573,6 @@
              [[NSNotificationCenter defaultCenter]postNotificationName:@"didSelectPlanLayout" object:selectedPlan1];
              [[KGModal sharedInstance]hideAnimated:YES];
          }
-     }];
 }
 }
 
@@ -862,7 +860,7 @@
       @"prey_symbol_id": [NSNumber numberWithInt:[_wayPointSymbol serverID]],
       @"predator_symbol_id": [NSNumber numberWithInt:[_predatorSymbol serverID]]};
     
-    [GamePlanSymbols changeGamePlanSymbolsIds: symbolsId ofGroupPlan: [[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] serverID]];
+    [Game_plan_symbols changeGamePlanSymbolsIds: symbolsId ofGroupPlan: [[_groupPlanController groupPlanForPlanWithPlanID:[[self selectedPlan] serverID]] serverID]];
 }
 
 //inicia symbols do jogo
