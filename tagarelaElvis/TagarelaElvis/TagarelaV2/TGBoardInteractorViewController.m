@@ -10,22 +10,22 @@
 
 @interface TGBoardInteractorViewController ()
 @property BOOL isGame;
-@property (strong,nonatomic)AVAudioPlayer* backgroundAudio;
-@property (strong,nonatomic)AVAudioPlayer* wrongPathAudio;
-@property (strong,nonatomic)NSMutableArray* wayPoints;
+@property (strong)AVAudioPlayer* backgroundAudio;
+@property (strong)AVAudioPlayer* wrongPathAudio;
+@property (strong)NSMutableArray* wayPoints;
 @property CFDataRef pixelData;
-@property (strong,nonatomic)TGPreviewView* previewView;
-@property (strong,nonatomic)TGHistoricView* historicView;
-@property (strong,nonatomic)UIView* drawView;
-@property (strong,nonatomic)TGGroupPlanController* groupPlanController;
-@property (strong,nonatomic)Symbol* backgroundSymbol;
-@property (strong,nonatomic)Symbol* traceSymbol;
-@property (strong,nonatomic)Symbol* predatorSymbol;
-@property (strong,nonatomic)Symbol* wayPointSymbol;
-@property (strong,nonatomic)TGGamePointTraceView *pointTrace;
-@property (strong,nonatomic)UIImageView *predatorView;
+@property (strong)TGPreviewView* previewView;
+@property (strong)TGHistoricView* historicView;
+@property (strong)UIView* drawView;
+@property (strong)TGGroupPlanController* groupPlanController;
+@property (strong)Symbol* backgroundSymbol;
+@property (strong)Symbol* traceSymbol;
+@property (strong)Symbol* predatorSymbol;
+@property (strong)Symbol* wayPointSymbol;
+@property (strong)TGGamePointTraceView *pointTrace;
+@property (strong)UIImageView *predatorView;
 @property float scale; // escala para a imagem em NSdata
-@property (strong,nonatomic)UIImageView *wayPointImageView;
+@property (strong)UIImageView *wayPointImageView;
 @end
 
 @implementation TGBoardInteractorViewController

@@ -9,7 +9,7 @@
 #import "GroupPlan.h"
 #import "GroupPlanRelationship.h"
 #import "Plan.h"
-#import "GamePlanSymbols.h"
+#import "Game_plan_symbols.h"
 
 
 @implementation GroupPlan
