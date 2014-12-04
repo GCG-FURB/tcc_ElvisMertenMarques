@@ -142,7 +142,7 @@
     }
     _speechUtterance = [[AVSpeechUtterance alloc]initWithString:word];
     [_speechUtterance setVoice:_speechVoice];
-    [_speechUtterance setPitchMultiplier:0.9];
+    [_speechUtterance setPitchMultiplier:1];
     [_speechUtterance setRate:AVSpeechUtteranceMinimumSpeechRate];
     [_speechSynthesizer speakUtterance:_speechUtterance];
     

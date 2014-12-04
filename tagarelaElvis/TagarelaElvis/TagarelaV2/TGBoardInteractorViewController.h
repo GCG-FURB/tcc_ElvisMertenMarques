@@ -7,7 +7,7 @@
 #import "TGSymbolHistoricController.h"
 #import "TGPlanController.h"
 
-@interface TGBoardInteractorViewController : UIViewController <AVAudioPlayerDelegate>
+@interface TGBoardInteractorViewController : UIViewController
 
 {
     UIImageView *imageView1;

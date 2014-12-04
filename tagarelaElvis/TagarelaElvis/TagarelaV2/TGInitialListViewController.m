@@ -299,6 +299,7 @@
     } else if (groupPlansLoaded) {
         [self loadPlansForSelectedGroupPlan:[groupPlanArray objectAtIndex:[indexPath row]]];
     }
+    
 }
 
 - (void)showPlansAfterSelectionForIndexPath:(int)indexPath

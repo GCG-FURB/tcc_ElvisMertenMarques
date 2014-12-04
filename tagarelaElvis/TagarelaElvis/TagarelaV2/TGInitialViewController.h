@@ -26,7 +26,7 @@
     
     NSTimer *fireTimer;        
 }
-
+@property UIActivityIndicatorView *loadingIndicator;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (weak, nonatomic) IBOutlet UITableView *initialTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *userPictureImageView;

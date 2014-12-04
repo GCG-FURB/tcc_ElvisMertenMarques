@@ -28,6 +28,7 @@
     TGUserController *userController;
     TGTutorPatientsController *tutorPatientsController;
     TGGroupPlanController *groupPlanController;
+   
     bool initialSync;
 }
 

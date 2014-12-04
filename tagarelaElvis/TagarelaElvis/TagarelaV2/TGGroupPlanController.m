@@ -88,9 +88,9 @@
                                                          }else {
                                                              if ([[serverDic objectForKey:@"group_plan_type"] isKindOfClass:[NSNumber class]]) {
                                                                  if ([serverDic objectForKey:@"group_plan_type"] ==[NSNumber numberWithInt:1]) {
-                                                                     [Game_plan_symbols loadSymbolsFromPlanGame:[[serverDic objectForKey:@"id"] integerValue] withCompletionBlock:^(NSDictionary *dic) {
+                                                                     [Game_plan_symbols loadSymbolsFromPlanGame:[[serverDic objectForKey:@"id"] longValue] withCompletionBlock:^(NSDictionary *dic) {
                                                                          if (dic) {
-                                                                             [Game_plan_symbols updateSymbolsFromGamePlan:[[serverDic objectForKey:@"id"] integerValue] withSymbols:dic];
+                                                                             [Game_plan_symbols updateSymbolsFromGamePlan:[[serverDic objectForKey:@"id"] longValue] withSymbols:dic];
                                                                          }
                                                                      }];
                                                                  }

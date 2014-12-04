@@ -1,4 +1,7 @@
 #import "TGSymbolController.h"
+@interface TGSymbolController()
+@property (nonatomic,strong)NSMutableSet *objectsToLoad;
+@end
 
 @implementation TGSymbolController
 
@@ -24,6 +27,7 @@
         [self setManagedObjectContext:[(AppDelegate*)[UIApplication sharedApplication].delegate backgroundObjectContext]];
         userController = [[TGUserController alloc]init];
         categoryController = [[TGCategoryController alloc]init];
+        _objectsToLoad = [NSMutableSet new];
     }
     return self;
 }
@@ -270,7 +274,15 @@
 
 - (void)loadSymbolsFromBackendWithIds:(NSMutableArray*)symbolIDS
                        successHandler:(void(^)())successHandler
+                          failHandler:(void(^)(NSString *error))failHandler{
+    [_objectsToLoad removeAllObjects];
+    [_objectsToLoad addObjectsFromArray:symbolIDS];
+    [self loadSymbolsFromBackendWithIds:symbolIDS successHandler:successHandler failHandler:failHandler withTry:0];
+}
+- (void)loadSymbolsFromBackendWithIds:(NSMutableArray*)symbolIDS
+                       successHandler:(void(^)())successHandler
                           failHandler:(void(^)(NSString *error))failHandler
+                              withTry:(int) try
 {
    // id params = @{@"symbols_id": symbolIDS};
     
@@ -280,41 +292,55 @@
     }
     for(NSNumber *param in symbolIDS){
         id params = @{@"symbols_id": param};// voltar ao antigo comentar essa parte e descomentar os outros
-    [[TGBackendAPIClient sharedAPIClient]getPath:@"/private_symbols/find_symbols_with_ids.json"
-                                      parameters:params
-                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                             if (operation) {
-                                                 NSData *jsonData = [[operation responseString]dataUsingEncoding:NSUTF8StringEncoding];
-                                                 NSDictionary *serverJson = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-                                                 if (serverJson) {
-                                                     //for (NSDictionary *serverSymbol in serverJson) { //estouro de string precisa ser feita uma requisicao por vez
-                                                     NSDictionary *serverSymbol = serverJson;
-                                                         int serverID = [[serverSymbol objectForKey:@"id"]intValue];
-                                                     
-                                                         if (![self symbolExistsWithID:serverID]) {
-                                                             Symbol *symbol = [NSEntityDescription insertNewObjectForEntityForName:@"Symbol" inManagedObjectContext:[self managedObjectContext]];
-                                                             [symbol setName:[serverSymbol objectForKey:@"name"]];
-                                                             [symbol setPicture:[self decodeBase64WithString:[[serverSymbol objectForKey:@"image_representation"]stringByReplacingOccurrencesOfString:@"@" withString:@"+"]]];
-                                                             [symbol setSound:[self decodeBase64WithString:[[serverSymbol objectForKey:@"sound_representation"]stringByReplacingOccurrencesOfString:@"@" withString:@"+"]]];
-                                                             [symbol setCategory:[categoryController loadCategoryWithID:[[serverSymbol objectForKey:@"category_id"]intValue]]];
-                                                             [symbol setServerID:serverID];
-                                                             [symbol setIsGeneral:[[serverSymbol objectForKey:@"isGeneral"]boolValue]];
-                                                             
-                                                             if (![[self managedObjectContext]save:nil]) {
-                                                                 failHandler(NSLocalizedString(@"errorMessageInsertingPrivateSymbol", nil));
+        [[TGBackendAPIClient sharedAPIClient]getPath:@"/private_symbols/find_symbols_with_ids.json"
+                                          parameters:params
+                                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                 if (operation) {
+                                                     NSData *jsonData = [[operation responseString]dataUsingEncoding:NSUTF8StringEncoding];
+                                                     NSDictionary *serverJson = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+                                                     if (serverJson) {
+                                                         //for (NSDictionary *serverSymbol in serverJson) { //estouro de string precisa ser feita uma requisicao por vez
+                                                         NSDictionary *serverSymbol = serverJson;
+                                                             int serverID = [[serverSymbol objectForKey:@"id"]intValue];
+                                                         
+                                                             if (![self symbolExistsWithID:serverID]) {
+                                                                 Symbol *symbol = [NSEntityDescription insertNewObjectForEntityForName:@"Symbol" inManagedObjectContext:[self managedObjectContext]];
+                                                                 [symbol setName:[serverSymbol objectForKey:@"name"]];
+                                                                 [symbol setPicture:[self decodeBase64WithString:[[serverSymbol objectForKey:@"image_representation"]stringByReplacingOccurrencesOfString:@"@" withString:@"+"]]];
+                                                                 [symbol setSound:[self decodeBase64WithString:[[serverSymbol objectForKey:@"sound_representation"]stringByReplacingOccurrencesOfString:@"@" withString:@"+"]]];
+                                                                 [symbol setCategory:[categoryController loadCategoryWithID:[[serverSymbol objectForKey:@"category_id"]intValue]]];
+                                                                 [symbol setServerID:serverID];
+                                                                 [symbol setIsGeneral:[[serverSymbol objectForKey:@"isGeneral"]boolValue]];
+                                                                 
+                                                                 if (![[self managedObjectContext]save:nil]) {
+                                                                     failHandler(NSLocalizedString(@"errorMessageInsertingPrivateSymbol", nil));
+                                                                 }
                                                              }
+                                                         //}
+                                                         [_objectsToLoad removeObject:param];
+                                                         if ([_objectsToLoad count]==0) {
+                                                             successHandler();
                                                          }
-                                                     //}
-                                                     //successHandler();
+                                                     }
+                                                 } else {
+                                                     failHandler(@"Erro ao carregar os símbolos");
                                                  }
-                                             } else {
-                                                 failHandler(@"Erro ao carregar os símbolos");
-                                             }
-                                         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                             failHandler([error description]);
-                                         }];    
+                                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                 if (try < 3 && error.code ==-1001) {
+                                                     NSString *url = operation.request.URL.relativeString;
+                                                     NSRange equalRange = [url rangeOfString:@"=" options:NSBackwardsSearch];
+                                                     if (equalRange.location != NSNotFound) {
+                                                         NSString *result = [url substringFromIndex:equalRange.location + equalRange.length];
+                                                         NSMutableArray *array= [NSMutableArray arrayWithObject:result];
+                                                        [self loadSymbolsFromBackendWithIds:array successHandler:successHandler failHandler:failHandler withTry:try+1];
+                                                         return;
+                                                     }
+                                                 }
+                                                 else
+                                                     failHandler([error description]);
+                                             }];    
 }
-    successHandler();//e comentar essa
+//    successHandler();//e comentar essa
 }
 
 

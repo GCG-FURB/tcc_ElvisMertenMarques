@@ -46,7 +46,8 @@
                 break;
         }
         [[TGCurrentUserManager sharedCurrentUserManager]setLastSync:lastSync];
-    }
+    }else
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"reloadData" object:nil];
 }
 
 - (void)syncTutorRelationshipsFromBackend
@@ -207,6 +208,7 @@
     
     [userHistoricController loadObservationsFromBackendWithSuccessHandler:^{
         NSLog(@"Sincronização completa");
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"reloadData" object:nil];
     } failHandler:^(NSString *error) {
         NSLog(@"Erro ao sincronizar o histórico do usuário %@", error);
     }];        

@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TagarelaV2/TGBoardInteractorViewController.m"
-            timestampString = "438893316.032984"
+            timestampString = "439406081.25587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "584"
-            endingLineNumber = "584"
+            startingLineNumber = "589"
+            endingLineNumber = "589"
             landmarkName = "-touchesMoved:withEvent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -168,11 +168,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TagarelaV2/TGSymbolController.m"
-            timestampString = "434470749.45927"
+            timestampString = "439322557.805325"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
             landmarkName = "-createSymbolWithName:andPicture:andVideoLink:andSound:andCategory:successHandler:failHandler:"
             landmarkType = "5">
          </BreakpointContent>
@@ -216,11 +216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TagarelaV2/TGSymbolController.m"
-            timestampString = "437503799.647058"
+            timestampString = "439322557.805325"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "-createSymbolInBackendWithName:andPicture:andVideoLink:andSound:andCategory:isUnsyncedSymbol:successHandler:failHandler:"
             landmarkType = "5">
          </BreakpointContent>
@@ -232,27 +232,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TagarelaV2/TGBoardInteractorViewController.m"
-            timestampString = "438893316.032984"
+            timestampString = "439406081.25587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "711"
-            endingLineNumber = "711"
-            landmarkName = "-nextPlanAnimation"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TagarelaV2/TGBoardInteractorViewController.m"
-            timestampString = "438893316.032984"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "718"
-            endingLineNumber = "718"
+            startingLineNumber = "705"
+            endingLineNumber = "705"
             landmarkName = "-nextPlanAnimation"
             landmarkType = "5">
          </BreakpointContent>
@@ -280,11 +264,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TagarelaV2/TGBoardInteractorViewController.m"
-            timestampString = "438893316.032984"
+            timestampString = "439406648.083083"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "868"
-            endingLineNumber = "868"
+            startingLineNumber = "863"
+            endingLineNumber = "863"
             landmarkName = "-startSymbols"
             landmarkType = "5">
          </BreakpointContent>
@@ -296,11 +280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TagarelaV2/TGBoardInteractorViewController.m"
-            timestampString = "438893316.032984"
+            timestampString = "439406648.083083"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "863"
-            endingLineNumber = "863"
+            startingLineNumber = "858"
+            endingLineNumber = "858"
             landmarkName = "-refreshDB"
             landmarkType = "5">
          </BreakpointContent>
@@ -328,11 +312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TagarelaV2/TGSymbolController.m"
-            timestampString = "438806676.212917"
+            timestampString = "439322557.805325"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
             landmarkName = "-loadSymbolsFromBackendWithSuccessHandler:failHandler:"
             landmarkType = "5">
          </BreakpointContent>
@@ -440,12 +424,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TagarelaV2/TGBoardInteractorViewController.m"
-            timestampString = "438893823.627314"
+            timestampString = "439406081.25587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "551"
-            endingLineNumber = "551"
+            startingLineNumber = "556"
+            endingLineNumber = "556"
             landmarkName = "-viewDidAppear:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TagarelaV2/TGSymbolController.m"
+            timestampString = "439322557.805325"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
+            landmarkName = "-loadSymbolsFromBackendWithIds:successHandler:failHandler:withTry:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TagarelaV2/TGSyncUserContentController.m"
+            timestampString = "439324060.930561"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "7"
+            endingLineNumber = "7"
+            landmarkName = "-init"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TagarelaV2/TGBoardInteractorViewController.m"
+            timestampString = "439391374.424617"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "-initWithNibName:bundle:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -43,7 +43,10 @@
 {
     [super viewDidLoad];    
     
-    [self customizeViewStyle];        
+    [self customizeViewStyle];
+    
+    self.closeScreenButton.target = self;
+    self.closeScreenButton.action = @selector(closeView);
     
     imageViewsArray = [[NSMutableArray alloc]initWithCapacity:0];
     
@@ -352,12 +355,13 @@
 
     
     if(self.isGame){
+//        imageView1.image = [UIImage imageNamed:@"á.png"];
          self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(imageView1.image.CGImage));
         _scale = imageView1.image.size.width/imageView1.frame.size.width;
          [self loadGameParts];
         //edicao teste! lembrar de tirar***********************************************************************
 //        
-//        imageView1.image = [UIImage imageNamed:@"A.png"];
+
 //        NSLog(@"%f", imageView1.image.size.width);
         
        
@@ -523,28 +527,29 @@
     [_backgroundAudio setVolume:0.7];
     [_pointTrace stopSound];
 }
--(void)viewDidDisappear:(BOOL)animated{ //nao entendo pq mas foi preciso desalocar manualmente
-    [_backgroundAudio stop];
-    _backgroundAudio = nil;
-    _backgroundImageView = nil;
-    _backgroundSymbol=nil;
-    _predatorSymbol=nil;
-    _predatorView = nil;
-    _previewView = nil;
-    _historicView = nil;
-    _traceSymbol = nil;
-    _pointTrace = nil;
-    self.view = nil;
-    _wrongPathAudio = nil;
-    _wayPoints =nil;
-    _pixelData = nil;
-    _drawView =NULL;
-    _groupPlanController=nil;
-    _wayPointSymbol = nil;
-    _wayPointImageView=nil;
-    _isGame = NO;
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
+//-(void)viewDidDisappear:(BOOL)animated{ //nao entendo pq mas foi preciso desalocar manualmente
+//    [_backgroundAudio stop];
+//    _backgroundAudio = nil;
+//    _backgroundImageView = nil;
+//    _backgroundSymbol=nil;
+//    _predatorSymbol=nil;
+//    _predatorView = nil;
+//    _previewView = nil;
+//    _historicView = nil;
+//    _traceSymbol = nil;
+//    _pointTrace = nil;
+//    self.view = nil;
+//    _wrongPathAudio = nil;
+//    _wayPoints =nil;
+//    _pixelData = nil;
+//    _drawView =NULL;
+//    _groupPlanController=nil;
+//    _wayPointSymbol = nil;
+//    _wayPointImageView=nil;
+//    _isGame = NO;
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+//}
+
 //apos a view aparecer esse metodo e chamado para verificar se nao existe symbolos
 //deve ser chamado aqui pois carrega outra view controller e essa view precisa estar totalmente carregada primeiro
 -(void)viewDidAppear:(BOOL)animated{
@@ -579,7 +584,7 @@
 //método presente na classe
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     if (self.isGame) {
-        NSLog(@"Inicio traçado");
+        NSLog(@"TouchesMooved");
     CGPoint location = [[touches anyObject] locationInView:self.view];
     CGRect fingerRect = CGRectMake(location.x-30 , location.y-30, 60, 60); //dedo com sua dimensao
     
@@ -597,13 +602,12 @@
         
         NSMutableArray *toDelete = [[NSMutableArray alloc]init]; //mutable para deletar itens do wayPoints. nao pode deletar dentro do for
         location = [[touches anyObject] locationInView:imageView1]; //faz o touch comparado a view menor para comparar com
-        fingerRect = CGRectMake(location.x-25, location.y-25, 50, 50);              // a posicao dos way points
+        fingerRect = CGRectMake(location.x-10, location.y-10, 20, 20);              // a posicao dos way points
         for(UIView *point in self.wayPoints){
             CGRect subviewFrame = point.frame;
             if(CGRectIntersectsRect(fingerRect, subviewFrame)){
                 [toDelete addObject:point];
                 [point removeFromSuperview];
-                NSLog(@"removeu!");
             }
         }
         [self.wayPoints removeObjectsInArray:toDelete];
@@ -616,7 +620,6 @@
         [self.wrongPathAudio play];
     }
 }
-    NSLog(@"fim traçado");
 }
 
 #pragma mark - alpha test
@@ -625,20 +628,13 @@
     if (x<0||x>imageView1.frame.size.width|| y<0||y>imageView1.frame.size.height) {
         return false;
     }
-    
     const UInt8* data = CFDataGetBytePtr(_pixelData);
     int pixelInfo = ((imageView1.image.size.width  * (y*_scale)) + (x*_scale) ) * 4; // The image is png
-    //retira os valores do pixel
-    //UInt8 red = data[pixelInfo];
-    //UInt8 green = data[(pixelInfo + 1)];
-    //UInt8 blue = data[pixelInfo + 2];
     int alpha = data[pixelInfo + 3];
 
     if (alpha==0){
-       // NSLog(@"a=%i, x=%i y=%i",alpha,x,y);
         return NO;
     }else{
-        //NSLog(@"a=%i, x=%i y=%i",alpha,x,y);
         return YES;
     }
 }
@@ -647,14 +643,12 @@
 -(void)makeWayPoints{
     NSLog(@"iniciando waypoints");
     [_wayPoints removeAllObjects];
-    //UInt8 alpha;
     for (int x = 0; x< imageView1.image.size.width; x++) {
         for (int y = 0; y< imageView1.image.size.height; y++){
           const UInt8* data = CFDataGetBytePtr(_pixelData);
           int pixelInfo = ((imageView1.image.size.width  * y) + x) * 4;
           int alpha = data[pixelInfo + 3];
             if (alpha!=0 && alpha!=255) {
-                //NSLog(@"%i , %i", x,y);
                 UIImageView *point2 = [[UIImageView alloc]initWithImage:_wayPointImageView.image];
                 point2.frame =CGRectMake(x/_scale-20, y/_scale-20, 40, 40);
                 [point2 setContentMode:UIViewContentModeScaleAspectFit];
@@ -710,6 +704,7 @@
                          completion:^(BOOL finished) {
                              if([self.previewView isOver]){
                                  NSLog(@"finalizar");
+                                 self.isGame = NO;
                                  UILabel* finishLabel = [[UILabel alloc]initWithFrame:_backgroundImageView.frame];
                                  finishLabel.text = @"Parabéns, plano finalizado!";
                                  finishLabel.textAlignment = NSTextAlignmentCenter;
@@ -794,7 +789,7 @@
     TGSymbolPickerViewController *symbolPickerViewController = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil]instantiateViewControllerWithIdentifier:@"TGSymbolPickerViewController"];
     [symbolPickerViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     [[symbolPickerViewController view]setFrame:CGRectMake(0, 0, 500, 500)];
-    [[KGModal sharedInstance]setShowCloseButton:NO];
+    [[KGModal sharedInstance]setShowCloseButton:YES];
     [[KGModal sharedInstance]setTapOutsideToDismiss:YES];
     [[KGModal sharedInstance]showWithContentViewController:symbolPickerViewController andAnimated:YES];
 
@@ -895,16 +890,9 @@
     [self makeWayPoints];
 }
 
-#pragma mark - audioPlayerDelegate
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
-    NSLog(@"asd");
+-(void)closeView{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-/* if an error occurs while decoding it will be reported to the delegate. */
-- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)erro{
-    NSLog(@"%@ ",erro);
-}
-
 
 
 

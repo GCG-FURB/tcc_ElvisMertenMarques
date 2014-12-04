@@ -1,6 +1,6 @@
 #import "TGInitialViewController.h"
 @interface TGInitialViewController ()
-
+@property UIView *loadingView;
 @end
 
 @implementation TGInitialViewController
@@ -9,7 +9,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-
+        
     }
     return self;
 }
@@ -24,6 +24,26 @@
 {
     [super viewDidLoad];
     
+    _loadingView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2, self.view.frame.size.height/2-170, 170, 170)];
+    _loadingView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    _loadingView.clipsToBounds = YES;
+    _loadingView.layer.cornerRadius = 10.0;
+    _loadingView.alpha =0;
+    
+    _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    _loadingIndicator.frame = CGRectMake(65, 40, _loadingIndicator.bounds.size.width, _loadingIndicator.bounds.size.height);
+    [_loadingIndicator stopAnimating];
+    [_loadingView addSubview:_loadingIndicator];
+    
+    UILabel *loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 115, 130, 22)];
+    loadingLabel.backgroundColor = [UIColor clearColor];
+    loadingLabel.textColor = [UIColor whiteColor];
+    loadingLabel.adjustsFontSizeToFitWidth = YES;
+    loadingLabel.text = @"Sincronizando...";
+    [_loadingView addSubview:loadingLabel];
+    [self.view addSubview:_loadingView];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showUserPickerScreen) name:@"sync" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showUserPickerScreen) name:@"userNotCreated" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(syncUserContent) name:@"userCreated" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didSelectPlan:) name:@"didSelectPlan" object:nil];
@@ -105,7 +125,6 @@
     [syncUserContent syncUnsyncedPlansToBackend];
     [syncUserContent syncUnsyncedSymbolHistoricsToBackend];
     [syncUserContent syncUnsyncedObservationsToBackend];
-    
     [SVProgressHUD dismiss];
 }
 
@@ -114,14 +133,17 @@
     [self configureInitialTable];
     
     [self performSelectorOnMainThread:@selector(loadUserPicture) withObject:nil waitUntilDone:NO];
-    
-    [syncUserContent syncAllData];           
+    [_loadingIndicator startAnimating];
+    _loadingView.alpha = 1;
+    [syncUserContent syncAllData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL userRegistered = [defaults boolForKey:@"userRegistered"];
+    
+    [[self initialTableView]reloadData];
     
     [[TGCurrentUserManager sharedCurrentUserManager]setSelectedTutorPatient:nil];
     
@@ -138,12 +160,14 @@
             [self performSelector:@selector(syncUnsyncedContent) withObject:nil afterDelay:0.5];
             [self configureInitialTable];
             [self syncUserContent];
+
         } else {
             [self configureInitialTable];
             UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"alertCaption", nil) message:NSLocalizedString(@"errorMessageConnection", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];            
             [alertView show];
         }
     }
+
 }
 
 - (BOOL)connectionIsAvailable
@@ -270,7 +294,7 @@
 {
     if ([[segue identifier]isEqualToString:@"segueToBoardInteractorScreen"]) {
         TGBoardInteractorViewController *boardInteractor = [segue destinationViewController];
-        [boardInteractor setSelectedPlan:selectedPlan];        
+        [boardInteractor setSelectedPlan:selectedPlan];
     }
 }
 
@@ -348,7 +372,9 @@
 {        
     [initialListViewController loadPatients];
     
-    [[self initialTableView]performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];    
+    [[self initialTableView]performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    [_loadingIndicator stopAnimating];
+    [_loadingView removeFromSuperview];
 }
 
 
