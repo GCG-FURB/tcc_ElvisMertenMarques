@@ -355,7 +355,7 @@
 
     
     if(self.isGame){
-//        imageView1.image = [UIImage imageNamed:@"á.png"];
+     //   imageView1.image = [UIImage imageNamed:@"á.png"];
          self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(imageView1.image.CGImage));
         _scale = imageView1.image.size.width/imageView1.frame.size.width;
          [self loadGameParts];
@@ -527,28 +527,28 @@
     [_backgroundAudio setVolume:0.7];
     [_pointTrace stopSound];
 }
-//-(void)viewDidDisappear:(BOOL)animated{ //nao entendo pq mas foi preciso desalocar manualmente
-//    [_backgroundAudio stop];
-//    _backgroundAudio = nil;
-//    _backgroundImageView = nil;
-//    _backgroundSymbol=nil;
-//    _predatorSymbol=nil;
-//    _predatorView = nil;
-//    _previewView = nil;
-//    _historicView = nil;
-//    _traceSymbol = nil;
-//    _pointTrace = nil;
-//    self.view = nil;
-//    _wrongPathAudio = nil;
-//    _wayPoints =nil;
-//    _pixelData = nil;
-//    _drawView =NULL;
-//    _groupPlanController=nil;
-//    _wayPointSymbol = nil;
-//    _wayPointImageView=nil;
-//    _isGame = NO;
-//    [self.navigationController popToRootViewControllerAnimated:YES];
-//}
+-(void)viewDidDisappear:(BOOL)animated{ //nao entendo pq mas foi preciso desalocar manualmente
+    [_backgroundAudio stop];
+    _backgroundAudio = nil;
+    _backgroundImageView = nil;
+    _backgroundSymbol=nil;
+    _predatorSymbol=nil;
+    _predatorView = nil;
+    _previewView = nil;
+    _historicView = nil;
+    _traceSymbol = nil;
+    _pointTrace = nil;
+    self.view = nil;
+    _wrongPathAudio = nil;
+    _wayPoints =nil;
+    _pixelData = nil;
+    _drawView =NULL;
+    _groupPlanController=nil;
+    _wayPointSymbol = nil;
+    _wayPointImageView=nil;
+    _isGame = NO;
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 //apos a view aparecer esse metodo e chamado para verificar se nao existe symbolos
 //deve ser chamado aqui pois carrega outra view controller e essa view precisa estar totalmente carregada primeiro
