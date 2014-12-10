@@ -584,7 +584,6 @@
 //método presente na classe
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     if (self.isGame) {
-        NSLog(@"TouchesMooved");
     CGPoint location = [[touches anyObject] locationInView:self.view];
     CGRect fingerRect = CGRectMake(location.x-30 , location.y-30, 60, 60); //dedo com sua dimensao
     
@@ -641,7 +640,6 @@
 
 //desenhar as presas no caminho
 -(void)makeWayPoints{
-    NSLog(@"iniciando waypoints");
     [_wayPoints removeAllObjects];
     for (int x = 0; x< imageView1.image.size.width; x++) {
         for (int y = 0; y< imageView1.image.size.height; y++){
@@ -683,7 +681,6 @@
         [self.drawView addSubview:point];
     }
     [self.drawView addSubview:_predatorView];
-    NSLog(@"fim waypoints");
 }
 
 
@@ -735,7 +732,7 @@
 }
 
 -(void)nextPlan{
-    if(![self.previewView isOver]){
+    if(![self.previewView isOver]&& self.isGame){
         [imageView1 setImage:[self.previewView nextPlanOnPreview]];
         //seta o pixelData para analise na hora do toque na tela. ao trocar de Plano sempre setar o pixelData
         self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(imageView1.image.CGImage));
@@ -747,7 +744,7 @@
 }
 
 -(void)previousPlan{
-    if(![self.previewView isStart]){
+    if(![self.previewView isStart] && self.isGame){
         [imageView1 setImage:[self.previewView previousPlanOnPreview]];
         //seta o pixelData para analise na hora do toque na tela. ao trocar de Plano sempre setar o pixelData
         self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(imageView1.image.CGImage));
@@ -770,6 +767,7 @@
 }
 
 -(void)change:(UIButton*) button{
+    if (self.isGame) {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     switch (button.tag) {
         case 1:
@@ -793,6 +791,7 @@
     [[KGModal sharedInstance]setTapOutsideToDismiss:YES];
     [[KGModal sharedInstance]showWithContentViewController:symbolPickerViewController andAnimated:YES];
 
+}
 }
 
 
