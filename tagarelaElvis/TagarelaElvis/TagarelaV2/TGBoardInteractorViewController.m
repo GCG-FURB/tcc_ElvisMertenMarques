@@ -26,6 +26,8 @@
 @property (strong)UIImageView *predatorView;
 @property float scale; // escala para a imagem em NSdata
 @property (strong)UIImageView *wayPointImageView;
+@property (strong) UIButton* nextButton;
+@property (strong) UIButton* previousButton;
 @end
 
 @implementation TGBoardInteractorViewController
@@ -444,7 +446,6 @@
     
 -(void)loadGameParts{
    //buttons
-    NSLog(@"iniciando game Parts");
     UIButton* musicButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 100, 100, 50)];
     [musicButton setTitle:@"Música" forState:UIControlStateNormal];
     [musicButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -479,18 +480,17 @@
     [traceButton setTag:4];
     [self.view addSubview:traceButton];
     
-    UIButton* nextButton = [[UIButton alloc]initWithFrame:CGRectMake( 900, 624 , 100, 50)];
-    NSLog(@"%f",self.view.frame.size.width);
-    [nextButton setTitle:@"Próximo" forState:UIControlStateNormal];
-    [nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [nextButton addTarget:self action: @selector(nextPlan) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:nextButton];
+    _nextButton = [[UIButton alloc]initWithFrame:CGRectMake( 900, 624 , 100, 50)];
+    [_nextButton setTitle:@"Próximo" forState:UIControlStateNormal];
+    [_nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_nextButton addTarget:self action: @selector(nextPlan) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_nextButton];
     
-    UIButton* previousButton = [[UIButton alloc]initWithFrame:CGRectMake( 10, 624 , 100, 50)];
-    [previousButton setTitle:@"Anterior" forState:UIControlStateNormal];
-    [previousButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [previousButton addTarget:self action: @selector(previousPlan) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:previousButton];
+    _previousButton = [[UIButton alloc]initWithFrame:CGRectMake( 10, 624 , 100, 50)];
+    [_previousButton setTitle:@"Anterior" forState:UIControlStateNormal];
+    [_previousButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_previousButton addTarget:self action: @selector(previousPlan) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_previousButton];
     
     
     self.drawView = [[UIView alloc]initWithFrame:imageView1.frame];
@@ -519,7 +519,6 @@
                     }
     
     [self.view addSubview:_previewView];
-      NSLog(@"fim gameParts");
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -584,7 +583,6 @@
 //método presente na classe
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     if (self.isGame) {
-        NSLog(@"TouchesMooved");
     CGPoint location = [[touches anyObject] locationInView:self.view];
     CGRect fingerRect = CGRectMake(location.x-30 , location.y-30, 60, 60); //dedo com sua dimensao
     
@@ -598,7 +596,6 @@
         [_backgroundAudio setVolume:0.2];
         [_pointTrace playSound];
         [self.drawView addSubview:Imageview];
-        
         
         NSMutableArray *toDelete = [[NSMutableArray alloc]init]; //mutable para deletar itens do wayPoints. nao pode deletar dentro do for
         location = [[touches anyObject] locationInView:imageView1]; //faz o touch comparado a view menor para comparar com
@@ -641,7 +638,6 @@
 
 //desenhar as presas no caminho
 -(void)makeWayPoints{
-    NSLog(@"iniciando waypoints");
     [_wayPoints removeAllObjects];
     for (int x = 0; x< imageView1.image.size.width; x++) {
         for (int y = 0; y< imageView1.image.size.height; y++){
@@ -683,7 +679,6 @@
         [self.drawView addSubview:point];
     }
     [self.drawView addSubview:_predatorView];
-    NSLog(@"fim waypoints");
 }
 
 
@@ -691,6 +686,8 @@
 //proximo plano
 
 -(void)nextPlanAnimation{
+    self.nextButton.userInteractionEnabled = NO;
+    self.previousButton.userInteractionEnabled = NO;
     [_backgroundAudio setVolume:0.2];
     [self.previewView playSoundFromCurrentPlan];
         [UIView animateWithDuration:1.0
@@ -735,7 +732,7 @@
 }
 
 -(void)nextPlan{
-    if(![self.previewView isOver]){
+    if(![self.previewView isOver]&& self.isGame){
         [imageView1 setImage:[self.previewView nextPlanOnPreview]];
         //seta o pixelData para analise na hora do toque na tela. ao trocar de Plano sempre setar o pixelData
         self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(imageView1.image.CGImage));
@@ -743,11 +740,12 @@
         _scale = imageView1.image.size.width/imageView1.frame.size.width;
         [self makeWayPoints];
     }
-
+    self.nextButton.userInteractionEnabled = YES;
+    self.previousButton.userInteractionEnabled = YES;
 }
 
 -(void)previousPlan{
-    if(![self.previewView isStart]){
+    if(![self.previewView isStart] && self.isGame){
         [imageView1 setImage:[self.previewView previousPlanOnPreview]];
         //seta o pixelData para analise na hora do toque na tela. ao trocar de Plano sempre setar o pixelData
         self.pixelData = CGDataProviderCopyData(CGImageGetDataProvider(imageView1.image.CGImage));
@@ -770,6 +768,7 @@
 }
 
 -(void)change:(UIButton*) button{
+    if (self.isGame) {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     switch (button.tag) {
         case 1:
@@ -793,6 +792,7 @@
     [[KGModal sharedInstance]setTapOutsideToDismiss:YES];
     [[KGModal sharedInstance]showWithContentViewController:symbolPickerViewController andAnimated:YES];
 
+}
 }
 
 
