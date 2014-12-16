@@ -13,6 +13,7 @@
 		14A83D2119CC7019007F5630 /* TGPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A83D2019CC7019007F5630 /* TGPreviewView.m */; };
 		14A83D2419CCA398007F5630 /* TGHistoricView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A83D2319CCA398007F5630 /* TGHistoricView.m */; };
 		14E77E6E1A28DD3200AE8299 /* Game_plan_symbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E77E6D1A28DD3200AE8299 /* Game_plan_symbols.m */; };
+		14E77E7E1A308A7C00AE8299 /* á.png in Resources */ = {isa = PBXBuildFile; fileRef = 14E77E7D1A308A7C00AE8299 /* á.png */; };
 		C30873B717AF372B00187F82 /* PatientSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = C30873B617AF372B00187F82 /* PatientSymbol.m */; };
 		C316D595174033CB00A62F82 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C316D594174033CB00A62F82 /* MessageUI.framework */; };
 		C316D59B174046E200A62F82 /* TGAlbunsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C316D59A174046E200A62F82 /* TGAlbunsListViewController.m */; };
@@ -144,6 +145,7 @@
 		14A83D2319CCA398007F5630 /* TGHistoricView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGHistoricView.m; sourceTree = "<group>"; };
 		14E77E6C1A28DD3200AE8299 /* Game_plan_symbols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game_plan_symbols.h; sourceTree = "<group>"; };
 		14E77E6D1A28DD3200AE8299 /* Game_plan_symbols.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game_plan_symbols.m; sourceTree = "<group>"; };
+		14E77E7D1A308A7C00AE8299 /* á.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "á.png"; path = "../../../../TCC2013-2-21-WagnerJReetz/OUTROS/Imagens/Servidor/planos/Letras Minúsculas/simbolos/á.png"; sourceTree = "<group>"; };
 		C30873B517AF372B00187F82 /* PatientSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientSymbol.h; sourceTree = "<group>"; };
 		C30873B617AF372B00187F82 /* PatientSymbol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientSymbol.m; sourceTree = "<group>"; };
 		C316D594174033CB00A62F82 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -378,6 +380,7 @@
 		14A83CF919C9019B007F5630 /* GameImages */ = {
 			isa = PBXGroup;
 			children = (
+				14E77E7D1A308A7C00AE8299 /* á.png */,
 				14A83D1019CA3C61007F5630 /* wrongPath.mp3 */,
 			);
 			path = GameImages;
@@ -846,6 +849,7 @@
 				C333DFBA17139C0000AD7E1A /* MainStoryboard.storyboard in Resources */,
 				C333DFD11713A34000AD7E1A /* patientPicked.png in Resources */,
 				C333DFD21713A34000AD7E1A /* specialistPicked.png in Resources */,
+				14E77E7E1A308A7C00AE8299 /* á.png in Resources */,
 				C333DFD31713A34000AD7E1A /* tutorPicked.png in Resources */,
 				C3E109131715088C00E9CB07 /* add-imagem-gray.png in Resources */,
 				C31AD5101719CC6300F5652A /* SVProgressHUD.bundle in Resources */,
