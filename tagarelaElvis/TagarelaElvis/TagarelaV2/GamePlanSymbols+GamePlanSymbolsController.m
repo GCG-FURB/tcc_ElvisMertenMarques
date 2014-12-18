@@ -178,9 +178,7 @@
                 [gameSymbolsDictionary setObject:gameSymbolsInbackend.path_symbol_id forKey:@"path_symbol_id"];
                 [gameSymbolsDictionary setObject:gameSymbolsInbackend.prey_id forKey:@"prey_symbol_id"];
                 [gameSymbolsDictionary setObject:gameSymbolsInbackend.predator_symbol_id forKey:@"predator_symbol_id"];
-                if (groupPlanId == 1) {
-                    NSLog(@"%i", groupPlanId);
-                }
+
                 [self changeGamePlanSymbolsIds:gameSymbolsDictionary ofGroupPlan:groupPlanId];
             }
         }

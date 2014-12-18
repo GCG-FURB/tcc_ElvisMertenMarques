@@ -639,6 +639,7 @@
 //desenhar as presas no caminho
 -(void)makeWayPoints{
     [_wayPoints removeAllObjects];
+     dispatch_async(dispatch_get_main_queue(), ^{
     for (int x = 0; x< imageView1.image.size.width; x++) {
         for (int y = 0; y< imageView1.image.size.height; y++){
           const UInt8* data = CFDataGetBytePtr(_pixelData);
@@ -653,6 +654,7 @@
             }
         }
     }
+   
     //se nao tiver presas ele cria para nao deixar vazio e concluir a prancha de primeira. para casos sem o alpha
     if([_wayPoints count]==0){
     UIImageView *point1 = [[UIImageView alloc]initWithImage:[UIImage imageWithData:_wayPointSymbol.picture]];
@@ -678,6 +680,7 @@
     for ( UIImageView *point in self.wayPoints) {
         [self.drawView addSubview:point];
     }
+           });
     [self.drawView addSubview:_predatorView];
 }
 

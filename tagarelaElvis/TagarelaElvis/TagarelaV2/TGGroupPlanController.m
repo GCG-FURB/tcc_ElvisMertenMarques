@@ -71,12 +71,12 @@
                                                              [gp setName:[serverDic objectForKey:@"name"]];
                                                              [gp setUserID:[[serverDic objectForKey:@"user_id"]intValue]];
                                                              //parte para game e quebra cabeça
-                                                             if ([[serverDic objectForKey:@"group_plan_type"] isKindOfClass:[NSNumber class]]) {
+                                                             if ([[serverDic objectForKey:@"group_plan_type"] isKindOfClass:[NSNumber class]]) { 
                                                                  [gp setType:[[serverDic objectForKey:@"group_plan_type"] integerValue]];
                                                                  if (gp.type ==1) {
                                                                      [Game_plan_symbols loadSymbolsFromPlanGame:gp.serverID withCompletionBlock:^(NSDictionary *dic) {
                                                                          if (dic) {
-                                                                             [Game_plan_symbols updateSymbolsFromGamePlan:gp.type withSymbols:dic];
+                                                                             [Game_plan_symbols updateSymbolsFromGamePlan:gp.serverID withSymbols:dic];
                                                                          }
                                                                      }];
                                                                  }
