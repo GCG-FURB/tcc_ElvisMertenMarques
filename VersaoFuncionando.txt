@@ -1,0 +1,2 @@
+A versão da pasta "tagarelaElvis" é mais antiga mas funciona.
+A pasta "tcc_bcc_2014_2_emmarques_ElvisMertenMarques" tem uma versão mais recente mas parece está travando. Nesta versão o orientando disse ue tinha arrumado o erro 414 que acontecia na outra versão ... erro que travava quando tinha muita informações para sincronizar. Acho que também nesta versão arrumou para não ficar tocando a música de fundo do plano sem parar ... na verdade ele tocava duas vezes a mesma música e o controle da interface só parava uma das múscias iguais.
