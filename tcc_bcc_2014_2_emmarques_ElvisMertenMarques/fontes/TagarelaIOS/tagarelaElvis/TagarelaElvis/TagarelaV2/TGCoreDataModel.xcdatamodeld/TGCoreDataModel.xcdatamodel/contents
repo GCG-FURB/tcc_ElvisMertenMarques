@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14B25" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Category" representedClassName="Category" syncable="YES">
+        <attribute name="blue" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="green" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="red" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="serverID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="symbols" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Symbol" inverseName="category" inverseEntity="Symbol" syncable="YES"/>
+    </entity>
+    <entity name="GamePlanSymbols" representedClassName="Game_plan_symbols" syncable="YES">
+        <attribute name="background_symbol_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="path_symbol_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="plan_ID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="predator_symbol_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="prey_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="server_ID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="update_at" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="groupPlanFrom" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GroupPlan" inverseName="symbolsOfGame" inverseEntity="GroupPlan" syncable="YES"/>
+    </entity>
+    <entity name="GroupPlan" representedClassName="GroupPlan" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serverID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="groupPlanRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GroupPlanRelationship" inverseName="groupPlan" inverseEntity="GroupPlanRelationship" syncable="YES"/>
+        <relationship name="plan" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Plan" inverseName="groupPlan" inverseEntity="Plan" syncable="YES"/>
+        <relationship name="symbolsOfGame" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GamePlanSymbols" inverseName="groupPlanFrom" inverseEntity="GamePlanSymbols" syncable="YES"/>
+    </entity>
+    <entity name="GroupPlanRelationship" representedClassName="GroupPlanRelationship" syncable="YES">
+        <attribute name="planID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="serverID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="groupPlan" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GroupPlan" inverseName="groupPlanRelationship" inverseEntity="GroupPlan" syncable="YES"/>
+    </entity>
+    <entity name="ObservationHistoric" representedClassName="ObservationHistoric" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="observation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serverID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="tutorID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="PatientsRelationships" representedClassName="PatientsRelationships" syncable="YES">
+        <attribute name="patientEmail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="patientName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="patientPicture" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="patientServerID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="patientTutorID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="relationshipType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="serverID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="PatientSymbol" representedClassName="PatientSymbol" syncable="YES">
+        <attribute name="patientID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="serverID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="symbolID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Plan" representedClassName="Plan" syncable="YES">
+        <attribute name="layout" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="patientID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="serverID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="groupPlan" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GroupPlan" inverseName="plan" inverseEntity="GroupPlan" syncable="YES"/>
+        <relationship name="symbol" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Symbol" inverseName="plan" inverseEntity="Symbol" syncable="YES"/>
+        <relationship name="symbolPlan" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SymbolPlan" inverseName="plan" inverseEntity="SymbolPlan" syncable="YES"/>
+    </entity>
+    <entity name="Symbol" representedClassName="Symbol" syncable="YES">
+        <attribute name="isGeneral" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="picture" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="serverID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="sound" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="videoLink" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="category" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="symbols" inverseEntity="Category" syncable="YES"/>
+        <relationship name="plan" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Plan" inverseName="symbol" inverseEntity="Plan" syncable="YES"/>
+        <relationship name="symbolHistoric" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SymbolHistoric" inverseName="symbolHistoric" inverseEntity="SymbolHistoric" syncable="YES"/>
+        <relationship name="symbolPlan" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SymbolPlan" inverseName="symbol" inverseEntity="SymbolPlan" syncable="YES"/>
+    </entity>
+    <entity name="SymbolHistoric" representedClassName="SymbolHistoric" syncable="YES">
+        <attribute name="date" attributeType="Date" syncable="YES"/>
+        <attribute name="serverID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="tutorID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="symbolHistoric" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Symbol" inverseName="symbolHistoric" inverseEntity="Symbol" syncable="YES"/>
+    </entity>
+    <entity name="SymbolPlan" representedClassName="SymbolPlan" syncable="YES">
+        <attribute name="position" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="serverID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="plan" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Plan" inverseName="symbolPlan" inverseEntity="Plan" syncable="YES"/>
+        <relationship name="symbol" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Symbol" inverseName="symbolPlan" inverseEntity="Symbol" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="picture" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="serverID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Category" positionX="-9" positionY="-207" width="128" height="133"/>
+        <element name="GamePlanSymbols" positionX="-0" positionY="-25" width="135" height="163"/>
+        <element name="GroupPlan" positionX="259" positionY="11" width="128" height="148"/>
+        <element name="GroupPlanRelationship" positionX="241" positionY="162" width="128" height="88"/>
+        <element name="ObservationHistoric" positionX="-279" positionY="-108" width="128" height="118"/>
+        <element name="PatientsRelationships" positionX="-360" positionY="36" width="128" height="148"/>
+        <element name="PatientSymbol" positionX="-180" positionY="315" width="128" height="88"/>
+        <element name="Plan" positionX="333" positionY="-207" width="128" height="163"/>
+        <element name="Symbol" positionX="-171" positionY="27" width="128" height="193"/>
+        <element name="SymbolHistoric" positionX="-342" positionY="234" width="128" height="118"/>
+        <element name="SymbolPlan" positionX="7" positionY="243" width="128" height="105"/>
+        <element name="User" positionX="-279" positionY="-253" width="128" height="118"/>
+    </elements>
+</model>

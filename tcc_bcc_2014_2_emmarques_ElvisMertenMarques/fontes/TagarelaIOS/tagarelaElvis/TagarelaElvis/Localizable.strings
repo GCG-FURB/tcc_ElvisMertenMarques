@@ -1,0 +1,111 @@
+//Criação de usuários
+"successMessageUserCreation" = "Usuário criado com sucesso";
+"missingPictureMessageUserCreation" = "Escolha uma foto sua para o seu perfil.";
+"errorMessageUserCreationServer" = "Erro ao criar o usuário no servidor.";
+"errorMessageUserCreationLocal" = "Erro ao criar o usuário localmente.";
+"errorUserNotFound" = "Usuário não encontrado.";
+
+//Autenticação de usuário
+"waitFetchingUserData" = "Por favor, aguarde... \n Buscando dados do usuário.";
+"errorMessageFetchingUserData" = "Erro ao buscar os dados do usuário. \n Verifique o seu email e sua senha e tente novamente.";
+
+//Mensagens gerais
+"alertCaption" = "Atenção !";
+"okCaption" = "OK";
+"photoChooserActionSheetTitle" = "Escolha o tipo de foto";
+"photoChooserPhotoGalleryOption" = "Galeria de fotos";
+"photoChooserTakePictureOption" = "Tirar foto";
+"waitMessageCreation" = "Por favor, aguarde...";
+"missingFieldsMessageCreation" = "Preencha os campos:";
+"noOption" = "Não";
+"yesOption" = "Sim";
+
+//Criação de símbolos do plano
+"errorMessageSymbolPlanCreationServer" = "Erro ao criar o símbolo no servidor.";
+"errorMessageSymbolPlanCreationLocal" = "Erro ao criar o símbolo localmente.";
+"errorMessageSymbolPlanUpdateLocal" = "Erro ao atualizar o símbolo do plano localmente.";
+
+//Criação de símbolos personalizados
+"recordSoundButtonTitle" = "Gravar som";
+"successMessageSymbolCreation" = "Símbolo criado com sucesso.";
+"recordSoundButtonCountdowTitle" = "Gravando 0:05";
+"missingPictureMessageSymbolCreation" = "Escolha uma imagem para o símbolo.";
+"missingSoundMessageSymbolCreation" = "Grave um áudio para o símbolo.";
+"errorMessageSymbolCreationServer" = "Erro ao criar o símbolo no servidor.";
+"errorMessageSymbolCreationLocal" = "Erro ao criar o símbolo localmente.";
+"errorMessageSymbolUpdateLocal" = "Erro ao atualizar o símbolo localmente.";
+
+//Criação de histórico de uso dos símbolos
+"errorMessageSymbolHistoricCreationLocal" = "Erro ao criar o histórico do símbolo localmente.";
+"errorMessageSymbolHistoricUpdateLocal" = "Erro ao atualizar o histórico localmente.";
+"labelCellSymbolUtilizationDate" = "Símbolo utilizado às %@ horas do dia %@";
+
+//Criação de histórico de observações do usuário
+"errorMessageUserHistoricCreationLocal" = "Erro ao criar o histórico do usuário localmente.";
+"errorMessageUserHistoricUpdateLocal" = "Erro ao atualizar o histórico localmente.";
+
+//Criação de usuários
+"errorMessageUserCreationServer" = "Erro ao criar o usuário no servidor.";
+"errorMessageUserCreationLocal" = "Erro ao criar o usuário localmente.";
+
+//Criação do relacionamento entre tutor e paciente
+"errorMessageRelationshipTutorPatientCreationLocal" = "Erro ao criar o relacionamento entre tutor e paciente localmente.";
+"errorMessageRelationshipTutorPatientCreationServer" = "Erro ao criar o relacionamento entre tutor e paciente no servidor.";
+"waitSyncingUnsynced" = "Por favor, aguarde... \n Sincronizando conteúdo offline.";
+"waitFetchingPatientData" = "Por favor, aguarde... \n Buscando dados do paciente selecionado.";
+"waitFetchingTutorData" = "Por favor, aguarde... \n Buscando dados do tutor selecionado.";
+"tutorPatientQuestion" = "Você deseja tutorar este paciente ?";
+"tutorPatientQuestion2" = "Você deseja ser tutorado por este tutor ?";
+"patientNotFound" = "Nenhum paciente encontrado com este email.";
+"tutorNotFound" = "Nenhum tutor encontrado com este email.";
+"infoLabelTutor" = "Informe o email do tutor no campo acima e pressione o botão Adicionar";
+"infoLabelPatient" = "Informe o email do paciente no campo acima e pressione o botão Adicionar";
+"textfieldIDPlaceholderTutor" = "Informe o email do tutor";
+"textfieldIDPlaceholderPatient" = "Informe o email do paciente";
+"successMessageTutorPatientRelationship" = "Sucesso ao criar o relacionamento entre tutor e paciente.";
+"successMessageSpecialistPatientRelationship" = "Sucesso ao criar o relacionamento entre especialista e paciente";
+
+//Criação do relacionamento entre especialista e paciente
+"errorMessageRelationshipSpecialistPatientCreationLocal" = "Erro ao criar o relacionamento entre especialista e paciente localmente.";
+"errorMessageRelationshipSpecialistPatientCreationServer" = "Erro ao criar o relacionamento entre especialista e paciente no servidor.";
+
+//Criação do relacionamento entre paciente e símbolo
+"errorMessageRelationshipPatientSymbolCreationServer" = "Erro ao criar o relacionamento entre paciente e símbolo no servidor.";
+"errorMessageRelationshipPatientSymbolCreationLocal" = "Erro ao criar o relacionamento entre paciente e símbolo localmente.";
+
+//Criação de planos
+"successMessagePlanCreation" = "Plano criado com sucesso.";
+"pickCategoryCaption" = "Selecione uma categoria";
+"errorMessagePlanCreationServer" = "Erro ao criar o plano no servidor.";
+"errorMessagePlanUpdateLocal" = "Erro ao atualizar o plano localmente.";
+"errorMessagePlanCreationLocal" = "Erro ao criar o plano localmente.";
+"successMessageCopyPlan" = "Plano copiado com sucesso para o seu usuário.";
+
+//Tela inicial
+"errorMessageFirstConnection" = "Houve um problema ao se conectar com o servidor do Tagarela. Verifique sua conexão para fazer seu registro no sistema.";
+"errorMessageConnection" = "Houve um problema ao se conectar com o servidor do Tagarela. Verifique sua conexão.";
+"welcomeCaption" = "Bem vindo ao Tagarela";
+"welcomeQuestion" = "Você já possui um usuário no Tagarela ?";
+"welcomeLabel" = "Olá %@,\nbem vindo ao Tagarela !";
+"errorMessageSelectPatientCreateSymbol" = "Para criar um símbolo você deve selecionar um paciente.";
+"errorMessageSelectPatientCreatePlan" = "Para criar um plano você deve selecionar um paciente.";
+"labelTutorRelationship" = "Vincular tutor";
+"labelPatientRelationship" = "Vincular paciente";
+"labelTutors" = "Tutores";
+"labelPatients" = "Pacientes";
+"labelVoltar" = "Voltar";
+"messageTutorIDForPlanAccess" = "Informe seu ID de tutor para acessar este plano";
+"labelTutorPlans" = "Planos do tutor %@";
+"labelPatientsPlans" = "Planos do paciente %@";
+"labelTutorGroupPlans" = "Grupos de planos do tutor %@";
+"labelPatientsGroupPlans" = "Grupos de planos do paciente %@";
+"labelPatientTutors" = "Tutores do paciente %@";
+"labelWelcomeToTagarela" = "Olá %@,\nbem vindo ao Tagarela !";
+
+//
+"errorMessageInsertingCategory" = "Erro ao inserir a categoria.";
+"errorMessageInsertingPrivateSymbol" = "Erro ao inserir o símbolo privado.";
+"errorMessageInsertingPlan" = "Erro ao inserir o plano.";
+"errorMessageInsertingSymbolPlan" = "Erro ao inserir o símbolo de um plano.";
+"errorMessageInsertingSymbolHistoric" = "Erro ao inserir o histórico de uso dos símbolos";
+"errorMessageInsertingUserHistoric" = "Erro ao inserir o histórico do usuário";
